@@ -1,0 +1,1889 @@
+Microsoft Windows [Version 10.0.10586]
+(c) 2015 Microsoft Corporation. All rights reserved.
+
+C:\Users\Shamshad>cd C:\Users\Shamshad\Documents\Visual Studio 2015\Projects\Vyshnavi Sales\Vyshnavi Sales
+
+C:\Users\Shamshad\Documents\Visual Studio 2015\Projects\Vyshnavi Sales\Vyshnavi Sales>cordova build android
+cp: no such file or directory: C:\Users\Shamshad\Documents\Visual Studio 2015\Projects\Vyshnavi Sales\Vyshnavi Sales\res\icons\android\icon-36-ldpi.png
+
+cp: no such file or directory: C:\Users\Shamshad\Documents\Visual Studio 2015\Projects\Vyshnavi Sales\Vyshnavi Sales\res\icons\android\icon-48-mdpi.png
+
+cp: no such file or directory: C:\Users\Shamshad\Documents\Visual Studio 2015\Projects\Vyshnavi Sales\Vyshnavi Sales\res\icons\android\icon-72-hdpi.png
+
+cp: no such file or directory: C:\Users\Shamshad\Documents\Visual Studio 2015\Projects\Vyshnavi Sales\Vyshnavi Sales\res\icons\android\icon-96-xhdpi.png
+
+ANDROID_HOME=C:\Program Files (x86)\Android\android-sdk
+JAVA_HOME=C:\Program Files\Java\jdk1.8.0_101
+Reading build config file: C:\Users\Shamshad\Documents\Visual Studio 2015\Projects\Vyshnavi Sales\Vyshnavi Sales\build.json
+:preBuildNote: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+C:\Users\Shamshad\Documents\Visual Studio 2015\Projects\Vyshnavi Sales\Vyshnavi Sales\platforms\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:24:23-37 : AAPT: No resource found that matches the given name (at 'icon' with value '@drawable/icon').
+
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':processDebugResources'.
+> com.android.ide.common.process.ProcessException: org.gradle.process.internal.ExecException: Process 'command 'C:\Program Files (x86)\Android\android-sdk\build-tools\24.0.1\aapt.exe'' finished with non-zero exit value 1
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
+Error: Error code 1 for command: cmd with args: /s,/c,""C:\Users\Shamshad\Documents\Visual Studio 2015\Projects\Vyshnavi Sales\Vyshnavi Sales\platforms\android\gradlew" cdvBuildDebug -b "C:\Users\Shamshad\Documents\Visual Studio 2015\Projects\Vyshnavi Sales\Vyshnavi Sales\platforms\android\build.gradle" -Dorg.gradle.daemon=true -Pandroid.useDeprecatedNdk=true"
+
+C:\Users\Shamshad\Documents\Visual Studio 2015\Projects\Vyshnavi Sales\Vyshnavi Sales>cordova build android
+ANDROID_HOME=C:\Program Files (x86)\Android\android-sdk
+JAVA_HOME=C:\Program Files\Java\jdk1.8.0_101
+Reading build config file: C:\Users\Shamshad\Documents\Visual Studio 2015\Projects\Vyshnavi Sales\Vyshnavi Sales\build.json
+:preBuild UP-TO-DATE
+:preDebugBuild UP-TO-DATE
+:checkDebugManifest
+:CordovaLib:preBuild UP-TO-DATE
+:CordovaLib:preDebugBuild UP-TO-DATE
+:CordovaLib:compileDebugNdk UP-TO-DATE
+:CordovaLib:compileLint
+:CordovaLib:copyDebugLint UP-TO-DATE
+:CordovaLib:mergeDebugProguardFiles UP-TO-DATE
+:CordovaLib:packageDebugRenderscript UP-TO-DATE
+:CordovaLib:checkDebugManifest
+:CordovaLib:prepareDebugDependencies
+:CordovaLib:compileDebugRenderscript UP-TO-DATE
+:CordovaLib:generateDebugResValues UP-TO-DATE
+:CordovaLib:generateDebugResources UP-TO-DATE
+:CordovaLib:packageDebugResources UP-TO-DATE
+:CordovaLib:compileDebugAidl UP-TO-DATE
+:CordovaLib:generateDebugBuildConfig UP-TO-DATE
+:CordovaLib:generateDebugAssets UP-TO-DATE
+:CordovaLib:mergeDebugAssets UP-TO-DATE
+:CordovaLib:processDebugManifest UP-TO-DATE
+:CordovaLib:processDebugResources UP-TO-DATE
+:CordovaLib:generateDebugSources UP-TO-DATE
+:CordovaLib:compileDebugJavaWithJavac UP-TO-DATE
+:CordovaLib:processDebugJavaRes UP-TO-DATE
+:CordovaLib:transformResourcesWithMergeJavaResForDebug UP-TO-DATE
+:CordovaLib:transformClassesAndResourcesWithSyncLibJarsForDebug UP-TO-DATE
+:CordovaLib:mergeDebugJniLibFolders UP-TO-DATE
+:CordovaLib:transformNative_libsWithMergeJniLibsForDebug UP-TO-DATE
+:CordovaLib:transformNative_libsWithSyncJniLibsForDebug UP-TO-DATE
+:CordovaLib:bundleDebug UP-TO-DATE
+:prepareAndroidCordovaLibUnspecifiedDebugLibrary UP-TO-DATE
+:prepareDebugDependencies
+:compileDebugAidl UP-TO-DATE
+:compileDebugRenderscript UP-TO-DATE
+:generateDebugBuildConfig UP-TO-DATE
+:generateDebugAssets UP-TO-DATE
+:mergeDebugAssets UP-TO-DATE
+:generateDebugResValues UP-TO-DATE
+:generateDebugResources UP-TO-DATE
+:mergeDebugResources
+:processDebugManifest UP-TO-DATE
+:processDebugResources
+:generateDebugSources
+:compileDebugJavaWithJavac
+:compileDebugNdk UP-TO-DATE
+:compileDebugSources
+:transformClassesWithDexForDebug
+:mergeDebugJniLibFolders
+:transformNative_libsWithMergeJniLibsForDebug
+:processDebugJavaRes UP-TO-DATE
+:transformResourcesWithMergeJavaResForDebug
+:validateDebugSigning
+:packageDebug
+:zipalignDebug
+:assembleDebug
+:cdvBuildDebug
+
+BUILD SUCCESSFUL
+
+Total time: 7.718 secs
+Built the following apk(s):
+        C:/Users/Shamshad/Documents/Visual Studio 2015/Projects/Vyshnavi Sales/Vyshnavi Sales/platforms/android/build/outputs/apk/android-debug.apk
+
+C:\Users\Shamshad\Documents\Visual Studio 2015\Projects\Vyshnavi Sales\Vyshnavi Sales>keytool -genkey -v -keystore sales.keystore -alias sales -keyalg RSA -keysize 2048 -validity 10000
+Enter keystore password:
+Re-enter new password:
+What is your first and last name?
+  [Unknown]:  sales
+What is the name of your organizational unit?
+  [Unknown]:  vyshnavi
+What is the name of your organization?
+  [Unknown]:  vyshnv
+What is the name of your City or Locality?
+  [Unknown]:  CHENNAI
+What is the name of your State or Province?
+  [Unknown]:  TN
+What is the two-letter country code for this unit?
+  [Unknown]:  91
+Is CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91 correct?
+  [no]:  y
+
+Generating 2,048 bit RSA key pair and self-signed certificate (SHA256withRSA) with a validity of 10,000 days
+        for: CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+Enter key password for <sales>
+        (RETURN if same as keystore password):
+Re-enter new password:
+They don't match. Try again
+Enter key password for <sales>
+        (RETURN if same as keystore password):
+Re-enter new password:
+[Storing sales.keystore]
+
+C:\Users\Shamshad\Documents\Visual Studio 2015\Projects\Vyshnavi Sales\Vyshnavi Sales>cordova build android --release
+ANDROID_HOME=C:\Program Files (x86)\Android\android-sdk
+JAVA_HOME=C:\Program Files\Java\jdk1.8.0_101
+Reading build config file: C:\Users\Shamshad\Documents\Visual Studio 2015\Projects\Vyshnavi Sales\Vyshnavi Sales\build.json
+'keystore' and 'alias' need to be specified to generate a signed archive.
+:preBuild UP-TO-DATE
+:preReleaseBuild UP-TO-DATE
+:checkReleaseManifest
+:CordovaLib:preBuild UP-TO-DATE
+:CordovaLib:preReleaseBuild UP-TO-DATE
+:CordovaLib:compileReleaseNdk UP-TO-DATE
+:CordovaLib:compileLint
+:CordovaLib:copyReleaseLint UP-TO-DATE
+:CordovaLib:mergeReleaseProguardFiles
+:CordovaLib:packageReleaseRenderscript UP-TO-DATE
+:CordovaLib:checkReleaseManifest
+:CordovaLib:prepareReleaseDependencies
+:CordovaLib:compileReleaseRenderscript
+:CordovaLib:generateReleaseResValues
+:CordovaLib:generateReleaseResources
+:CordovaLib:packageReleaseResources
+:CordovaLib:compileReleaseAidl
+:CordovaLib:generateReleaseBuildConfig
+:CordovaLib:generateReleaseAssets UP-TO-DATE
+:CordovaLib:mergeReleaseAssets
+:CordovaLib:processReleaseManifest
+:CordovaLib:processReleaseResources
+:CordovaLib:generateReleaseSources
+:CordovaLib:compileReleaseJavaWithJavacNote: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+:CordovaLib:processReleaseJavaRes UP-TO-DATE
+:CordovaLib:transformResourcesWithMergeJavaResForRelease
+:CordovaLib:transformClassesAndResourcesWithSyncLibJarsForRelease
+:CordovaLib:mergeReleaseJniLibFolders
+:CordovaLib:transformNative_libsWithMergeJniLibsForRelease
+:CordovaLib:transformNative_libsWithSyncJniLibsForRelease
+:CordovaLib:bundleRelease
+:prepareAndroidCordovaLibUnspecifiedReleaseLibrary
+:prepareReleaseDependencies
+:compileReleaseAidl
+:compileReleaseRenderscript
+:generateReleaseBuildConfig
+:generateReleaseAssets UP-TO-DATE
+:mergeReleaseAssets
+:generateReleaseResValues
+:generateReleaseResources
+:mergeReleaseResources
+:processReleaseManifest
+:processReleaseResources
+:generateReleaseSources
+:compileReleaseJavaWithJavac
+:compileReleaseNdk UP-TO-DATE
+:compileReleaseSources
+:lintVitalRelease
+:transformClassesWithDexForRelease
+:mergeReleaseJniLibFolders
+:transformNative_libsWithMergeJniLibsForRelease
+:processReleaseJavaRes UP-TO-DATE
+:transformResourcesWithMergeJavaResForRelease
+:packageRelease
+:assembleRelease
+:cdvBuildRelease
+
+BUILD SUCCESSFUL
+
+Total time: 7.95 secs
+Built the following apk(s):
+        C:/Users/Shamshad/Documents/Visual Studio 2015/Projects/Vyshnavi Sales/Vyshnavi Sales/platforms/android/build/outputs/apk/android-release-unsigned.apk
+
+C:\Users\Shamshad\Documents\Visual Studio 2015\Projects\Vyshnavi Sales\Vyshnavi Sales>cd C:\Users\Shamshad\Documents\Visual Studio 2015\Projects\Vyshnavi Sales\Vyshnavi Sales\platforms\android\build\outputs\apk
+
+C:\Users\Shamshad\Documents\Visual Studio 2015\Projects\Vyshnavi Sales\Vyshnavi Sales\platforms\android\build\outputs\apk>jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore "C:\Users\Shamshad\Documents\Visual Studio 2015\Projects\Vyshnavi Sales\Vyshnavi Sales\sales.keystore"  android-release-unsigned.apk sales
+Enter Passphrase for keystore:
+   adding: META-INF/MANIFEST.MF
+   adding: META-INF/SALES.SF
+   adding: META-INF/SALES.RSA
+  signing: AndroidManifest.xml
+  signing: assets/www/Customcss/custom.css
+  signing: assets/www/Customcss/font-awesome.min.css
+  signing: assets/www/Web.config
+  signing: assets/www/balancerpt.html
+  signing: assets/www/cashbook.html
+  signing: assets/www/charts.html
+  signing: assets/www/cordova-js-src/android/nativeapiprovider.js
+  signing: assets/www/cordova-js-src/android/promptbasednativeapi.js
+  signing: assets/www/cordova-js-src/exec.js
+  signing: assets/www/cordova-js-src/platform.js
+  signing: assets/www/cordova-js-src/plugin/android/app.js
+  signing: assets/www/cordova.js
+  signing: assets/www/cordova_plugins.js
+  signing: assets/www/crates.html
+  signing: assets/www/css/circlestyle.css
+  signing: assets/www/css/cirlceframework.css
+  signing: assets/www/css/framework7.css
+  signing: assets/www/css/img/cb.png
+  signing: assets/www/css/img/icons.png
+  signing: assets/www/css/img/icons.svg
+  signing: assets/www/css/img/loader.gif
+  signing: assets/www/css/reset.css
+  signing: assets/www/css/swipebox.css
+  signing: assets/www/dcrpt.html
+  signing: assets/www/home.html
+  signing: assets/www/images/DC.png
+  signing: assets/www/images/apple-touch-icon.png
+  signing: assets/www/images/apple-touch-startup-image-320x460.png
+  signing: assets/www/images/apple-touch-startup-image-640x920.png
+  signing: assets/www/images/balance.jpg
+  signing: assets/www/images/bg.jpg
+  signing: assets/www/images/bg1.jpg
+  signing: assets/www/images/bullet.png
+  signing: assets/www/images/cashbook.png
+  signing: assets/www/images/cb.png
+  signing: assets/www/images/charts.png
+  signing: assets/www/images/comments.png
+  signing: assets/www/images/creat.png
+  signing: assets/www/images/icons/black/blog.png
+  signing: assets/www/images/icons/black/briefcase.png
+  signing: assets/www/images/icons/black/cart.png
+  signing: assets/www/images/icons/black/caution.png
+  signing: assets/www/images/icons/black/compass.png
+  signing: assets/www/images/icons/black/contact.png
+  signing: assets/www/images/icons/black/contacts.png
+  signing: assets/www/images/icons/black/countdown.png
+  signing: assets/www/images/icons/black/docs.png
+  signing: assets/www/images/icons/black/download.png
+  signing: assets/www/images/icons/black/dribbble.png
+  signing: assets/www/images/icons/black/envelope.png
+  signing: assets/www/images/icons/black/facebook.png
+  signing: assets/www/images/icons/black/googleplus.png
+  signing: assets/www/images/icons/black/heart.png
+  signing: assets/www/images/icons/black/home.png
+  signing: assets/www/images/icons/black/linkedin.png
+  signing: assets/www/images/icons/black/lists.png
+  signing: assets/www/images/icons/black/lock.png
+  signing: assets/www/images/icons/black/logout.png
+  signing: assets/www/images/icons/black/map.png
+  signing: assets/www/images/icons/black/newspaper.png
+  signing: assets/www/images/icons/black/pencil.png
+  signing: assets/www/images/icons/black/phone.png
+  signing: assets/www/images/icons/black/photos.png
+  signing: assets/www/images/icons/black/pinterest.png
+  signing: assets/www/images/icons/black/responsive.png
+  signing: assets/www/images/icons/black/search.png
+  signing: assets/www/images/icons/black/settings.png
+  signing: assets/www/images/icons/black/toogle.png
+  signing: assets/www/images/icons/black/tools.png
+  signing: assets/www/images/icons/black/twitter.png
+  signing: assets/www/images/icons/black/user.png
+  signing: assets/www/images/icons/black/video.png
+  signing: assets/www/images/icons/turquoise/blog.png
+  signing: assets/www/images/icons/turquoise/briefcase.png
+  signing: assets/www/images/icons/turquoise/cart.png
+  signing: assets/www/images/icons/turquoise/caution.png
+  signing: assets/www/images/icons/turquoise/compass.png
+  signing: assets/www/images/icons/turquoise/contact.png
+  signing: assets/www/images/icons/turquoise/contacts.png
+  signing: assets/www/images/icons/turquoise/countdown.png
+  signing: assets/www/images/icons/turquoise/docs.png
+  signing: assets/www/images/icons/turquoise/download.png
+  signing: assets/www/images/icons/turquoise/dribbble.png
+  signing: assets/www/images/icons/turquoise/envelope.png
+  signing: assets/www/images/icons/turquoise/facebook.png
+  signing: assets/www/images/icons/turquoise/googleplus.png
+  signing: assets/www/images/icons/turquoise/heart.png
+  signing: assets/www/images/icons/turquoise/home.png
+  signing: assets/www/images/icons/turquoise/linkedin.png
+  signing: assets/www/images/icons/turquoise/lists.png
+  signing: assets/www/images/icons/turquoise/lock.png
+  signing: assets/www/images/icons/turquoise/logout.png
+  signing: assets/www/images/icons/turquoise/map.png
+  signing: assets/www/images/icons/turquoise/newspaper.png
+  signing: assets/www/images/icons/turquoise/pencil.png
+  signing: assets/www/images/icons/turquoise/phone.png
+  signing: assets/www/images/icons/turquoise/photos.png
+  signing: assets/www/images/icons/turquoise/pinterest.png
+  signing: assets/www/images/icons/turquoise/responsive.png
+  signing: assets/www/images/icons/turquoise/search.png
+  signing: assets/www/images/icons/turquoise/settings.png
+  signing: assets/www/images/icons/turquoise/toogle.png
+  signing: assets/www/images/icons/turquoise/tools.png
+  signing: assets/www/images/icons/turquoise/twitter.png
+  signing: assets/www/images/icons/turquoise/user.png
+  signing: assets/www/images/icons/turquoise/video.png
+  signing: assets/www/images/icons/white/blog.png
+  signing: assets/www/images/icons/white/briefcase.png
+  signing: assets/www/images/icons/white/cart.png
+  signing: assets/www/images/icons/white/caution.png
+  signing: assets/www/images/icons/white/compass.png
+  signing: assets/www/images/icons/white/contact.png
+  signing: assets/www/images/icons/white/contacts.png
+  signing: assets/www/images/icons/white/countdown.png
+  signing: assets/www/images/icons/white/docs.png
+  signing: assets/www/images/icons/white/download.png
+  signing: assets/www/images/icons/white/dribbble.png
+  signing: assets/www/images/icons/white/envelope.png
+  signing: assets/www/images/icons/white/facebook.png
+  signing: assets/www/images/icons/white/googleplus.png
+  signing: assets/www/images/icons/white/heart.png
+  signing: assets/www/images/icons/white/home.png
+  signing: assets/www/images/icons/white/linkedin.png
+  signing: assets/www/images/icons/white/lists.png
+  signing: assets/www/images/icons/white/lock.png
+  signing: assets/www/images/icons/white/logout.png
+  signing: assets/www/images/icons/white/map.png
+  signing: assets/www/images/icons/white/newspaper.png
+  signing: assets/www/images/icons/white/pencil.png
+  signing: assets/www/images/icons/white/phone.png
+  signing: assets/www/images/icons/white/photos.png
+  signing: assets/www/images/icons/white/pinterest.png
+  signing: assets/www/images/icons/white/responsive.png
+  signing: assets/www/images/icons/white/search.png
+  signing: assets/www/images/icons/white/settings.png
+  signing: assets/www/images/icons/white/toogle.png
+  signing: assets/www/images/icons/white/tools.png
+  signing: assets/www/images/icons/white/twitter.png
+  signing: assets/www/images/icons/white/user.png
+  signing: assets/www/images/icons/white/video.png
+  signing: assets/www/images/indent.png
+  signing: assets/www/images/loader.gif
+  signing: assets/www/images/masters.png
+  signing: assets/www/images/menu_open.png
+  signing: assets/www/images/menu_open_black.png
+  signing: assets/www/images/order.png
+  signing: assets/www/images/page_photo.jpg
+  signing: assets/www/images/photos/photo1.jpg
+  signing: assets/www/images/photos/photo10.jpg
+  signing: assets/www/images/photos/photo11.jpg
+  signing: assets/www/images/photos/photo12.jpg
+  signing: assets/www/images/photos/photo13.jpg
+  signing: assets/www/images/photos/photo14.jpg
+  signing: assets/www/images/photos/photo15.jpg
+  signing: assets/www/images/photos/photo2.jpg
+  signing: assets/www/images/photos/photo3.jpg
+  signing: assets/www/images/photos/photo4.jpg
+  signing: assets/www/images/photos/photo5.jpg
+  signing: assets/www/images/photos/photo6.jpg
+  signing: assets/www/images/photos/photo7.jpg
+  signing: assets/www/images/photos/photo8.jpg
+  signing: assets/www/images/photos/photo9.jpg
+  signing: assets/www/images/post_photo.jpg
+  signing: assets/www/images/rupe.png
+  signing: assets/www/images/sales.jpg
+  signing: assets/www/images/salesicon.png
+  signing: assets/www/images/swipe_more.png
+  signing: assets/www/images/switch_11.png
+  signing: assets/www/images/switch_11_active.png
+  signing: assets/www/images/switch_12.png
+  signing: assets/www/images/switch_12_active.png
+  signing: assets/www/images/switch_13.png
+  signing: assets/www/images/switch_13_active.png
+  signing: assets/www/images/trans_black.png
+  signing: assets/www/indententry.html
+  signing: assets/www/index.html
+  signing: assets/www/js/email.js
+  signing: assets/www/js/framework7.min.js
+  signing: assets/www/js/jquery-1.10.1.min.js
+  signing: assets/www/js/jquery.fitvids.js
+  signing: assets/www/js/jquery.swipebox.js
+  signing: assets/www/js/jquery.validate.min.js
+  signing: assets/www/js/my-app.js
+  signing: assets/www/lekages.html
+  signing: assets/www/masters.html
+  signing: assets/www/sales.html
+  signing: assets/www/scripts/android2.3-jscompat.js
+  signing: assets/www/scripts/platformOverrides.js
+  signing: assets/www/style.css
+  signing: res/drawable-hdpi-v4/icon.png
+  signing: res/drawable-land-hdpi-v4/screen.png
+  signing: res/drawable-land-ldpi-v4/screen.png
+  signing: res/drawable-land-mdpi-v4/screen.png
+  signing: res/drawable-land-xhdpi-v4/screen.png
+  signing: res/drawable-ldpi-v4/icon.png
+  signing: res/drawable-mdpi-v4/icon.png
+  signing: res/drawable-port-hdpi-v4/screen.png
+  signing: res/drawable-port-ldpi-v4/screen.png
+  signing: res/drawable-port-mdpi-v4/screen.png
+  signing: res/drawable-port-xhdpi-v4/screen.png
+  signing: res/drawable-xhdpi-v4/icon.png
+  signing: res/drawable/icon.png
+  signing: res/xml/config.xml
+  signing: resources.arsc
+  signing: classes.dex
+jar signed.
+
+Warning:
+No -tsa or -tsacert is provided and this jar is not timestamped. Without a timestamp, users may not be able to validate this jar after the signer certificate's expiration date (2044-02-14) or after any future revocation date.
+
+C:\Users\Shamshad\Documents\Visual Studio 2015\Projects\Vyshnavi Sales\Vyshnavi Sales\platforms\android\build\outputs\apk>jarsigner -verify -verbose -certs android-release-unsigned.apk
+
+s      18479 Wed Sep 28 14:42:36 IST 2016 META-INF/MANIFEST.MF
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+       18600 Wed Sep 28 14:42:36 IST 2016 META-INF/SALES.SF
+        1326 Wed Sep 28 14:42:36 IST 2016 META-INF/SALES.RSA
+sm      2740 Wed Sep 28 14:40:12 IST 2016 AndroidManifest.xml
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      4623 Wed Sep 28 14:40:12 IST 2016 assets/www/Customcss/custom.css
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     22089 Wed Sep 28 14:40:12 IST 2016 assets/www/Customcss/font-awesome.min.css
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      2190 Wed Sep 28 14:40:12 IST 2016 assets/www/Web.config
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      5152 Wed Sep 28 14:40:12 IST 2016 assets/www/balancerpt.html
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      4947 Wed Sep 28 14:40:12 IST 2016 assets/www/cashbook.html
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       239 Wed Sep 28 14:40:12 IST 2016 assets/www/charts.html
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1322 Wed Sep 28 14:40:12 IST 2016 assets/www/cordova-js-src/android/nativeapiprovider.js
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1441 Wed Sep 28 14:40:12 IST 2016 assets/www/cordova-js-src/android/promptbasednativeapi.js
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     10522 Wed Sep 28 14:40:12 IST 2016 assets/www/cordova-js-src/exec.js
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      4924 Wed Sep 28 14:40:12 IST 2016 assets/www/cordova-js-src/platform.js
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      4005 Wed Sep 28 14:40:12 IST 2016 assets/www/cordova-js-src/plugin/android/app.js
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     70680 Wed Sep 28 14:40:12 IST 2016 assets/www/cordova.js
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       212 Wed Sep 28 14:40:12 IST 2016 assets/www/cordova_plugins.js
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      4990 Wed Sep 28 14:40:12 IST 2016 assets/www/crates.html
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     30655 Wed Sep 28 14:40:12 IST 2016 assets/www/css/circlestyle.css
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm    195590 Wed Sep 28 14:40:12 IST 2016 assets/www/css/cirlceframework.css
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm    195538 Wed Sep 28 14:40:12 IST 2016 assets/www/css/framework7.css
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       131 Tue Jan 01 05:30:00 IST 1980 assets/www/css/img/cb.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       729 Tue Jan 01 05:30:00 IST 1980 assets/www/css/img/icons.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1431 Wed Sep 28 14:40:12 IST 2016 assets/www/css/img/icons.svg
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      2608 Tue Jan 01 05:30:00 IST 1980 assets/www/css/img/loader.gif
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1225 Wed Sep 28 14:40:12 IST 2016 assets/www/css/reset.css
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      4892 Wed Sep 28 14:40:12 IST 2016 assets/www/css/swipebox.css
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      5121 Wed Sep 28 14:40:12 IST 2016 assets/www/dcrpt.html
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     14427 Wed Sep 28 14:40:12 IST 2016 assets/www/home.html
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     37238 Tue Jan 01 05:30:00 IST 1980 assets/www/images/DC.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1102 Tue Jan 01 05:30:00 IST 1980 assets/www/images/apple-touch-icon.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm    104659 Tue Jan 01 05:30:00 IST 1980 assets/www/images/apple-touch-startup-image-320x460.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm    334202 Tue Jan 01 05:30:00 IST 1980 assets/www/images/apple-touch-startup-image-640x920.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     50158 Tue Jan 01 05:30:00 IST 1980 assets/www/images/balance.jpg
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     54464 Tue Jan 01 05:30:00 IST 1980 assets/www/images/bg.jpg
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm    106033 Tue Jan 01 05:30:00 IST 1980 assets/www/images/bg1.jpg
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       136 Tue Jan 01 05:30:00 IST 1980 assets/www/images/bullet.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm    114870 Tue Jan 01 05:30:00 IST 1980 assets/www/images/cashbook.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       131 Tue Jan 01 05:30:00 IST 1980 assets/www/images/cb.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     36024 Tue Jan 01 05:30:00 IST 1980 assets/www/images/charts.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       310 Tue Jan 01 05:30:00 IST 1980 assets/www/images/comments.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm    194672 Tue Jan 01 05:30:00 IST 1980 assets/www/images/creat.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1601 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/blog.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       791 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/briefcase.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1028 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/cart.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1156 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/caution.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1235 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/compass.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       767 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/contact.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       368 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/contacts.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1017 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/countdown.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       562 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/docs.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1385 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/download.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1680 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/dribbble.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1249 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/envelope.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1336 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/facebook.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1589 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/googleplus.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1284 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/heart.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1521 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/home.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1414 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/linkedin.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       441 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/lists.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1005 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/lock.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1347 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/logout.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1975 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/map.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       628 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/newspaper.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       906 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/pencil.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       454 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/phone.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1706 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/photos.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1831 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/pinterest.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       422 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/responsive.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1236 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/search.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1384 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/settings.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1599 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/toogle.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1195 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/tools.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1595 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/twitter.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1253 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/user.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       561 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/black/video.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1594 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/blog.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       796 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/briefcase.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1028 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/cart.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1161 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/caution.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1241 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/compass.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       773 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/contact.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       375 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/contacts.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1022 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/countdown.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       570 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/docs.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1392 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/download.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1653 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/dribbble.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1261 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/envelope.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1305 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/facebook.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1579 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/googleplus.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1288 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/heart.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1505 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/home.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1391 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/linkedin.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       451 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/lists.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1015 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/lock.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1855 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/logout.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1981 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/map.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       630 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/newspaper.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       920 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/pencil.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       462 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/phone.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1707 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/photos.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1811 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/pinterest.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       424 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/responsive.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1188 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/search.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1395 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/settings.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1560 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/toogle.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1195 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/tools.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1568 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/twitter.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1257 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/user.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       566 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/turquoise/video.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1325 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/blog.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       768 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/briefcase.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1027 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/cart.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       994 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/caution.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1218 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/compass.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       589 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/contact.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       344 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/contacts.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       821 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/countdown.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       543 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/docs.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1259 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/download.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1145 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/dribbble.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       935 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/envelope.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1023 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/facebook.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1168 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/googleplus.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1021 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/heart.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1428 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/home.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1068 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/linkedin.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       396 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/lists.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       888 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/lock.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1257 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/logout.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1648 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/map.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       619 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/newspaper.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       793 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/pencil.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       375 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/phone.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1319 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/photos.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1437 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/pinterest.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       428 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/responsive.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1145 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/search.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1022 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/settings.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       930 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/toogle.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       931 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/tools.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1189 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/twitter.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1131 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/user.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       587 Tue Jan 01 05:30:00 IST 1980 assets/www/images/icons/white/video.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      8202 Tue Jan 01 05:30:00 IST 1980 assets/www/images/indent.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      2545 Tue Jan 01 05:30:00 IST 1980 assets/www/images/loader.gif
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      6215 Tue Jan 01 05:30:00 IST 1980 assets/www/images/masters.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       132 Tue Jan 01 05:30:00 IST 1980 assets/www/images/menu_open.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       140 Tue Jan 01 05:30:00 IST 1980 assets/www/images/menu_open_black.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm    106643 Tue Jan 01 05:30:00 IST 1980 assets/www/images/order.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     10425 Tue Jan 01 05:30:00 IST 1980 assets/www/images/page_photo.jpg
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     15219 Tue Jan 01 05:30:00 IST 1980 assets/www/images/photos/photo1.jpg
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     15219 Tue Jan 01 05:30:00 IST 1980 assets/www/images/photos/photo10.jpg
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     15219 Tue Jan 01 05:30:00 IST 1980 assets/www/images/photos/photo11.jpg
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     15219 Tue Jan 01 05:30:00 IST 1980 assets/www/images/photos/photo12.jpg
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     15219 Tue Jan 01 05:30:00 IST 1980 assets/www/images/photos/photo13.jpg
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     15219 Tue Jan 01 05:30:00 IST 1980 assets/www/images/photos/photo14.jpg
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     15219 Tue Jan 01 05:30:00 IST 1980 assets/www/images/photos/photo15.jpg
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     15219 Tue Jan 01 05:30:00 IST 1980 assets/www/images/photos/photo2.jpg
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     15219 Tue Jan 01 05:30:00 IST 1980 assets/www/images/photos/photo3.jpg
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     15219 Tue Jan 01 05:30:00 IST 1980 assets/www/images/photos/photo4.jpg
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     15219 Tue Jan 01 05:30:00 IST 1980 assets/www/images/photos/photo5.jpg
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     15219 Tue Jan 01 05:30:00 IST 1980 assets/www/images/photos/photo6.jpg
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     15219 Tue Jan 01 05:30:00 IST 1980 assets/www/images/photos/photo7.jpg
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     15219 Tue Jan 01 05:30:00 IST 1980 assets/www/images/photos/photo8.jpg
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     15219 Tue Jan 01 05:30:00 IST 1980 assets/www/images/photos/photo9.jpg
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     10425 Tue Jan 01 05:30:00 IST 1980 assets/www/images/post_photo.jpg
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      4315 Tue Jan 01 05:30:00 IST 1980 assets/www/images/rupe.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     31556 Tue Jan 01 05:30:00 IST 1980 assets/www/images/sales.jpg
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1749 Tue Jan 01 05:30:00 IST 1980 assets/www/images/salesicon.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       178 Tue Jan 01 05:30:00 IST 1980 assets/www/images/swipe_more.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       167 Tue Jan 01 05:30:00 IST 1980 assets/www/images/switch_11.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       180 Tue Jan 01 05:30:00 IST 1980 assets/www/images/switch_11_active.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       176 Tue Jan 01 05:30:00 IST 1980 assets/www/images/switch_12.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       185 Tue Jan 01 05:30:00 IST 1980 assets/www/images/switch_12_active.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       179 Tue Jan 01 05:30:00 IST 1980 assets/www/images/switch_13.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       187 Tue Jan 01 05:30:00 IST 1980 assets/www/images/switch_13_active.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       131 Tue Jan 01 05:30:00 IST 1980 assets/www/images/trans_black.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     10639 Wed Sep 28 14:40:12 IST 2016 assets/www/indententry.html
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      5806 Wed Sep 28 14:40:12 IST 2016 assets/www/index.html
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       975 Wed Sep 28 14:40:12 IST 2016 assets/www/js/email.js
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm    211946 Wed Sep 28 14:40:12 IST 2016 assets/www/js/framework7.min.js
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     93064 Wed Sep 28 14:40:12 IST 2016 assets/www/js/jquery-1.10.1.min.js
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      2376 Wed Sep 28 14:40:12 IST 2016 assets/www/js/jquery.fitvids.js
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     15179 Wed Sep 28 14:40:12 IST 2016 assets/www/js/jquery.swipebox.js
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     40182 Wed Sep 28 14:40:12 IST 2016 assets/www/js/jquery.validate.min.js
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      4293 Wed Sep 28 14:40:12 IST 2016 assets/www/js/my-app.js
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      5272 Wed Sep 28 14:40:12 IST 2016 assets/www/lekages.html
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       239 Wed Sep 28 14:40:12 IST 2016 assets/www/masters.html
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      5050 Wed Sep 28 14:40:12 IST 2016 assets/www/sales.html
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      1172 Wed Sep 28 14:40:12 IST 2016 assets/www/scripts/android2.3-jscompat.js
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm       329 Wed Sep 28 14:40:12 IST 2016 assets/www/scripts/platformOverrides.js
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     23959 Wed Sep 28 14:40:12 IST 2016 assets/www/style.css
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      6152 Tue Jan 01 05:30:00 IST 1980 res/drawable-hdpi-v4/icon.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     18472 Tue Jan 01 05:30:00 IST 1980 res/drawable-land-hdpi-v4/screen.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     10429 Tue Jan 01 05:30:00 IST 1980 res/drawable-land-ldpi-v4/screen.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     10578 Tue Jan 01 05:30:00 IST 1980 res/drawable-land-mdpi-v4/screen.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     28583 Tue Jan 01 05:30:00 IST 1980 res/drawable-land-xhdpi-v4/screen.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      2032 Tue Jan 01 05:30:00 IST 1980 res/drawable-ldpi-v4/icon.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      3514 Tue Jan 01 05:30:00 IST 1980 res/drawable-mdpi-v4/icon.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     18693 Tue Jan 01 05:30:00 IST 1980 res/drawable-port-hdpi-v4/screen.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     10499 Tue Jan 01 05:30:00 IST 1980 res/drawable-port-ldpi-v4/screen.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     10641 Tue Jan 01 05:30:00 IST 1980 res/drawable-port-mdpi-v4/screen.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm     28693 Tue Jan 01 05:30:00 IST 1980 res/drawable-port-xhdpi-v4/screen.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      9923 Tue Jan 01 05:30:00 IST 1980 res/drawable-xhdpi-v4/icon.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm    122406 Tue Jan 01 05:30:00 IST 1980 res/drawable/icon.png
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      5016 Wed Sep 28 14:40:12 IST 2016 res/xml/config.xml
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm      2716 Tue Jan 01 05:30:00 IST 1980 resources.arsc
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+sm    139380 Wed Sep 28 14:40:12 IST 2016 classes.dex
+
+      X.509, CN=sales, OU=vyshnavi, O=vyshnv, L=CHENNAI, ST=TN, C=91
+      [certificate is valid from 9/28/16 2:39 PM to 2/14/44 2:39 PM]
+      [CertPath not validated: Path does not chain with any of the trust anchors]
+
+
+  s = signature was verified
+  m = entry is listed in manifest
+  k = at least one certificate was found in keystore
+  i = at least one certificate was found in identity scope
+
+jar verified.
+
+Warning:
+This jar contains entries whose certificate chain is not validated.
+This jar contains signatures that does not include a timestamp. Without a timestamp, users may not be able to validate this jar after the signer certificate's expiration date (2044-02-14) or after any future revocation date.
+
+C:\Users\Shamshad\Documents\Visual Studio 2015\Projects\Vyshnavi Sales\Vyshnavi Sales\platforms\android\build\outputs\apk>zipalign -v 4 android-release-unsigned.apk sales.apk
+Verifying alignment of sales.apk (4)...
+      50 META-INF/MANIFEST.MF (OK - compressed)
+    5983 META-INF/SALES.SF (OK - compressed)
+   12377 META-INF/SALES.RSA (OK - compressed)
+   13533 AndroidManifest.xml (OK - compressed)
+   14605 assets/www/Customcss/custom.css (OK - compressed)
+   15781 assets/www/Customcss/font-awesome.min.css (OK - compressed)
+   20215 assets/www/Web.config (OK - compressed)
+   21118 assets/www/balancerpt.html (OK - compressed)
+   22670 assets/www/cashbook.html (OK - compressed)
+   24158 assets/www/charts.html (OK - compressed)
+   24430 assets/www/cordova-js-src/android/nativeapiprovider.js (OK - compressed)
+   25208 assets/www/cordova-js-src/android/promptbasednativeapi.js (OK - compressed)
+   26033 assets/www/cordova-js-src/exec.js (OK - compressed)
+   29556 assets/www/cordova-js-src/platform.js (OK - compressed)
+   31429 assets/www/cordova-js-src/plugin/android/app.js (OK - compressed)
+   32960 assets/www/cordova.js (OK - compressed)
+   50003 assets/www/cordova_plugins.js (OK - compressed)
+   50231 assets/www/crates.html (OK - compressed)
+   51740 assets/www/css/circlestyle.css (OK - compressed)
+   56743 assets/www/css/cirlceframework.css (OK - compressed)
+   79012 assets/www/css/framework7.css (OK - compressed)
+  101264 assets/www/css/img/cb.png (OK)
+  101456 assets/www/css/img/icons.png (OK)
+  102243 assets/www/css/img/icons.svg (OK - compressed)
+  102868 assets/www/css/img/loader.gif (OK)
+  105530 assets/www/css/reset.css (OK - compressed)
+  106195 assets/www/css/swipebox.css (OK - compressed)
+  107421 assets/www/dcrpt.html (OK - compressed)
+  108932 assets/www/home.html (OK - compressed)
+  110964 assets/www/images/DC.png (OK)
+  148272 assets/www/images/apple-touch-icon.png (OK)
+  149460 assets/www/images/apple-touch-startup-image-320x460.png (OK)
+  254204 assets/www/images/apple-touch-startup-image-640x920.png (OK)
+  588468 assets/www/images/balance.jpg (OK)
+  638680 assets/www/images/bg.jpg (OK)
+  693200 assets/www/images/bg1.jpg (OK)
+  799292 assets/www/images/bullet.png (OK)
+  799488 assets/www/images/cashbook.png (OK)
+  914412 assets/www/images/cb.png (OK)
+  914604 assets/www/images/charts.png (OK)
+  950688 assets/www/images/comments.png (OK)
+  951056 assets/www/images/creat.png (OK)
+ 1145796 assets/www/images/icons/black/blog.png (OK)
+ 1147472 assets/www/images/icons/black/briefcase.png (OK)
+ 1148332 assets/www/images/icons/black/cart.png (OK)
+ 1149432 assets/www/images/icons/black/caution.png (OK)
+ 1150660 assets/www/images/icons/black/compass.png (OK)
+ 1151968 assets/www/images/icons/black/contact.png (OK)
+ 1152808 assets/www/images/icons/black/contacts.png (OK)
+ 1153252 assets/www/images/icons/black/countdown.png (OK)
+ 1154340 assets/www/images/icons/black/docs.png (OK)
+ 1154976 assets/www/images/icons/black/download.png (OK)
+ 1156436 assets/www/images/icons/black/dribbble.png (OK)
+ 1158188 assets/www/images/icons/black/envelope.png (OK)
+ 1159512 assets/www/images/icons/black/facebook.png (OK)
+ 1160924 assets/www/images/icons/black/googleplus.png (OK)
+ 1162584 assets/www/images/icons/black/heart.png (OK)
+ 1163936 assets/www/images/icons/black/home.png (OK)
+ 1165532 assets/www/images/icons/black/linkedin.png (OK)
+ 1167016 assets/www/images/icons/black/lists.png (OK)
+ 1167528 assets/www/images/icons/black/lock.png (OK)
+ 1168604 assets/www/images/icons/black/logout.png (OK)
+ 1170020 assets/www/images/icons/black/map.png (OK)
+ 1172068 assets/www/images/icons/black/newspaper.png (OK)
+ 1172768 assets/www/images/icons/black/pencil.png (OK)
+ 1173744 assets/www/images/icons/black/phone.png (OK)
+ 1174268 assets/www/images/icons/black/photos.png (OK)
+ 1176048 assets/www/images/icons/black/pinterest.png (OK)
+ 1177956 assets/www/images/icons/black/responsive.png (OK)
+ 1178448 assets/www/images/icons/black/search.png (OK)
+ 1179756 assets/www/images/icons/black/settings.png (OK)
+ 1181212 assets/www/images/icons/black/toogle.png (OK)
+ 1182880 assets/www/images/icons/black/tools.png (OK)
+ 1184148 assets/www/images/icons/black/twitter.png (OK)
+ 1185812 assets/www/images/icons/black/user.png (OK)
+ 1187136 assets/www/images/icons/black/video.png (OK)
+ 1187772 assets/www/images/icons/turquoise/blog.png (OK)
+ 1189444 assets/www/images/icons/turquoise/briefcase.png (OK)
+ 1190312 assets/www/images/icons/turquoise/cart.png (OK)
+ 1191416 assets/www/images/icons/turquoise/caution.png (OK)
+ 1192652 assets/www/images/icons/turquoise/compass.png (OK)
+ 1193968 assets/www/images/icons/turquoise/contact.png (OK)
+ 1194820 assets/www/images/icons/turquoise/contacts.png (OK)
+ 1195272 assets/www/images/icons/turquoise/countdown.png (OK)
+ 1196368 assets/www/images/icons/turquoise/docs.png (OK)
+ 1197016 assets/www/images/icons/turquoise/download.png (OK)
+ 1198484 assets/www/images/icons/turquoise/dribbble.png (OK)
+ 1200216 assets/www/images/icons/turquoise/envelope.png (OK)
+ 1201556 assets/www/images/icons/turquoise/facebook.png (OK)
+ 1202940 assets/www/images/icons/turquoise/googleplus.png (OK)
+ 1204592 assets/www/images/icons/turquoise/heart.png (OK)
+ 1205952 assets/www/images/icons/turquoise/home.png (OK)
+ 1207536 assets/www/images/icons/turquoise/linkedin.png (OK)
+ 1209000 assets/www/images/icons/turquoise/lists.png (OK)
+ 1209524 assets/www/images/icons/turquoise/lock.png (OK)
+ 1210616 assets/www/images/icons/turquoise/logout.png (OK)
+ 1212544 assets/www/images/icons/turquoise/map.png (OK)
+ 1214604 assets/www/images/icons/turquoise/newspaper.png (OK)
+ 1215308 assets/www/images/icons/turquoise/pencil.png (OK)
+ 1216304 assets/www/images/icons/turquoise/phone.png (OK)
+ 1216840 assets/www/images/icons/turquoise/photos.png (OK)
+ 1218624 assets/www/images/icons/turquoise/pinterest.png (OK)
+ 1220516 assets/www/images/icons/turquoise/responsive.png (OK)
+ 1221016 assets/www/images/icons/turquoise/search.png (OK)
+ 1222280 assets/www/images/icons/turquoise/settings.png (OK)
+ 1223752 assets/www/images/icons/turquoise/toogle.png (OK)
+ 1225388 assets/www/images/icons/turquoise/tools.png (OK)
+ 1226660 assets/www/images/icons/turquoise/twitter.png (OK)
+ 1228300 assets/www/images/icons/turquoise/user.png (OK)
+ 1229632 assets/www/images/icons/turquoise/video.png (OK)
+ 1230268 assets/www/images/icons/white/blog.png (OK)
+ 1231668 assets/www/images/icons/white/briefcase.png (OK)
+ 1232504 assets/www/images/icons/white/cart.png (OK)
+ 1233604 assets/www/images/icons/white/caution.png (OK)
+ 1234672 assets/www/images/icons/white/compass.png (OK)
+ 1235964 assets/www/images/icons/white/contact.png (OK)
+ 1236628 assets/www/images/icons/white/contacts.png (OK)
+ 1237048 assets/www/images/icons/white/countdown.png (OK)
+ 1237940 assets/www/images/icons/white/docs.png (OK)
+ 1238556 assets/www/images/icons/white/download.png (OK)
+ 1239888 assets/www/images/icons/white/dribbble.png (OK)
+ 1241108 assets/www/images/icons/white/envelope.png (OK)
+ 1242116 assets/www/images/icons/white/facebook.png (OK)
+ 1243216 assets/www/images/icons/white/googleplus.png (OK)
+ 1244456 assets/www/images/icons/white/heart.png (OK)
+ 1245548 assets/www/images/icons/white/home.png (OK)
+ 1247048 assets/www/images/icons/white/linkedin.png (OK)
+ 1248188 assets/www/images/icons/white/lists.png (OK)
+ 1248652 assets/www/images/icons/white/lock.png (OK)
+ 1249612 assets/www/images/icons/white/logout.png (OK)
+ 1250936 assets/www/images/icons/white/map.png (OK)
+ 1252660 assets/www/images/icons/white/newspaper.png (OK)
+ 1253352 assets/www/images/icons/white/pencil.png (OK)
+ 1254216 assets/www/images/icons/white/phone.png (OK)
+ 1254664 assets/www/images/icons/white/photos.png (OK)
+ 1256056 assets/www/images/icons/white/pinterest.png (OK)
+ 1257568 assets/www/images/icons/white/responsive.png (OK)
+ 1258068 assets/www/images/icons/white/search.png (OK)
+ 1259288 assets/www/images/icons/white/settings.png (OK)
+ 1260380 assets/www/images/icons/white/toogle.png (OK)
+ 1261380 assets/www/images/icons/white/tools.png (OK)
+ 1262384 assets/www/images/icons/white/twitter.png (OK)
+ 1263644 assets/www/images/icons/white/user.png (OK)
+ 1264844 assets/www/images/icons/white/video.png (OK)
+ 1265492 assets/www/images/indent.png (OK)
+ 1273752 assets/www/images/loader.gif (OK)
+ 1276356 assets/www/images/masters.png (OK)
+ 1282632 assets/www/images/menu_open.png (OK)
+ 1282832 assets/www/images/menu_open_black.png (OK)
+ 1283032 assets/www/images/order.png (OK)
+ 1389740 assets/www/images/page_photo.jpg (OK)
+ 1400232 assets/www/images/photos/photo1.jpg (OK)
+ 1415520 assets/www/images/photos/photo10.jpg (OK)
+ 1430808 assets/www/images/photos/photo11.jpg (OK)
+ 1446096 assets/www/images/photos/photo12.jpg (OK)
+ 1461384 assets/www/images/photos/photo13.jpg (OK)
+ 1476672 assets/www/images/photos/photo14.jpg (OK)
+ 1491960 assets/www/images/photos/photo15.jpg (OK)
+ 1507244 assets/www/images/photos/photo2.jpg (OK)
+ 1522528 assets/www/images/photos/photo3.jpg (OK)
+ 1537812 assets/www/images/photos/photo4.jpg (OK)
+ 1553096 assets/www/images/photos/photo5.jpg (OK)
+ 1568380 assets/www/images/photos/photo6.jpg (OK)
+ 1583664 assets/www/images/photos/photo7.jpg (OK)
+ 1598948 assets/www/images/photos/photo8.jpg (OK)
+ 1614232 assets/www/images/photos/photo9.jpg (OK)
+ 1629516 assets/www/images/post_photo.jpg (OK)
+ 1640000 assets/www/images/rupe.png (OK)
+ 1644372 assets/www/images/sales.jpg (OK)
+ 1675992 assets/www/images/salesicon.png (OK)
+ 1677804 assets/www/images/swipe_more.png (OK)
+ 1678044 assets/www/images/switch_11.png (OK)
+ 1678280 assets/www/images/switch_11_active.png (OK)
+ 1678524 assets/www/images/switch_12.png (OK)
+ 1678768 assets/www/images/switch_12_active.png (OK)
+ 1679016 assets/www/images/switch_13.png (OK)
+ 1679264 assets/www/images/switch_13_active.png (OK)
+ 1679516 assets/www/images/trans_black.png (OK)
+ 1679704 assets/www/indententry.html (OK - compressed)
+ 1682488 assets/www/index.html (OK - compressed)
+ 1684096 assets/www/js/email.js (OK - compressed)
+ 1684680 assets/www/js/framework7.min.js (OK - compressed)
+ 1739738 assets/www/js/jquery-1.10.1.min.js (OK - compressed)
+ 1772662 assets/www/js/jquery.fitvids.js (OK - compressed)
+ 1773667 assets/www/js/jquery.swipebox.js (OK - compressed)
+ 1777507 assets/www/js/jquery.validate.min.js (OK - compressed)
+ 1787628 assets/www/js/my-app.js (OK - compressed)
+ 1789034 assets/www/lekages.html (OK - compressed)
+ 1790597 assets/www/masters.html (OK - compressed)
+ 1790836 assets/www/sales.html (OK - compressed)
+ 1792350 assets/www/scripts/android2.3-jscompat.js (OK - compressed)
+ 1792867 assets/www/scripts/platformOverrides.js (OK - compressed)
+ 1793118 assets/www/style.css (OK - compressed)
+ 1797524 res/drawable-hdpi-v4/icon.png (OK)
+ 1803744 res/drawable-land-hdpi-v4/screen.png (OK)
+ 1822284 res/drawable-land-ldpi-v4/screen.png (OK)
+ 1832780 res/drawable-land-mdpi-v4/screen.png (OK)
+ 1843428 res/drawable-land-xhdpi-v4/screen.png (OK)
+ 1872072 res/drawable-ldpi-v4/icon.png (OK)
+ 1874164 res/drawable-mdpi-v4/icon.png (OK)
+ 1877744 res/drawable-port-hdpi-v4/screen.png (OK)
+ 1896504 res/drawable-port-ldpi-v4/screen.png (OK)
+ 1907072 res/drawable-port-mdpi-v4/screen.png (OK)
+ 1917780 res/drawable-port-xhdpi-v4/screen.png (OK)
+ 1946536 res/drawable-xhdpi-v4/icon.png (OK)
+ 1956512 res/drawable/icon.png (OK)
+ 2078966 res/xml/config.xml (OK - compressed)
+ 2080640 resources.arsc (OK)
+ 2083397 classes.dex (OK - compressed)
+Verification succesful
+
+C:\Users\Shamshad\Documents\Visual Studio 2015\Projects\Vyshnavi Sales\Vyshnavi Sales\platforms\android\build\outputs\apk>

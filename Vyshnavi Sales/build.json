@@ -1,0 +1,11 @@
+{
+     "android": {
+         "release": {
+             "keystore": "sales.keystore",
+             "storePassword": "Vyshnavi123",
+             "alias": "sales",
+             "password" : "Vyshnavi123",
+             "keystoreType": "jks"
+         }
+     }
+ }
