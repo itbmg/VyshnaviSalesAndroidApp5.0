@@ -115,6 +115,9 @@
             background-repeat: no-repeat;
             background-position: 50% 15px;
         }
+
+        
+
         .master-icon a
         {
             background: url(../images/masters.png);
@@ -173,9 +176,30 @@
             background-repeat: no-repeat;
             background-position: 10px 50%;
         }
+         .dispatch-icon
+        {
+            background: url(../images/icons/white/dispatch.png);
+            background-size: auto 55%;
+            background-repeat: no-repeat;
+            background-position: 10px 50%;
+        }
+.chartline-icon {
+    background: url(../images/icons/black/dotedline.png);
+    background-size: auto 55%;
+    background-repeat: no-repeat;
+    background-position: 10px 50%;
+}
+
+.chartline1-icon {
+    background: url(../images/icons/black/dotedline1.png);
+    background-size: auto 55%;
+    background-repeat: no-repeat;
+    background-position: 10px 50%;
+}
+
+
         .approve-icon
         {
-            width:300px;
             background: url(../images/icons/white/pencil.png);
             background-size: auto 55%;
             background-repeat: no-repeat;

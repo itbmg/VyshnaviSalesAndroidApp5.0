@@ -19,10 +19,30 @@
     <script src="js/vendor/modernizr-2.6.2.min.js"></script>
     <link href="css/homepage.css?v=18" rel="stylesheet" type="text/css " />
     <style type="text/css">
+        .btn-glyphicon {
+            padding: 8px;
+            background: #ffffff;
+            margin-right: 4px;
+            color: cornflowerblue;
+        }
+        .btn-glyphicon1 {
+            padding: 8px;
+            background: #ffffff;
+            margin-right: 4px;
+            color: darkred;
+        }
+        .icon-btn {
+            padding: 1px 15px 3px 2px;
+            border-radius: 50px;
+        }
+        .glyphicon-approve {
+            background: url(../images/glyphicon-approve.png) no-repeat center top;
+        }
         #mydiv {
             height: 400px;
             position: relative;
-            background-color: #cedede; /* for demonstration */
+            background-color: #F8F9F9; /* for demonstration */
+            align-self:center;
         }
 
         .ajax-loader {
@@ -34,9 +54,8 @@
             margin-left: -32px; /* -1 * image width / 2 */
             margin-top: -32px; /* -1 * image height / 2 */
         }
-    </style>
 
-   
+    </style>
     <script type="text/javascript">
         $(function () {
             var date = new Date();
@@ -49,19 +68,39 @@
             $('#txtFromDate').val(today);
             $('#txtToDate').val(today);
             getloginvalidation();
+            getloginvalidation2();
+            FillSalesOffice();
             $('#mydiv').css('display', 'none');
             $('#GriddivRaisedVouchers').css('display', 'none');
             $('#divMainAddNewRow').css('display', 'none');
             $('#divcontrols').css('display', 'block');
             $('#divclose').css('display', 'none');
+            checkloginstatus();
+            scrollTo(0, 0);
         });
+        function checkloginstatus() {
+            var data = { 'op': 'checkloginstatus' };
+            var s = function (msg) {
+                if (msg) {
+                    if (msg == "NotValid") {
+                        window.location = 'login.html';
+                    }
+                    else if (msg == "valid") {
+
+                    }
+                }
+            };
+            var e = function (x, h, e) {
+            };
+            callHandler(data, s, e);
+        }
         var sessionarray = [];
         function getloginvalidation() {
             var data = { 'op': 'Getsessionvalues' };
             var s = function (msg) {
                 if (msg) {
+                    document.getElementById('lbl_username').innerHTML = msg[0].EmpName;
                     if (msg[0].LevelType == "AccountsOfficer" || msg[0].LevelType == "Director") {
-
                         $('#divdisplay').css('display', 'block');
                         leveltype = msg[0].LevelType;
                         sessionarray = msg;
@@ -70,6 +109,37 @@
                     else {
                         $('#divdisplay').css('display', 'none');
                         GetRisedVouchers();
+                    }
+                }
+                else {
+                }
+            };
+            var e = function (x, h, e) {
+            };
+            $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+            callHandler(data, s, e);
+        }
+        var sessionarray = [];
+        function getloginvalidation2() {
+            var data = { 'op': 'Getsessionvalues' };
+            var s = function (msg) {
+                if (msg) {
+                    if (msg[0].LevelType == "Agent" || msg[0].LevelType == "Agent") {
+
+                        $('#divcontrols').css('display', 'block');
+                        //$('#divroute').css('display', 'block');
+                        leveltype = msg[0].LevelType;
+                        sessionarray = msg;
+                        get_agent_logindetails();
+                    }
+                    else if (msg[0].LevelType == "Opperations" || msg[0].LevelType == "Opperations") {
+                        //$('#divroute').css('display', 'block');
+                        $('#divcontrols').css('display', 'block');
+                    }
+                    else {
+                        //$('#divroute').css('display', 'none');
+                        $('#divcontrols').css('display', 'none');
+                        FillSalesOffice();
                     }
                 }
                 else {
@@ -116,35 +186,44 @@
         }
         function BtnGenerateClick() {
             $('#mydiv').css('display', 'block');
-            $('#GriddivRaisedVouchers').css('display', 'block');
-            $('#divMainAddNewRow').css('display', 'none');
-            $('#divcontrols').css('display', 'none');
-            $('#divclose').css('display', 'block');
+            $('#divdisplay').css('display', 'none');
             var salesOffice = document.getElementById("ddlsalesOffice").value;
             if (salesOffice == "select") {
                 alert("Select Sales Office");
+                $('#divdisplay').css('display', 'block');
                 $('#mydiv').css('display', 'none');
                 $('#GriddivRaisedVouchers').css('display', 'none');
                 $('#divMainAddNewRow').css('display', 'none');
-                $('#divcontrols').css('display', 'block');
                 $('#divclose').css('display', 'none');
                 return false;
             }
             GetSalesOffice(salesOffice);
-         
         }
         function GetSalesOffice(salesOffice) {
+            $('#mydiv').css('display', 'block');
             var fromdate = document.getElementById("txtFromDate").value;
             var ToDate = document.getElementById("txtToDate").value;
             var data = { 'op': 'Get_RaisedVoucherdetails', 'BranchID': salesOffice, 'fromdate': fromdate, 'ToDate': ToDate };
             var s = function (msg) {
-                if (msg) {
+                if (msg == "") {
+                    alert("Data Not found");
+                    $('#mydiv').css('display', 'none');
+                    $('#GriddivRaisedVouchers').css('display', 'none');
+                    $('#divdisplay').css('display', 'block');
+                    $('#divMainAddNewRow').css('display', 'none');
+                    $('#divclose').css('display', 'none');
+                }
+                else if (msg) {
+
                     if (msg == "Session Expired") {
                         alert(msg);
                         window.location = "Login.aspx";
                     }
                     fillvouchers(msg);
                     $('#mydiv').css('display', 'none');
+                    $('#GriddivRaisedVouchers').css('display', 'block');
+                    $('#divMainAddNewRow').css('display', 'none');
+                    $('#divclose').css('display', 'block');
                 }
                 else {
                 }
@@ -164,11 +243,11 @@
             var COLOR = ["white"];
             for (var i = 0; i < msg.length; i++) {
                 results += '<tr ><th scope="row" class="1" style="text-align:center;display:none;" background-color:"white;">' + j + '</th>';
-                results += '<td data-title="VoucherId" onclick="btnViewVoucher(\'' + msg[i].VoucherID + '\');"><i class="fa fa-hand-o-right" aria-hidden="true"></i><span style="text-decoration: underline; color:red;">' + msg[i].VoucherID + '</span></td>';
-                results += '<td  data-title="EmployeeName" class="3">' + msg[i].EmpName + '</td>';
-                results += '<td  data-title="VoucherType" class="4">' + msg[i].VoucherType + '</td>';
-                results += '<td  data-title="Amount" class="3">' + msg[i].Amount + '</td>';
-                results += '<td  data-title="inwarddate" style="text-align:center;display:none; " class="4">' + msg[i].Sno + '</td>';
+                results += '<td data-title="VoucherId"  onclick="btnViewVoucher(\'' + msg[i].VoucherID + '\');"><i class="fa fa-hand-o-right" style="font-size:22px;color:#337ab7;;text-shadow:1px 1px 1px;" aria-hidden="true"></i><span style="text-decoration: underline;text-shadow:1px 1px 1px; color:#337ab7;;">' + msg[i].VoucherID + '</span></td>';
+                results += '<td data-title="EmployeeName" class="3">' + msg[i].EmpName + '</td>';
+                results += '<td data-title="VoucherType" class="4">' + msg[i].VoucherType + '</td>';
+                results += '<td data-title="Amount" class="3">' + msg[i].Amount + '</td>';
+                results += '<td data-title="inwarddate" style="text-align:center;display:none; " class="4">' + msg[i].Sno + '</td>';
                 results += '<td data-title="invoicedate" style="text-align:center;display:none; " >' + msg[i].Empid + '</td><tr>';
                 j++;
             }
@@ -179,6 +258,9 @@
             var data = { 'op': 'Get_RaisedVoucherdetails', 'BranchID': BranchID };
             var s = function (msg) {
                 if (msg) {
+                    if ((msg) = '') {
+                        alert("Data Not Found");
+                    }
                     if (msg == "Session Expired") {
                         alert(msg);
                         window.location = "Login.aspx";
@@ -294,6 +376,7 @@
         }
         function OrdersCloseClick() {
             $('#divMainAddNewRow').css('display', 'none');
+            $('#divdisplay').css('display', 'none');
         }
         function VoucherApproval() {
             var Remarks = document.getElementById("txtCashierRemarks").value;
@@ -310,32 +393,43 @@
             }
             else {
             }
-            var AppRemarks = document.getElementById("txtRemarks").value;
-            var Status = "A";
-            var data = { 'op': 'VoucherApproval', 'VoucherID': voucher, 'BranchID': branchID, 'Approvalamt': Approvalamt, 'AppRemarks': Remarks, 'Status': Status, 'Remarks': Remarks };
-            var s = function (msg) {
-                if (msg) {
-                    alert(msg);
-                    $('#divMainAddNewRow').css('display', 'none');
-                    document.getElementById("txtCashierRemarks").value = "";
-                    document.getElementById("txtApprovalamt").value = "";
-                    document.getElementById("txtRemarks").value = "";
-                    var LevelType = sessionarray[0].LevelType;
-                    if (LevelType == "AccountsOfficer" || LevelType == "Director") {
-                        BtnGenerateClick();
+            btnval = document.getElementsByTagName('span')[13].innerHTML;
+            if (btnval = "Approve") {
+                var confi = confirm("Do You want to approve Details");
+
+            }
+            if (confi == true) {
+                var AppRemarks = document.getElementById("txtRemarks").value;
+                var Status = "A";
+                var data = { 'op': 'VoucherApproval', 'VoucherID': voucher, 'BranchID': branchID, 'Approvalamt': Approvalamt, 'AppRemarks': Remarks, 'Status': Status, 'Remarks': Remarks };
+                var s = function (msg) {
+                    if (msg) {
+                        alert(msg);
+                        $('#divMainAddNewRow').css('display', 'none');
+                        document.getElementById("txtCashierRemarks").value = "";
+                        document.getElementById("txtApprovalamt").value = "";
+                        document.getElementById("txtRemarks").value = "";
+                        var LevelType = sessionarray[0].LevelType;
+                        if (LevelType == "AccountsOfficer" || LevelType == "Director") {
+                            BtnGenerateClick();
+                        }
+                        else {
+                            GetRisedVouchers();
+                        }
                     }
                     else {
-
-                        GetRisedVouchers();
                     }
-                }
-                else {
-                }
-            };
+                };
+            }
+            else {
+
+            }
             var e = function (x, h, e) {
             };
             callHandler(data, s, e);
         }
+            
+
         function VoucherReject() {
             var Remarks = document.getElementById("txtCashierRemarks").value;
             var Approvalamt = document.getElementById("txtApprovalamt").value;
@@ -351,33 +445,44 @@
             }
             else {
             }
-            var AppRemarks = document.getElementById("txtRemarks").value;
-            var Status = "C";
-            var data = { 'op': 'VoucherReject', 'VoucherID': voucher, 'BranchID': branchID, 'Approvalamt': Approvalamt, 'Remarks': Remarks, 'Status': Status };
-            var s = function (msg) {
-                if (msg) {
-                    alert(msg);
-                    $('#divMainAddNewRow').css('display', 'none');
-                    document.getElementById("txtCashierRemarks").value = "";
-                    document.getElementById("txtApprovalamt").value = "";
-                    document.getElementById("txtRemarks").value = "";
-                    var LevelType = sessionarray[0].LevelType;
-                    if (LevelType == "AccountsOfficer" || LevelType == "Director") {
-                        BtnGenerateClick();
+            //var btnval = document.getElementById("Button1").value;
+            btnval = document.getElementsByTagName('span')[14].innerHTML;
+            if (btnval = "Reject") {
+                var confi = confirm("Do You want to reject Details");
+
+            }
+            if (confi == true) {
+                var AppRemarks = document.getElementById("txtRemarks").value;
+                var Status = "C";
+                var data = { 'op': 'VoucherReject', 'VoucherID': voucher, 'BranchID': branchID, 'Approvalamt': Approvalamt, 'Remarks': Remarks, 'Status': Status };
+                var s = function (msg) {
+                    if (msg) {
+                        alert(msg);
+                        $('#divMainAddNewRow').css('display', 'none');
+                        document.getElementById("txtCashierRemarks").value = "";
+                        document.getElementById("txtApprovalamt").value = "";
+                        document.getElementById("txtRemarks").value = "";
+                        var LevelType = sessionarray[0].LevelType;
+                        if (LevelType == "AccountsOfficer" || LevelType == "Director") {
+                            BtnGenerateClick();
+                        }
+                        else {
+                            GetRisedVouchers();
+                        }
                     }
                     else {
-                        GetRisedVouchers();
                     }
-                }
-                else {
-                }
-            };
+                };
+            }
+            else {
+            }
             var e = function (x, h, e) {
             };
             callHandler(data, s, e);
         }
-
         function logoutclick() {
+            window.localStorage.removeItem("key7");
+            window.localStorage.removeItem("key8");
             var data = { 'op': 'log_out' };
             var s = function (msg) {
                 if (msg == "Valid") {
@@ -388,9 +493,11 @@
             };
             callHandler(data, s, e);
         }
-
         function homeclick() {
             window.location = "home.html";
+        }
+        function hdispatchclick() {
+            window.location = "Dispatch.html";
         }
         function Indentclick() {
             window.location = "indententry.html";
@@ -412,23 +519,42 @@
         }
         function cashclick() {
             window.location = "cashbook.html";
+
+        }
+        function horderindentclick() {
+            window.location = "indent.html";
+        }
+        function chartdataclick() {
+            window.location = "charts.html";
+        }
+        function chartDashBoardclick() {
+            window.location = "ClassificationChart.html";
         }
         function approvalvoucherclick() {
-            window.location = "VoucherApproval.html";
+            var branchID = "0";
+            var LevelType = sessionarray[0].LevelType;
+            if (LevelType == "AccountsOfficer" || LevelType == "Director") {
+                $('.div_salesOffice').css('display', 'table-row');
+                window.location = "VoucherApproval.html";
+            }
+            else {
+                alert("You Dont Have A permission Amount");
+            }
         }
-        function logoutclick() {
-            window.location = "login.html";
+        function indentincdecclick() {
+            window.location = "AgentIncDecReport.html";
         }
-        function closeclick() {
+        function divcloseclick() {
+
             $('#mydiv').css('display', 'none');
             $('#divclose').css('display', 'none');
             $('#GriddivRaisedVouchers').css('display', 'none');
             $('#divMainAddNewRow').css('display', 'none');
-            $('#divcontrols').css('display', 'block');
+            $('#divdisplay').css('display', 'block');
         }
         function callHandler(d, s, e) {
             $.ajax({
-                url: 'http://49.50.65.160/salesapp/Bus.axd',
+                url: 'http://182.18.162.51/salesapp/Bus.axd',
                 data: d,
                 type: 'GET',
                 dataType: "json",
@@ -444,19 +570,34 @@
 <body style="background: whitesmoke !important;">
     <!-- Pushy Menu -->
     <nav class="pushy pushy-left">
-        <ul>
-            <li class="home-icon"><a href="#" onclick="homeclick();">&nbsp&nbsp&nbsp Home</a></li>
-            <li class="about-icon"><a href="#" onclick="Indentclick();">&nbsp&nbsp&nbsp Indent</a></li>
-            <li class="features-icon"><a href="#" onclick="Salesclick();">&nbsp&nbsp&nbsp Sales</a></li>
-            <li class="photos-icon"><a href="#" onclick="dcclick();">&nbsp&nbsp&nbsp DC Report</a></li>
-            <li class="video-icon"><a href="#" onclick="balanceclick();">&nbsp&nbsp&nbsp Closing Stock Report</a></li>
-            <li class="blog-icon"><a href="#" onclick="lekageclick();">&nbsp&nbsp&nbsp Lekages</a></li>
-            <li class="contact-icon"><a href="#" onclick="cratesclick();">&nbsp&nbsp&nbsp Inventory</a></li>
-            <li class="cash-icon"><a href="#" onclick="cashclick();">&nbsp&nbsp&nbsp Cash Book</a></li>
-            <li class="approve-icon"><a href="#" onclick="approvalvoucherclick();">&nbsp&nbsp&nbsp Approval
-                Voucher</a></li>
-            <li class="logout-icon"><a href="#" onclick="logoutclick();">&nbsp&nbsp&nbsp Logout</a></li>
-        </ul>
+        <div style="background-color:#9a9494;width: 100% !important" class="menu-btn">
+            <img src="images/avatar.jpg" class="user-image" alt="User Image" style="border-radius:50%;width: 18%;" />
+            <span id="lbl_username" style="position: absolute;padding-left: 5%;padding-top: 5%;color: white;">Guest</span>
+            <img src="images/arrow.png" style="width: 6%;position: absolute;margin-left: 70%;padding-top: 5%;" />
+        </div>
+            <ul>
+                <li class="home-icon"><a href="#" onclick="homeclick();">&nbsp&nbsp&nbsp&nbsp Home</a></li>
+                <li class="about-icon"><a href="#" onclick="Indentclick();">&nbsp&nbsp&nbsp&nbsp Indent</a></li>
+                <li class="features-icon"><a href="#" onclick="Salesclick();">&nbsp&nbsp&nbsp&nbsp Sales</a></li>
+                <li class="photos-icon"><a href="#" onclick="dcclick();">&nbsp&nbsp&nbsp&nbsp DC Report</a></li>
+                <li id="liclosingstock" class="video-icon"><a href="#" onclick="closingstockclick();">&nbsp&nbsp&nbsp Closing Stock Report</a></li>
+                <li id="libalance" class="video-icon"><a href="#" onclick="balanceclick();">&nbsp&nbsp&nbsp Balance Report</a></li>
+                  <li class="blog-icon"><a href="#" onclick="lekageclick();">&nbsp&nbsp&nbsp&nbsp Lekages</a></li>
+                <li class="contact-icon"><a href="#" onclick="cratesclick();">&nbsp&nbsp&nbsp&nbsp Inventory</a></li>
+                <li class="cash-icon"><a href="#" onclick="cashclick();">&nbsp&nbsp&nbsp&nbsp Cash Book</a></li>
+                <li class="cash-icon"><a href="#" onclick="indentincdecclick();">&nbsp&nbsp&nbsp&nbsp Sales Analysis</a></li>
+                 <li id="liapvocher" class="approve-icon">
+                    <a href="#" onclick="approvalvoucherclick();">
+                        &nbsp&nbsp&nbsp&nbsp Approval
+                        Voucher
+                    </a>
+                </li>
+                <li id="lidispatch" class="dispatch-icon"><a href="#" onclick="hdispatchclick();">&nbsp&nbsp Dispatch</a></li>
+                <li id="licharts" class="chartline-icon"><a href="#" onclick="chartdataclick();">&nbsp&nbsp Charts</a></li>
+                <li id="lichartsdashboard" class="chartline1-icon"><a href="#" onclick="chartDashBoardclick();">&nbsp&nbsp ChartDashBoard</a></li>
+                <li class="logout-icon"><a href="#" onclick="logoutclick();">&nbsp&nbsp&nbsp&nbsp Logout</a></li>
+            </ul>
+        
     </nav>
     <!-- Site Overlay -->
     <div class="site-overlay">
@@ -465,12 +606,11 @@
     <div id="container">
         <!-- Menu Button -->
         <div class="menu-btn" style="font-size:larger">
-            &#9776;  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Vyshnavi
-            Sales
+            &#9776;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Vyshnavi Sales
         </div>
         <!-- table code-->
         <form role="form">
-        <div class="box-body" id="divcontrols">
+        <div class="box-body" id="divdisplay" style="align-content:center;">
             <div class="form-group">
                 <label for="exampleInputEmail1">
                     Sales Office :</label>
@@ -490,77 +630,91 @@
                 <input type="date" id="txtToDate" class="form-control" value="">
             </div>
             <div class="box-footer" style="text-align: center;">
-                <input id="btn_save" type="button" class="btn btn-primary" name="submit" value="Genarate"
-                    onclick="BtnGenerateClick();">
+                <a id="btn_save" onclick="BtnGenerateClick();" class="btn icon-btn btn-primary" href="#">
+                    <span id="btn_save" onclick="BtnGenerateClick();" class="glyphicon btn-glyphicon glyphicon-cog img-circle text-success"></span>
+                    Generate
+                </a>
+                <!--<input id="btn_save" type="button" class="btn btn-primary" name="submit" value="Genarate"
+                    onclick="BtnGenerateClick();">-->
             </div>
         </div>
-            <div id="mydiv" style="display: none;">
-                <img src="images/loading.gif" alt="Loading..." id="LoadingGraphic" class="ajax-loader" />
-            </div>
-            
         <table class="responsive-table" role="grid" aria- describedby="example2_info" id="tbl_Indent_value">
         </table>
-            <div id="divclose" style="text-align:right;">
+            <!--<div id="divclose" style="text-align:right;">
                 <input id="btn_close" type="button" class="btn btn-primary" name="submit" value="Close"
-                       onclick="closeclick();" />
+                       onclick="divcloseclick();" />
+            </div>-->
+            <div id="divclose" style="text-align: -webkit-right;padding-bottom: 2%;" >
+                <a class="btn icon-btn btn-primary" id="btn_close" style="background-color: indianred; border-color: indianred;" onclick="divcloseclick();" href="#"><span id="Button1" onclick="divcloseclick();" name="submit" class="glyphicon btn-glyphicon1 glyphicon-remove img-circle text-muted"></span>Close</a>
             </div>
         <div id="GriddivRaisedVouchers" style="overflow: auto;">
         </div>
         <div id="divMainAddNewRow" class="pickupclass" style="text-align: center; height: 100%;
             width: 100%; position: absolute; display: none; left: 0%; top: 0%; z-index: 99999;
             background: rgba(192, 192, 192, 0.7);">
-            <div id="divAddNewRow" style="border: 5px solid #A0A0A0; position: absolute; top: 8%;
-                background-color: White; left: 2%; right: 10%; width: 98%; height: 100%; -webkit-box-shadow: 1px 1px 10px rgba(50, 50, 50, 0.65);
+            <div id="divAddNewRow" style="border: 5px solid #A0A0A0; position: absolute; top: 5%;
+                background-color: White; left: 2%; right: 10%; width: 98%;  -webkit-box-shadow: 1px 1px 10px rgba(50, 50, 50, 0.65);
                 -moz-box-shadow: 1px 1px 10px rgba(50, 50, 50, 0.65); box-shadow: 1px 1px 10px rgba(50, 50, 50, 0.65);
                 border-radius: 10px 10px 10px 10px;">
                 <div id="showpopup">
-                    <table id="tableCollectionDetails" class="actions-modal-group" border="1">
+                    <table id="tableCollectionDetails" class="actions-modal-group" border="1" style="width:100%;">
                         <tr>
                             <td>
-                                <span style="font-weight: bold">&nbsp&nbsp Name:</span> <span id="spnName"></span>
+                                <span style="font-weight: bold">&nbsp&nbsp Name:</span> 
+                                </td>
+                            <td>
+                                <span id="spnName"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span style="font-weight: bold">Voucher ID:</span>
                             </td>
                             <td>
-                                <span style="font-weight: bold">Voucher ID:</span> <span id="spnVoucherID" class="form_input">
+                                <span id="spnVoucherID" class="form_input">
                                 </span>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <span style="font-weight: bold">Voucher Type:</span> <span id="spnVoucherType" class="form_input">
-                                </span>
+                                <span style="font-weight: bold">Voucher Type:</span>
                             </td>
                             <td>
-                                <span style="font-weight: bold">Amount:</span> <span id="spnAmount" class="form_input">
+                                <span id="spnVoucherType" class="form_input">
                                 </span>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <span style="font-weight: bold">ApprovalEmployee:</span> <span id="spnApprovalEmp"
-                                    class="form_input"></span>
+                                <span style="font-weight: bold">Amount:</span>
+                            </td>
+                            <td>
+                                <span id="spnAmount" class="form_input">
+                                </span>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                <span style="font-weight: bold">ApprovalEmployee:</span>
+                            </td>
+                            <td>
+                                <span id="spnApprovalEmp"
+                                      class="form_input"></span>
                             </td>
                         </tr>
+                        
                         <tr>
                             <td colspan="2">
-                                <textarea rows="4" cols="45" id="txtCashierRemarks" class="form-control" placeholder="Enter Remarks"></textarea>
+                                <textarea rows="4" style="width:100%;" cols="45" id="txtCashierRemarks" class="form-control" placeholder="Enter Remarks"></textarea>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                            </td>
-                        </tr>
+                        
                         <tr>
                             <td>
                                 <span style="font-weight: bold">Approval Amount:</span>
                             </td>
                             <td style="height: 40px;">
-                                <input type="text" id="txtApprovalamt" class="form-control" value="" onkeypress="return numberOnlyExample();"
+                                <input type="text" id="txtApprovalamt" style="width:100%;"  class="form-control" value="" onkeypress="return numberOnlyExample();"
                                     placeholder="Enter Approval Amount" />
                             </td>
                         </tr>
@@ -569,7 +723,7 @@
                                 <span style="font-weight: bold">Approval Remarks:</span>
                             </td>
                             <td>
-                                <input type="text" id="txtRemarks" class="form-control" value="" onkeypress="return numberOnlyExample();"
+                                <input type="text" id="txtRemarks" style="width:100%;" class="form-control" value="" onkeypress="return numberOnlyExample();"
                                     placeholder="Enter Remarks" />
                             </td>
                         </tr>
@@ -588,21 +742,33 @@
                 <table align="center">
                     <tr>
                         <td colspan="2" style="height: 40px;">
-                            <input type="button" id="Button1" value="Approve" onclick="VoucherApproval();" class="btn btn-success" />
-                            <input type="button" id="Button2" value="Reject" onclick="VoucherReject();" class="btn btn-danger" />
+                            <a id="Button1" onclick="VoucherApproval();" class="btn icon-btn btn-primary" href="#">
+                                <span id="Button1" onclick="VoucherApproval();" class="glyphicon btn-glyphicon  glyphicon-ok-circle img-circle text-success"></span>
+                                Approve
+                            </a>
+                            <a id="Button2" onclick="VoucherReject();" class="btn icon-btn btn-danger" href="#">
+                                <span id="Button1" onclick="VoucherReject();" class="glyphicon btn-glyphicon1  glyphicon-remove img-circle text-success"></span>
+                                Reject
+                            </a>
+                            <!--<input type="button" id="Button1" value="Approve" onclick="VoucherApproval();" class="btn btn-success" />-->
+                            <!--<input type="button" id="Button2" value="Reject" onclick="VoucherReject();" class="btn btn-danger" />-->
                         </td>
                     </tr>
                 </table>
             </div>
-            <div id="divclose" style="width: 35px; top: 7%; right: 3.5%; position: absolute;
+            <div id="divclose" style="width: 35px; top: 5%; right: 3.5%; position: absolute;
                 z-index: 99999; cursor: pointer;">
-                <img src="images/Odclose.png" alt="close" onclick="OrdersCloseClick();" />
+              <img src="images/close.png" alt="close" onclick="OrdersCloseClick();"style="margin-top:-28px;" />
+                <!--<a  onclick="OrdersCloseClick();" class="btn icon-btn btn-primary" style="width:50px !important; height:50px !important;" src="#"><span id="Button1" onclick="OrdersCloseClick();" class="glyphicon btn-glyphicon  glyphicon-remove-circle img-circle text-success"></span></a>-->
             </div>
         </div>
         <span style="color: green; font-weight: bold; font-size: 25px;" align="left" id="lblid">
         </span><span id="totalcls" align="left" style="color: Red; font-weight: bold; font-size: 25px;
             padding-left: 150px;"></span>
         </form>
+        <div id="mydiv" style="display: none;">
+            <img src="images/new_loading.gif" alt="Loading..." id="LoadingGraphic" class="ajax-loader" />
+        </div>
     </div>
     <!-- Pushy JS -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

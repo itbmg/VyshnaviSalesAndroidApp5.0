@@ -82,7 +82,7 @@
 			message:  '<img src="images/719.GIF" />',/// <reference path="../thumbnails/36.gif" />
 /// <reference path="../thumbnails/loading29.gif" />
 
-//			message:  '<div class="liadingimg" style="background:url(Images/Loading.gif) no-repeat;">',
+//			message:  '<div class="liadingimg" style="background:url(images/loading.png) no-repeat;">',
 
 			title: null,		// title string; only used when theme == true
 			draggable: true,	// only used when theme == true (requires jquery-ui.js to be loaded)

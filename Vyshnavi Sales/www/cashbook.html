@@ -1,42 +1,134 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Sales App</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="css/normalize.css?v=11">
-    <link rel="stylesheet" href="css/demo.css?v=12">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/demo.css" />
     <!-- Pushy CSS -->
-    <link rel="stylesheet" href="css/pushy.css?v=13">
-    <link href="bootstrap/css/bootstrap.min.css?v=14" rel="stylesheet" type="text/css" />
-    <link href="Customcss/custom.css" rel="stylesheet" type="text/css" />
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css?v=16">
-    <link href="CustomCSS/font-awesome.css?v=17" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/pushy.css" />
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="CustomCSS/custom.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+    <link href="CustomCSS/font-awesome.css" rel="stylesheet" type="text/css" />
     <!-- jQuery -->
     <!-- Modernizr -->
     <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
     <script src="js/vendor/modernizr-2.6.2.min.js"></script>
-     <link href="css/homepage.css?v=18" rel="stylesheet" type="text/css" />
+    <link href="css/homepage.css" rel="stylesheet" type="text/css" />
+    <link href="css/tablestyle.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .btn-glyphicon {
+    padding:8px;
+    background:#ffffff;
+    margin-right:4px;
+    color:cornflowerblue;
+}
+           .btn-glyphicon1 {
+    padding:8px;
+    background:#ffffff;
+    margin-right:4px;
+    color:darkred;
+}
+.icon-btn {
+    padding: 1px 15px 3px 2px;
+    border-radius:50px;
+}
+        #mydiv {
+            height: 400px;
+            position: relative;
+            background-color: #F8F9F9; /* for demonstration */
+        }
+
+        .ajax-loader {
+            position: absolute;
+            height: 100px;
+            width: 100px;
+            left: 50%;
+            top: 50%;
+            margin-left: -32px; /* -1 * image width / 2 */
+            margin-top: -32px; /* -1 * image height / 2 */
+        }
+    </style>
     <script type="text/javascript">
         $(function () {
-            var date = new Date();
-            var day = date.getDate();
-            var month = date.getMonth() + 1;
-            var year = date.getFullYear();
-            if (month < 10) month = "0" + month;
-            if (day < 10) day = "0" + day;
-            today = year + "-" + month + "-" + day;
-            $('#txtdate').val(today);
-            $('#txtToDate').val(today);
             fillcsoroutes();
+            getloginvalidation();
+            $('#mydiv').css('display', 'none');
+            $('#divclose').css('display', 'none');
+            $('#divcontroles').css('display', 'block');
+            $('#divtotal').css('display', 'none');
+            $('#spntpayments').css('display', 'none');
+            $('#spntreceipt').css('display', 'none');
+            $('#spnopening').css('display', 'none');
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+            var hrs = today.getHours();
+            var mnts = today.getMinutes();
+            $('#txtdate').val(yyyy + '-' + mm + '-' + dd);
+            checkloginstatus();
         });
+        function checkloginstatus() {
+            var data = { 'op': 'checkloginstatus' };
+            var s = function (msg) {
+                if (msg) {
+                    if (msg == "NotValid") {
+                        window.location = 'login.html';
+                    }
+                    else if (msg == "valid") {
+
+                    }
+                }
+            };
+            var e = function (x, h, e) {
+            };
+            callHandler(data, s, e);
+        }
+        var sessionarray = [];
+        function getloginvalidation() {
+            var data = { 'op': 'Getsessionvalues' };
+            var s = function (msg) {
+                if (msg) {
+                    document.getElementById('lbl_username').innerHTML = msg[0].EmpName;
+                    if (msg[0].LevelType == "AccountsOfficer" || msg[0].LevelType == "Director") {
+                        $('#liapvocher').css('display', 'block');
+                        //                        $('#tdapprove').css('display', 'block');
+                    }
+                    else {
+                        $('#liapvocher').css('display', 'none');
+                        //                        $('#tdapprove').css('display', 'none');
+                    }
+                }
+                else {
+                }
+            };
+            var e = function (x, h, e) {
+            };
+            $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+            callHandler(data, s, e);
+        }
         function fillcsoroutes() {
             var data = { 'op': 'GetCsodispatchRoutes' };
             var s = function (msg) {
                 if (msg) {
-
+                    if (msg[0].Branchid == "172" || msg[0].Branchid == "3625" || msg[0].Branchid == "158" || msg[0].Branchid == "3919") {
+                        $('#lblroutename').css('display', 'block');
+                        $('#slctroute').css('display', 'block');
+                    }
+                    else {
+                        $('#lblroutename').css('display', 'none');
+                        $('#slctroute').css('display', 'none');
+                    }
                     BindDispatchName(msg);
                 }
                 else {
@@ -48,14 +140,14 @@
             callHandler(data, s, e);
         }
         function BindDispatchName(msg) {
-            document.getElementById('ddldispatch').options.length = "";
-            var veh = document.getElementById('ddldispatch');
+            document.getElementById('slctbranch').options.length = "";
+            var veh = document.getElementById('slctbranch');
             var length = veh.options.length;
             for (i = length - 1; i >= 0; i--) {
                 veh.options[i] = null;
             }
             var opt = document.createElement('option');
-            opt.innerHTML = "Select Dispatch";
+            opt.innerHTML = "Select BranchName";
             opt.value = "";
             veh.appendChild(opt);
             for (var i = 0; i < msg.length; i++) {
@@ -67,59 +159,32 @@
                 }
             }
         }
-        function routechange(ddldispatch) {
+        function Get_CashBook_Details() {
+            $('#mydiv').css('display', 'block');
+            
+            $('#divcontroles').css('display', 'none');
+            $('#tbl_Receipt_values').css('display', 'block');
+          
             var RouteName = "";
-            RouteName = document.getElementById('ddldispatch').value;
-            // date = document.getElementById('txtdate').value;
-            if (RouteName == "Select Route" || RouteName == "") {
-                alert("Please Select Route Name");
-                return false;
-            }
-            var data = { 'op': 'GetRouteNameclick', 'RouteID': RouteName };
-            var s = function (msg) {
-                if (msg) {
-                    BindRouteName(msg);
-                }
-                else {
-                }
-            };
-            var e = function (x, h, e) {
-            };
-            $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
-            callHandler(data, s, e);
-        }
-        function BindRouteName(msg) {
-            document.getElementById('ddlRouteName').options.length = "";
-            var veh = document.getElementById('ddlRouteName');
-            var length = veh.options.length;
-            for (i = length - 1; i >= 0; i--) {
-                veh.options[i] = null;
-            }
-            var opt = document.createElement('option');
-            opt.innerHTML = "Select RouteName";
-            opt.value = "";
-            veh.appendChild(opt);
-            for (var i = 0; i < msg.length; i++) {
-                if (msg[i] != null) {
-                    var opt = document.createElement('option');
-                    opt.innerHTML = msg[i].RouteName;
-                    opt.value = msg[i].sno;
-                    veh.appendChild(opt);
-                }
-            }
-        }
-        function getindentReportsclick() {
-            var Dispatchname = document.getElementById('ddldispatch').value;
+            Branchid = document.getElementById('slctbranch').value;
             date = document.getElementById('txtdate').value;
-            if (Dispatchname == "Select Dispatch" || Dispatchname == "") {
+            if (Branchid == "Select BranchName" || Branchid == "") {
                 alert("Please Select BranchName");
                 return false;
             }
-            var RouteName = document.getElementById('ddlRouteName').value;
-            var data = { 'op': 'GetIndentReport', 'RouteID': RouteName, 'Branchid': Dispatchname, 'Date': date };
+            var data = { 'op': 'Get_CashBook_Details', 'Branchid': Branchid, 'Date': date };
             var s = function (msg) {
                 if (msg) {
-                    fillindentdetails(msg);
+                    fillcashbook(msg);
+                    $('#spntpayments').show();
+                    $('#spntreceipt').show();
+                    $('#spnopening').show();
+                    $('#lblOpening').show();
+                    $('#lbltotalReceipt').show();
+                    $('#lbltotalPayments').show();
+                    $('#divclose').css('display', 'block');
+                    $('#divtotal').css('display', 'block');
+                    $('#mydiv').css('display', 'none');
                 }
                 else {
                 }
@@ -130,67 +195,68 @@
             callHandler(data, s, e);
         }
 
-        function fillindentdetails(msg) {
-            var table = document.getElementById("tbl_Indent_value");
-            for (var i = table.rows.length - 1; i > 0; i--) {
-                table.deleteRow(i);
-            }
-            var j = 1;
-            var k = 1;
-            var l = 0;
-            var COLOR = ["#b3ffe6", "AntiqueWhite", "#daffff", "MistyRose", "Bisque"];
-            for (var i = 0; i < msg.length; i++) {
-                var tablerowcnt = document.getElementById("tbl_Indent_value").rows.length;
-                $('#tbl_Indent_value').append('<tr style="background-color:' + COLOR[l] + '"><td  style="font-size:medium;font-weight:bold;font-style:inherit" data-title="ProductName" ><span id="spninqty" onclick="btnViewProducts(\'' + msg[i].sno + '\');"  class="badge bg-green"><span class="clsinqty">' + msg[i].SubCatName + '</span></span></td><td data-title="Qty" ><span id="spnmoniterqty" class="badge bg-green"><span class="clsmoniterqty">' + msg[i].totalqty + '</span></span></td></tr>');
-                j++;
-                l = l + 1;
-                if (l == 4) {
-                    l = 0;
-                }
-            }
-            GettotalclsCal();
-            //            j = 1;
-            //            var results = '<div  style="overflow:auto;"><table id="tableCashFormdetails" class="table table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="example2_info">';
-            //            results += '<thead><tr></th><th scope="col">ProductName</th><th scope="col">Qty</th></tr></thead></tbody>';
-            //            for (var i = 0; i < msg.length; i++) {
-            //                results += '<tr>';
-            //                results += '<td class="2"><span id="txtamount" style="font-size: 16px; color: green; font-weight: bold;"   onclick="btnViewProducts(\'' + msg[i].sno + '\');"><b>' + msg[i].SubCatName + '</b></span></td>';
-            //                results += '<td class="2"><span id="txtamount" style="font-size: 16px; color: green; font-weight: bold;" class="tammountcls"><b>' + msg[i].totalqty + '</b></span></td></tr>';
-            //                j++;
-            //            }
-            //            results += '<tr>';
-            //            results += '<td data-title="brandstatus" style="font-size: 16px; color: green; font-weight: bold;" class="2">Total</td>';
-            //            results += '<td data-title="Total" style="font-size: 16px; color: red; font-weight: bold;" class="7"><span id="totalcls"></span></td></tr>';
-            //            results += '</table></div>';
-            //            $("#divFillScreen").html(results);
-            //            GettotalclsCal();
-        }
-        function GettotalclsCal() {
-            var totamount = 0;
-            $('.clsmoniterqty').each(function (i, obj) {
-                var qtyclass = $(this).text();
-                if (qtyclass == "" || qtyclass == "0") {
-                }
-                else {
-                    totamount += parseFloat(qtyclass);
-                }
-            });
-            document.getElementById('totalcls').innerHTML = parseFloat(totamount).toFixed(2);
-        }
-        function logoutclick() {
-            var data = { 'op': 'log_out' };
-            var s = function (msg) {
-                if (msg == "Valid") {
-                    window.location = 'login.html';
-                }
-            };
-            var e = function (x, h, e) {
-            };
-            callHandler(data, s, e);
-        }
+
+
+
+         var Receiptarr=[];
+         var paymentarr = [];
+         
+         function fillcashbook(msg) {
+             var totalReceipt = 0; var totalPayments = 0;
+             var Receiptarr = msg[0].ReceiptDetails;
+             var paymentarr = msg[0].PaymentDetails;
+             var results = '<div class="divcontainer" style="overflow:auto; font-size:12px;"><table class="table table-bordered table-hover dataTable no-footer" id="tabledetails">';
+             results += '<thead><tr><th scope="col" style="text-align: center;">sno</th><th scope="col" style="text-align: center;" >ReceiptNo</th><th scope="col" style="text-align: center;">DispName</th><th scope="col" style="text-align: center;">Amount</th></tr></thead></tbody>';
+             var j = 1;
+             for (var i = 0; i < Receiptarr.length; i++) {
+                 results += '<tr><td data-title="Capacity"> ' + j + '</td>';
+                 results += '<td data-title="Capacity" class="2" id="txtPrvQty">' + Receiptarr[i].RecieptNo + '</td>';
+                 results += '<td data-title="Capacity" class="4">' + Receiptarr[i].DispName + '</td>';
+                 results += '<td data-title="Capacity" class="5"><div style="float:right;padding-right: 15%;">' + parseFloat(Receiptarr[i].ReceivedAmount).toFixed(2) + '</div></td></tr>';
+                 j++;
+                 totalReceipt += parseFloat(Receiptarr[i].ReceivedAmount) || 0;
+                 var openingamount = parseFloat(Receiptarr[i].opningbalance) || 0;
+             }
+             document.getElementById('lblOpening').innerHTML = openingamount
+             document.getElementById('lbltotalReceipt').innerHTML = totalReceipt
+             var Total = parseFloat(totalReceipt) + parseFloat(openingamount);
+             results += '</table></div>';
+             $("#tbl_Receipt_values").html(results);
+
+
+             var results1 = '<div class="divcontainer" style="overflow:auto; font-size:12px;"><table class="table table-bordered table-hover dataTable no-footer" id="tabledetails1">';
+             results1 += '<thead><tr><th scope="col" style="text-align: center;">sno</th><th scope="col" style="text-align: center;">VocherID</th><th scope="col" style="text-align: center;">Payments</th><th scope="col" style="text-align: center;">Amount</th></tr></thead></tbody>';
+             var j = 1;
+             for (var i = 0; i < paymentarr.length; i++) {
+                 results1 += '<tr><td data-title="Capacity"> ' + j + '</td>';
+                 results1 += '<td data-title="Capacity" class="2">' + paymentarr[i].VocherID + '</td>';
+                 results1 += '<td data-title="Capacity" class="4">' + paymentarr[i].Payments + '</td>';
+                 results1 += '<td data-title="Capacity" class="5"><div style="float:right;padding-right: 15%;">' + parseFloat(paymentarr[i].Amount).toFixed(2) + '</div></td></tr>';
+                 j++;
+                 totalPayments += parseFloat(paymentarr[i].Amount) || 0;
+             }
+             var ClosingAmount = parseFloat(Total) - parseFloat(totalPayments);
+             document.getElementById('lbltotalPayments').innerHTML = totalPayments;
+             document.getElementById('totalcls').innerHTML = ClosingAmount;
+             results1 += '</table></div>';
+             $("#tbl_Payment_values").html(results1);
+         }
+         function logoutclick() {
+             window.localStorage.removeItem("key7");
+             window.localStorage.removeItem("key8");
+             var data = { 'op': 'log_out' };
+             var s = function (msg) {
+                 if (msg == "Valid") {
+                     window.location = 'login.html';
+                 }
+             };
+             var e = function (x, h, e) {
+             };
+             callHandler(data, s, e);
+         }
         function callHandler(d, s, e) {
             $.ajax({
-                url: 'http://49.50.65.160/salesapp/Bus.axd',
+                url: 'http://182.18.162.51/salesapp/Bus.axd',
                 data: d,
                 type: 'GET',
                 dataType: "json",
@@ -228,26 +294,73 @@
         function approvalvoucherclick() {
             window.location = "VoucherApproval.html";
         }
+        function horderindentclick() {
+            window.location = "indent.html";
+        }
+        
+        function chartdataclick() {
+            window.location = "charts.html";
+        }
         function logoutclick() {
+            window.localStorage.removeItem("key7");
+            window.localStorage.removeItem("key8");
             window.location = "login.html";
+        }
+        function indentincdecclick() {
+            window.location = "AgentIncDecReport.html";
+        }
+        function hdispatchclick() {
+            window.location = "Dispatch.html";
+        }
+        function chartDashBoardclick() {
+            window.location = "ClassificationChart.html";
+        }
+        function closeclick() {
+            $('#mydiv').css('display', 'none');
+            $('#divclose').css('display', 'none');
+            $('#divcontroles').css('display', 'block');
+            $('#tabledetails1').css('display', 'none');
+            $('#tabledetails').css('display', 'none');
+            $('#divtotal').css('display', 'none');
+            $('#spntpayments').css('display', 'none');
+            $('#spntreceipt').css('display', 'none');
+            $('#lblOpening').css('display', 'none');
+            $('#lbltotalReceipt').css('display', 'none');
+            $('#lbltotalPayments').css('display', 'none');
+            $('#spnopening').css('display', 'none');   
+
         }
     </script>
 </head>
 <body style="background: whitesmoke !important;">
     <!-- Pushy Menu -->
     <nav class="pushy pushy-left">
+        <div style="background-color:#9a9494;width: 100% !important" class="menu-btn">
+            <img src="images/avatar.jpg" class="user-image" alt="User Image" style="border-radius:50%;width: 18%;" />
+            <span id="lbl_username" style="position: absolute;padding-left: 5%;padding-top: 5%;color: white;">Guest</span>
+            <img src="images/arrow.png" style="width: 6%;position: absolute;margin-left: 70%;padding-top: 5%;" />
+        </div>
         <ul>
-            <li class="home-icon"><a href="#" onclick="homeclick();">&nbsp&nbsp&nbsp Home</a></li>
-            <li class="about-icon"><a href="#" onclick="Indentclick();">&nbsp&nbsp&nbsp Indent</a></li>
-            <li class="features-icon"><a href="#" onclick="Salesclick();">&nbsp&nbsp&nbsp Sales</a></li>
-            <li class="photos-icon"><a href="#" onclick="dcclick();">&nbsp&nbsp&nbsp DC Report</a></li>
-            <li class="video-icon"><a href="#" onclick="balanceclick();">&nbsp&nbsp&nbsp Closing Stock Report</a></li>
-            <li class="blog-icon"><a href="#" onclick="lekageclick();">&nbsp&nbsp&nbsp Lekages</a></li>
-            <li class="contact-icon"><a href="#" onclick="cratesclick();">&nbsp&nbsp&nbsp Inventory</a></li>
-            <li class="cash-icon"><a href="#" onclick="cashclick();">&nbsp&nbsp&nbsp Cash Book</a></li>
-            <li class="approve-icon"><a href="#" onclick="approvalvoucherclick();">&nbsp&nbsp&nbsp Approval
-                Voucher</a></li>
-            <li class="logout-icon"><a href="#" onclick="logoutclick();">&nbsp&nbsp&nbsp Logout</a></li>
+            <li class="home-icon"><a href="#" onclick="homeclick();">&nbsp&nbsp&nbsp&nbsp Home</a></li>
+            <li class="about-icon"><a href="#" onclick="Indentclick();">&nbsp&nbsp&nbsp&nbsp Indent</a></li>
+            <li class="features-icon"><a href="#" onclick="Salesclick();">&nbsp&nbsp&nbsp&nbsp Sales</a></li>
+            <li class="photos-icon"><a href="#" onclick="dcclick();">&nbsp&nbsp&nbsp&nbsp DC Report</a></li>
+            <li id="liclosingstock" class="video-icon"><a href="#" onclick="closingstockclick();">&nbsp&nbsp&nbsp Closing Stock Report</a></li>
+            <li id="libalance" class="video-icon"><a href="#" onclick="balanceclick();">&nbsp&nbsp&nbsp Balance Report</a></li>
+            <li class="blog-icon"><a href="#" onclick="lekageclick();">&nbsp&nbsp&nbsp&nbsp Lekages</a></li>
+            <li class="contact-icon"><a href="#" onclick="cratesclick();">&nbsp&nbsp&nbsp&nbsp Inventory</a></li>
+            <li class="cash-icon"><a href="#" onclick="cashclick();">&nbsp&nbsp&nbsp&nbsp Cash Book</a></li>
+            <li class="cash-icon"><a href="#" onclick="indentincdecclick();">&nbsp&nbsp&nbsp&nbsp Sales Analysis</a></li>
+            <li id="liapvocher" class="approve-icon">
+                <a href="#" onclick="approvalvoucherclick();">
+                    &nbsp&nbsp&nbsp&nbsp Approval
+                    Voucher
+                </a>
+            </li>
+            <li id="lidispatch" class="dispatch-icon"><a href="#" onclick="hdispatchclick();">&nbsp&nbsp Dispatch</a></li>
+            <li id="licharts" class="chartline-icon"><a href="#" onclick="chartdataclick();">&nbsp&nbsp Charts</a></li>
+            <li id="lichartsdashboard" class="chartline1-icon"><a href="#" onclick="chartDashBoardclick();">&nbsp&nbsp ChartDashBoard</a></li>
+            <li class="logout-icon"><a href="#" onclick="logoutclick();">&nbsp&nbsp&nbsp&nbsp Logout</a></li>
         </ul>
     </nav>
     <!-- Site Overlay -->
@@ -257,27 +370,81 @@
     <div id="container">
         <!-- Menu Button -->
         <div class="menu-btn" style="font-size:larger">
-            &#9776;  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Vyshnavi
-            Sales
+            &#9776;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  Vyshnavi Sales
         </div>
-             <div style="padding: 13px; padding-left: 36px; color: #2a70bb; text-align: left; cursor: pointer; font-size: 25px;"><i class="fa fa-money" aria-hidden="true"></i> Cash Book  </div>
+        <div style="padding: 13px; padding-left: 36px; color: #2a70bb; text-align: left;
+            cursor: pointer; font-size: 25px;">
+            <i class="fa fa-tint" aria-hidden="true"></i>CashBook
+        </div>
         <!-- table code-->
         <form role="form">
-        <div class="box-body">
-            <div class="form-group">
-                <label for="exampleInputFile">
-                    Date</label>
-                <input type="date" id="txtdate" class="form-control" value="">
+            <div id="divcontroles" class="box-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        Branch Name:
+                    </label>
+                    <select class="form-control" id="slctbranch"></select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">
+                        Date
+                    </label>
+                    <input type="date" id="txtdate" class="form-control" value="" />
+                </div>
+                <div class="box-footer" style="text-align: center;">
+                    <a id="btn_save" onclick="Get_CashBook_Details();" class="btn icon-btn btn-primary" href="#">
+                        <span id="btn_save" onclick="Get_CashBook_Details();" class="glyphicon btn-glyphicon glyphicon-cog img-circle text-success"></span>
+                        Generate
+                    </a>
+                    <!--<input id="btn_save" type="button" class="btn btn-primary" name="submit" value="Genarate"
+                           onclick="Get_CashBook_Details();" />-->
+                </div>
+
             </div>
-        </div>
-        <div class="box-footer" style="text-align: center;">
-            <input id="btn_save" type="button" class="btn btn-primary" name="submit" value="Genarate">
-        </div>
-        <table class="responsive-table" role="grid" aria- describedby="example2_info" id="tbl_Indent_value">
-            </table>
-        <div id="divFillScreen" style="overflow: auto;">
-        </div>
-        
+            <div id="mydiv" style="display: none;">
+                <img src="images/loading.gif" alt="Loading..." id="LoadingGraphic" class="ajax-loader" />
+            </div>
+            <div>
+                <span style="color: green; font-weight: bold; font-size: 15px;" align="left" id="spnopening">
+                    OpeningAmount:
+                </span><span id="lblOpening" style="width: 700px; color: Red; font-weight: bold; font-size: 15px;"></span>
+            </div>
+            <div id="divclose" style="text-align: right;margin-top: -35px;">
+                <a class="btn icon-btn btn-danger" id="btn_close" onclick="closeclick();" href="#"><span id="btn_close" onclick="closeclick();" name="submit" class="glyphicon btn-glyphicon1 glyphicon-remove img-circle text-muted"></span>Close</a>
+            </div>
+            <!--<table>
+                <tr>
+                    <td>
+                        <span style="color: green; font-weight: bold; font-size: 15px;" align="left" id="spnopening">
+                            OpeningAmount:
+                        </span><span id="lblOpening" style="width: 700px; color: Red; font-weight: bold; font-size: 15px;"></span>
+                    </td>
+                    <td>
+                        <div id="divclose" style="text-align: right;margin-top: -35px;">
+                            <a class="btn icon-btn btn-danger" id="btn_close" onclick="closeclick();" href="#"><span id="btn_close" onclick="closeclick();" name="submit" class="glyphicon btn-glyphicon1 glyphicon-remove img-circle text-muted"></span>Close</a>
+                            
+                        </div>
+                    </td>
+                </tr>
+            </table>-->
+            
+       
+            <div id="tbl_Receipt_values">
+            </div>
+            <span style="color: green; font-weight: bold; font-size: 15px;" align="left" id="spntreceipt">
+                TotalReceiptAmt :
+            </span><span id="lbltotalReceipt" style="width: 700px; color: Red; font-weight: bold; font-size: 15px;"></span>
+            <div id="tbl_Payment_values">
+            </div>
+            <span style="color: green; font-weight: bold; font-size: 15px;" align="left" id="spntpayments">
+                TotalPaymentsAmt :
+            </span><span id="lbltotalPayments" style="width: 700px; color: Red; font-weight: bold; font-size: 15px;"></span>
+            <div id="divtotal">
+                <span style="color: green; font-weight: bold; font-size: 15px;" align="left" id="lblid">
+                    ClosingBalance :
+                </span><span id="totalcls" align="right" style="color: Red; font-weight: bold;
+                    font-size: 17px;"></span>
+            </div>
         </form>
     </div>
     <!-- Pushy JS -->

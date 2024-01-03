@@ -1,0 +1,671 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Sales App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/demo.css">
+    <!-- Pushy CSS -->
+    <link rel="stylesheet" href="css/pushy.css">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="CustomCSS/custom.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="CustomCSS/font-awesome.css" rel="stylesheet" type="text/css" />
+    <!-- jQuery -->
+    <!-- Modernizr -->
+    <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    <link href="css/homepage.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+
+        .btn-glyphicon {
+            padding: 8px;
+            background: #ffffff;
+            margin-right: 4px;
+            color: cornflowerblue;
+        }
+
+        .btn-glyphicon1 {
+            padding: 8px;
+            background: #ffffff;
+            margin-right: 4px;
+            color: darkred;
+        }
+
+        .icon-btn {
+            padding: 1px 15px 3px 2px;
+            margin: -11px 1px 0px 11px;
+            border-radius: 50px;
+        }
+        #mydiv {
+            height: 400px;
+            position: relative;
+            background-color: #F8F9F9; /* for demonstration */
+        }
+
+        .ajax-loader {
+            position: absolute;
+            height: 100px;
+            width: 100px;
+            left: 50%;
+            top: 50%;
+            margin-left: -32px; /* -1 * image width / 2 */
+            margin-top: -32px; /* -1 * image height / 2 */
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            fillcsoroutes();
+            getloginvalidation();
+            $('#mydiv').css('display', 'none');
+            $('#divclose').css('display', 'none');
+            $('#divcontroles').css('display', 'block');
+            $('#divtotal').css('display', 'none');
+            getloginvalidation2();
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+            var hrs = today.getHours();
+            var mnts = today.getMinutes();
+            $('#txtFromDate').val(yyyy + '-' + mm + '-' + dd);
+            $('#txtToDate').val(yyyy + '-' + mm + '-' + dd);
+            checkloginstatus();
+        });
+        function checkloginstatus() {
+            var data = { 'op': 'checkloginstatus' };
+            var s = function (msg) {
+                if (msg) {
+                    if (msg == "NotValid") {
+                        window.location = 'login.html';
+                    }
+                    else if (msg == "valid") {
+
+                    }
+                }
+            };
+            var e = function (x, h, e) {
+            };
+            callHandler(data, s, e);
+        }
+        var sessionarray = [];
+        function getloginvalidation() {
+            var data = { 'op': 'Getsessionvalues' };
+            var s = function (msg) {
+                if (msg) {
+                    document.getElementById('lbl_username').innerHTML = msg[0].EmpName;
+                    if (msg[0].LevelType == "AccountsOfficer" || msg[0].LevelType == "Director") {
+                        $('#liapvocher').css('display', 'block');
+                        //                        $('#tdapprove').css('display', 'block');
+                    }
+                    else {
+                        $('#liapvocher').css('display', 'none');
+                        //                        $('#tdapprove').css('display', 'none');
+                    }
+                }
+                else {
+                }
+            };
+            var e = function (x, h, e) {
+            };
+            $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+            callHandler(data, s, e);
+        }
+        var sessionarray = [];
+        function getloginvalidation2() {
+            var data = { 'op': 'Getsessionvalues' };
+            var s = function (msg) {
+                if (msg) {
+                    document.getElementById('lbl_username').innerHTML = msg[0].EmpName;
+                    if (msg[0].LevelType == "Agent" || msg[0].LevelType == "Agent") {
+                        roureall = "A"
+                        $('#lihome').css('display', 'block');
+                        $('#liindent').css('display', 'block');
+                        $('#lisales').css('display', 'none');
+                        $('#lidc').css('display', 'none');
+                        $('#liclosingstock').css('display', 'none');
+                        $('#lileakages').css('display', 'none');
+                        $('#liinventory').css('display', 'none');
+                        $('#licashbook').css('display', 'none');
+                        $('#div_Branch').css('display', 'none');
+                        $('#lidispatch').css('display', 'none');
+
+//                        $('#div_route').css('display', 'none');
+                        leveltype = msg[0].LevelType;
+                        sessionarray = msg;
+                        get_agent_logindetails();
+                    }
+                    else if (msg[0].LevelType == "Admin" || msg[0].LevelType == "Admin") {
+                        roureall = "B";
+//                        $('#div_route').css('display', 'block');
+                        $('#div_Branch').css('display', 'block');
+                    }
+                    else {
+                        roureall = "B";
+//                        $('#div_route').css('display', 'block');
+                        $('#div_Branch').css('display', 'block');
+                    }
+                }
+                else {
+                }
+            };
+            var e = function (x, h, e) {
+            };
+            $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+            callHandler(data, s, e);
+        }
+        function fillcsoroutes() {
+            var data = { 'op': 'GetCsodispatchRoutes' };
+            var s = function (msg) {
+                if (msg) {
+                    BindDispatchName(msg);
+                }
+                else {
+                }
+            };
+            var e = function (x, h, e) {
+            };
+            $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+            callHandler(data, s, e);
+        }
+        function BindDispatchName(msg) {
+            document.getElementById('ddlsalesoffice').options.length = "";
+            var veh = document.getElementById('ddlsalesoffice');
+            var length = veh.options.length;
+            for (i = length - 1; i >= 0; i--) {
+                veh.options[i] = null;
+            }
+            var opt = document.createElement('option');
+            opt.innerHTML = "Select branchname";
+            opt.value = "";
+            veh.appendChild(opt);
+            for (var i = 0; i < msg.length; i++) {
+                if (msg[i] != null) {
+                    var opt = document.createElement('option');
+                    opt.innerHTML = msg[i].RouteName;
+                    opt.value = msg[i].rid;
+                    veh.appendChild(opt);
+                }
+            }
+        }
+        function get_AgentIncDec() {
+            $('#mydiv').css('display', 'block');
+            $('#divcontroles').css('display', 'none');
+            var Branchid = document.getElementById('ddlsalesoffice').value;
+            var fromdate = document.getElementById('txtFromDate').value;
+            var todate = document.getElementById('txtToDate').value;
+            var type = document.getElementById('ddltype').value;
+
+            var data = { 'op': 'get_AgentIncDec', 'Branchid': Branchid, 'fromdate': fromdate, 'todate': todate, 'type': type };
+            var s = function (msg) {
+                if (msg == "") {
+                    alert("Data Not Found");
+                    $('#divcontroles').css('display', 'block');
+                    $('#mydiv').css('display', 'none');
+                    $('#divclose').css('display', 'none');
+                    $('#tbl_Balance_amount').css('display', 'none');
+                    $('#divtotal').css('display', 'none');
+                }
+                if (msg) {
+                    filldetails(msg);
+                    $('#mydiv').css('display', 'none');
+                    $('#divclose').css('display', 'block');
+                    
+                    $('#divtotal').css('display', 'block');
+                    $('#tbl_Balance_amount').css('display', 'block');
+                }
+                else {
+                }
+            };
+            var e = function (x, h, e) {
+            };
+            $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+            callHandler(data, s, e);
+        }
+       
+        function filldetails(msg) {
+            var TotFromqty = 0;
+            var grand_TotFromqty = 0;
+            var Tototqty = 0;
+            var grand_Tototqty = 0;
+            var TotIncreaseQty = 0;
+            var grand_TotIncreaseQty = 0;
+            var TotIncreasepercen = 0;
+            var grand_TotIncreasepercen = 0;
+            var TotDecreaseQty = 0;
+            var grand_TotDecreaseQty = 0;
+            var TotDecreasepercen = 0;
+            var grand_TotDecreasepercen = 0;
+            var type = document.getElementById('ddltype').value;
+            if (type == "Branchwise") {
+                var Branchid = document.getElementById('ddlsalesoffice').value;
+                var fromdate = msg[0].fromdate;
+                var todate = msg[0].todate; ;
+                var BranchTable = [];
+                var BranchTable1 = [];
+                var results = '<div class="divcontainer" style="overflow:auto;"><table border="1" class="table table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="example2_info" style="font-size:10px;font-weight:bold;">';
+                results += '<thead><tr>';
+                results += '<th scope="col">BranchName</th><th scope="col" style="text-align: center;">RouteName</th><th scope="col" id="txtDate" style="text-align: center;">' + fromdate + '</th><th scope="col" id="txtDate" style="text-align: center;">' + todate + '</th><th scope="col" style="text-align: center;">Increase</th><th scope="col" style="text-align: center;">Increase%</th><th scope="col" style="text-align: center;">Decrease</th><th scope="col" style="text-align: center;">Decrease%</th>';
+                results += '</tr></thead></tbody>';
+                var k = 1;
+                var l = 0;
+                var COLOR = ["#b3ffe6", "AntiqueWhite", "#daffff", "MistyRose", "Bisque"];
+                for (var i = 0; i < msg.length; i++) {
+                    grand_TotFromqty += parseFloat(msg[i].Fromqty) || 0;
+                    grand_Tototqty += parseFloat(msg[i].Toqty) || 0;
+                    grand_TotIncreaseQty += parseFloat(msg[i].IncreaseQty) || 0;
+                    grand_TotIncreasepercen += parseFloat(msg[i].Increasepercen) || 0;
+                    grand_TotDecreaseQty += parseFloat(msg[i].DecreaseQty) || 0;
+                    grand_TotDecreasepercen += parseFloat(msg[i].Decreasepercen) || 0;
+
+                    if ((BranchTable.indexOf(msg[i].BranchName) == -1)) {
+                        if (i == 0) {
+                        }
+                        else {
+
+                        }
+                        totqty = 0;
+                        var IncreaseQty = msg[i].IncreaseQty || 0;
+                        var Increasepercen = msg[i].Increasepercen || 0;
+                        var DecreaseQty = msg[i].DecreaseQty || 0;
+                        var Decreasepercen = msg[i].Decreasepercen || 0;
+                        var Fromqty = msg[i].Fromqty || 0;
+                        var Toqty = msg[i].Toqty || 0;
+                        results += '<tr style="background-color:' + COLOR[l] + '">';
+                        results += '<td scope="row" class="1"  style="font-size:10px;font-weight:bold;color:blue;">' + msg[i].BranchName + '</td>';
+                        results += '<td scope="row" class="totbalcls" >' + msg[i].RouteName + '</td>';
+                        results += '<td  class="2"><div style="float:right;padding-right: 20%;">' + parseFloat(Fromqty).toFixed(2) + '</div></td>';
+                        results += '<td  class="tammountcls" ><div style="float:right;padding-right: 20%;">' + parseFloat(Toqty).toFixed(2)  + '</div></td>';
+                        results += '<td  class="tammountcls" style="color:#006400;" ><div style="float:right;padding-right: 20%;">' + parseFloat(IncreaseQty).toFixed(2) + '</div></td>';
+                        results += '<td  class="tammountcls" style="color:#006400;" ><div style="float:right;padding-right: 20%;">' + parseFloat(Increasepercen).toFixed(2) + '</div></td>';
+                        results += '<td  class="tammountcls" style="color: Red;"><div style="float:right;padding-right: 20%;">' + parseFloat(DecreaseQty).toFixed(2) + '</div></td>';
+                        results += '<td  class="tammountcls" style="color: Red;"><div style="float:right;padding-right: 20%;">' + parseFloat(Decreasepercen).toFixed(2) + '</div></td></tr>';
+                        TotFromqty += parseFloat(msg[i].Fromqty) || 0;
+                        Tototqty += parseFloat(msg[i].Toqty) || 0;
+                        TotIncreaseQty += parseFloat(msg[i].IncreaseQty) || 0;
+                        TotIncreasepercen += parseFloat(msg[i].Increasepercen) || 0;
+                        TotDecreaseQty += parseFloat(msg[i].DecreaseQty) || 0;
+                        TotDecreasepercen += parseFloat(msg[i].Decreasepercen) || 0;
+                        BranchTable.push(msg[i].BranchName);
+                        l = l + 1;
+                        if (l == 4) {
+                            l = 0;
+                        }
+                    }
+                    else {
+                        var IncreaseQty = msg[i].IncreaseQty || 0;
+                        var Increasepercen = msg[i].Increasepercen || 0;
+                        var DecreaseQty = msg[i].DecreaseQty || 0;
+                        var Decreasepercen = msg[i].Decreasepercen || 0;
+                        var Fromqty = msg[i].Fromqty || 0;
+                        var Toqty = msg[i].Toqty || 0;
+                        results += '<tr style="background-color:' + COLOR[l] + '">';
+                        results += '<td scope="row" class="1" ></td>';
+                        results += '<td scope="row" class="1" >' + msg[i].RouteName + '</td>';
+                        results += '<td  class="2"><div style="float:right;padding-right: 20%;">' + parseFloat(Fromqty).toFixed(2)  + '<div></td>';
+                        results += '<td  class="tammountcls" ><div style="float:right;padding-right: 20%;">' + parseFloat(Toqty).toFixed(2) + '<div></td>';
+                        results += '<td  class="tammountcls" style="color:#006400;"><div style="float:right;padding-right: 20%;">' + parseFloat(IncreaseQty).toFixed(2) + '<div></td>';
+                        results += '<td  class="tammountcls" style="color:#006400;"><div style="float:right;padding-right: 20%;">' + parseFloat(Increasepercen).toFixed(2) + '<div></td>';
+                        results += '<td  class="tammountcls" style="color: Red;"><div style="float:right;padding-right: 20%;">' + parseFloat(DecreaseQty).toFixed(2) + '<div></td>';
+                        results += '<td  class="tammountcls" style="color: Red;"><div style="float:right;padding-right: 20%;">' + parseFloat(Decreasepercen).toFixed(2) + '<div></td></tr>';
+                        TotFromqty += parseFloat(msg[i].Fromqty) || 0;
+                        Tototqty += parseFloat(msg[i].Toqty) || 0;
+                        TotIncreaseQty += parseFloat(msg[i].IncreaseQty) || 0;
+                        TotIncreasepercen += parseFloat(msg[i].Increasepercen) || 0;
+                        TotDecreaseQty += parseFloat(msg[i].DecreaseQty) || 0;
+                        TotDecreasepercen += parseFloat(msg[i].Decreasepercen) || 0;
+                        l = l + 1;
+                        if (l == 4) {
+                            l = 0;
+                        }
+                    }
+                }
+                results += '<tr>';
+                results += '<td scope="row" class="1" ></td>';
+                results += '<td scope="row" class="1" style="font-size:10px;font-weight:bold;color:#006400;" >Total</td>';
+                results += '<td scope="row" style="font-size:10px;font-weight:bold;color:#006400;" ><div style="float:right;padding-right: 20%;">' + parseFloat(TotFromqty).toFixed(2) + '<div></td>';
+                results += '<td scope="row" style="font-size:10px;font-weight:bold;color:#006400;" ><div style="float:right;padding-right: 20%;">' + parseFloat(Tototqty).toFixed(2) + '<div></td>';
+                results += '<td scope="row" style="font-size:10px;font-weight:bold;color:#006400;" ><div style="float:right;padding-right: 20%;">' + parseFloat(TotIncreaseQty).toFixed(2) + '<div></td>';
+                results += '<td scope="row" style="font-size:10px;font-weight:bold;color:#006400;" ><div style="float:right;padding-right: 20%;">' + parseFloat(TotIncreasepercen).toFixed(2) + '<div></td>';
+                results += '<td scope="row" style="font-size:10px;font-weight:bold;color:#006400;" ><div style="float:right;padding-right: 20%;">' + parseFloat(TotDecreaseQty).toFixed(2) + '<div></td>';
+                results += '<td style="font-size:10px;font-weight:bold;color:#006400;" ><div style="float:right;padding-right: 20%;">' + parseFloat(TotDecreasepercen).toFixed(2) + '<div></td></tr>';
+                results += '<tr>';
+                results += '</table></div>';
+                $("#tbl_Balance_amount").html(results);
+                Tototqty = 0;
+            }
+            else {
+                var Branchid = document.getElementById('ddlsalesoffice').value;
+                var BranchTable = [];
+                var BranchTable1 = [];
+                var results = '<div class="divcontainer" style="overflow:auto;" ><table border="1" class="table table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="example2_info" style="font-size:10px;font-weight:bold;color:blue;">';
+                results += '<thead><tr><th scope="col" style="text-align: center;">RouteName</th><th scope="col" style="text-align: center;">AgentName</th><th scope="col" style="text-align: center;">FromDate</th><th scope="col" style="text-align: center;">ToDate</th><th scope="col" style="text-align: center;">Increase</th><th scope="col" style="text-align: center;">Increase%</th><th scope="col" style="text-align: center;">Decrease</th><th scope="col" style="text-align: center;">Decrease%</th></tr></thead></tbody>';
+                var k = 1;
+                var l = 0;
+                var COLOR = ["#b3ffe6", "AntiqueWhite", "#daffff", "MistyRose", "Bisque"];
+                for (var i = 0; i < msg.length; i++) {
+                    grand_TotFromqty += parseFloat(msg[i].Fromqty) || 0;
+                    grand_Tototqty += parseFloat(msg[i].Toqty) || 0;
+                    grand_TotIncreaseQty += parseFloat(msg[i].IncreaseQty) || 0;
+                    grand_TotIncreasepercen += parseFloat(msg[i].Increasepercen) || 0;
+                    grand_TotDecreaseQty += parseFloat(msg[i].DecreaseQty) || 0;
+                    grand_TotDecreasepercen += parseFloat(msg[i].Decreasepercen) || 0;
+                    if ((BranchTable.indexOf(msg[i].BranchName) == -1)) {
+                        if (i == 0) {
+                        }
+                        else {
+                            results += '<tr style="background-color:' + COLOR[l] + '">';
+                            results += '<td scope="row" class="1" ></td>';
+                            results += '<td scope="row" class="1"  style="font-size:10px;font-weight:bold;color:#006400;">Total</td>';
+                            results += '<td scope="row" style="font-size:10px;font-weight:bold;color:#006400;" ><div style="float:right;padding-right: 20%;">' + parseFloat(TotFromqty).toFixed(2) || 0 + '</div></td>';
+                            results += '<td scope="row" style="font-size:10px;font-weight:bold;color:#006400;" ><div style="float:right;padding-right: 20%;">' + parseFloat(Tototqty).toFixed(2) || 0 + '</div></td>';
+                            results += '<td scope="row" style="font-size:10px;font-weight:bold;color:#006400;" ><div style="float:right;padding-right: 20%;">' + parseFloat(TotIncreaseQty).toFixed(2) || 0 + '</div></td>';
+                            results += '<td scope="row" style="font-size:10px;font-weight:bold;color:#006400;" ><div style="float:right;padding-right: 20%;">' + parseFloat(TotIncreasepercen).toFixed(2) || 0 + '</div></td>';
+                            results += '<td scope="row" style="font-size:10px;font-weight:bold;color:#006400;" ><div style="float:right;padding-right: 20%;">' + parseFloat(TotDecreaseQty).toFixed(2) || 0 + '</div></td>';
+                            results += '<td style="font-size:10px;font-weight:bold;color:#006400;" ><div style="float:right;padding-right: 20%;">' + parseFloat(TotDecreasepercen).toFixed(2) || 0 + '</div></td></tr>';
+                            TotFromqty = 0;
+                            Tototqty = 0;
+                            TotIncreaseQty = 0;
+                            TotIncreasepercen = 0;
+                            TotDecreaseQty = 0;
+                            TotDecreasepercen = 0;
+                            l = l + 1;
+                            if (l == 4) {
+                                l = 0;
+                            }
+                        }
+                        totqty = 0;
+                        var Fromqty = parseFloat(msg[i].Fromqty) || 0;
+                        var Toqty = parseFloat(msg[i].Toqty) || 0;
+                        var IncreaseQty = parseFloat(msg[i].IncreaseQty) || 0;
+                        var Increasepercen = parseFloat(msg[i].Increasepercen) || 0;
+                        var DecreaseQty = parseFloat(msg[i].DecreaseQty) || 0;
+                        var Decreasepercen = parseFloat(msg[i].Decreasepercen) || 0;
+                        results += '<tr style="background-color:' + COLOR[l] + '">';
+                        results += '<td scope="row" class="1"  style="font-size:10px;font-weight:bold;color:blue;"><div style="float:right;padding-right: 20%;">' + msg[i].BranchName + '</td>';
+                        results += '<td scope="row" class="totbalcls" >' + msg[i].RouteName + '</td>';
+                        results += '<td  class="2"><div style="float:right;padding-right: 20%;">' + parseFloat(Fromqty).toFixed(2)  + '</div></td>';
+                        results += '<td  class="tammountcls"><div style="float:right;padding-right: 20%;">' + parseFloat(Toqty).toFixed(2)  + '</div></td>';
+                        results += '<td  class="tammountcls" style="color:#006400;"><div style="float:right;padding-right: 20%;">' + parseFloat(IncreaseQty).toFixed(2)  + '</div></td>';
+                        results += '<td  class="tammountcls" style="color:#006400;"><div style="float:right;padding-right: 20%;">' + parseFloat(Increasepercen).toFixed(2)  + '</div></td>';
+                        results += '<td  class="tammountcls" style="color: Red;"><div style="float:right;padding-right: 20%;">' + parseFloat(DecreaseQty).toFixed(2)  + '</div></td>';
+                        results += '<td  class="tammountcls" style="color: Red;"><div style="float:right;padding-right: 20%;">' + parseFloat(Decreasepercen).toFixed(2)  + '</div></td></tr>';
+                        TotFromqty += parseFloat(msg[i].Fromqty) || 0;
+                        Tototqty += parseFloat(msg[i].Toqty) || 0;
+                        TotIncreaseQty += parseFloat(msg[i].IncreaseQty) || 0;
+                        TotIncreasepercen += parseFloat(msg[i].Increasepercen) || 0;
+                        TotDecreaseQty += parseFloat(msg[i].DecreaseQty) || 0;
+                        TotDecreasepercen += parseFloat(msg[i].Decreasepercen) || 0;
+                        BranchTable.push(msg[i].BranchName);
+                        l = l + 1;
+                        if (l == 4) {
+                            l = 0;
+                        }
+                    }
+                    else {
+                        var Fromqty = parseFloat(msg[i].Fromqty) || 0;
+                        var Toqty = parseFloat(msg[i].Toqty) || 0;
+                        var IncreaseQty = parseFloat(msg[i].IncreaseQty) || 0;
+                        var Increasepercen = parseFloat(msg[i].Increasepercen) || 0;
+                        var DecreaseQty = parseFloat(msg[i].DecreaseQty) || 0;
+                        var Decreasepercen = parseFloat(msg[i].Decreasepercen) || 0;
+                       
+                        results += '<tr style="background-color:' + COLOR[l] + '">';
+                        results += '<td scope="row" class="1" ></td>';
+                        results += '<td scope="row" class="1" >' + msg[i].RouteName + '</td>';
+                        results += '<td  class="2"><div style="float:right;padding-right: 20%;">' + parseFloat(Fromqty).toFixed(2) + '</div></td>';
+                        results += '<td  class="tammountcls"><div style="float:right;padding-right: 20%;">' + parseFloat(Toqty).toFixed(2) + '</div></td>';
+                        results += '<td  class="tammountcls" style="color:#006400;"><div style="float:right;padding-right: 20%;">' + parseFloat(IncreaseQty).toFixed(2) + '</div></td>';
+                        results += '<td  class="tammountcls" style="color:#006400;"><div style="float:right;padding-right: 20%;">' + parseFloat(Increasepercen).toFixed(2) + '</div></td>';
+                        results += '<td  class="tammountcls" style="color: Red;"><div style="float:right;padding-right: 20%;">' + parseFloat(DecreaseQty).toFixed(2) + '</div></td>';
+                        results += '<td  class="tammountcls" style="color: Red;"><div style="float:right;padding-right: 20%;">' + parseFloat(Decreasepercen).toFixed(2) + '</div></td></tr>';
+                        TotFromqty += parseFloat(msg[i].Fromqty) || 0;
+                        Tototqty += parseFloat(msg[i].Toqty) || 0;
+                        TotIncreaseQty += parseFloat(msg[i].IncreaseQty) || 0;
+                        TotIncreasepercen += parseFloat(msg[i].Increasepercen) || 0;
+                        TotDecreaseQty += parseFloat(msg[i].DecreaseQty) || 0;
+                        TotDecreasepercen += parseFloat(msg[i].Decreasepercen) || 0;
+                        l = l + 1;
+                        if (l == 4) {
+                            l = 0;
+                        }
+                    }
+                }
+                results += '<tr>';
+                results += '<td scope="row" class="1" ></td>';
+                results += '<td scope="row" class="1" style="font-size:10px;font-weight:bold;color:#006400;" >Total</td>';
+                results += '<td scope="row" style="font-size:10px;font-weight:bold;" ><div style="float:right;padding-right: 20%;">' + parseFloat(TotFromqty).toFixed(2) || 0 + '</div></td>';
+                results += '<td scope="row" style="font-size:10px;font-weight:bold;" ><div style="float:right;padding-right: 20%;">' + parseFloat(Tototqty).toFixed(2) || 0 + '</div></td>';
+                results += '<td scope="row" style="font-size:10px;font-weight:bold;" ><div style="float:right;padding-right: 20%;">' + parseFloat(TotIncreaseQty).toFixed(2) || 0 + '</div></td>';
+                results += '<td scope="row" style="font-size:10px;font-weight:bold;" ><div style="float:right;padding-right: 20%;">' + parseFloat(TotIncreasepercen).toFixed(2) || 0 + '</div></td>';
+                results += '<td scope="row" style="font-size:10px;font-weight:bold;" ><div style="float:right;padding-right: 20%;">' + parseFloat(TotDecreaseQty).toFixed(2) || 0 + '</div></td>';
+                results += '<td style="font-size:10px;font-weight:bold;" ><div style="float:right;padding-right: 20%;">' + parseFloat(TotDecreasepercen).toFixed(2) || 0 + '</div></td></tr>';
+                results += '<tr>';
+                results += '<td scope="row" class="1" ></td>';
+                results += '<td data-title="brandstatus" class="5" style="font-size:10px;font-weight:bold;color:#B22222;">Grand Total</td>';
+                results += '<td data-title="brandstatus" class="5"><span id="totaltoqtycls" class="badge bg-yellow" style="font-size:10px;font-weight:bold;color:#B22222;float:right;padding-right: 20%;">' + parseFloat(grand_TotFromqty).toFixed(2) || 0 + '</span></td>';
+                results += '<td data-title="brandstatus" class="5"><span id="totalincrcls" class="badge bg-yellow" style="font-size:10px;font-weight:bold;color:#B22222;float:right;padding-right: 20%;">' + parseFloat(grand_Tototqty).toFixed(2) || 0 + '</span></td>';
+                results += '<td data-title="brandstatus" class="5"><span id="totaldecrecls" class="badge bg-yellow" style="font-size:10px;font-weight:bold;color:#B22222;float:right;padding-right: 20%;">' + parseFloat(grand_TotIncreaseQty).toFixed(2) || 0 + '</span></td>';
+                results += '<td data-title="brandstatus" class="5"><span id="totalincrperccls" class="badge bg-yellow" style="font-size:10px;font-weight:bold;color:#B22222;float:right;padding-right: 20%;">' + parseFloat(grand_TotIncreasepercen).toFixed(2) || 0 + '</span></td>';
+                results += '<td data-title="brandstatus" class="5"><span id="totalfrmqtycls" class="badge bg-yellow" style="font-size:10px;font-weight:bold;color:#B22222;float:right;padding-right: 20%;">' + parseFloat(grand_TotDecreaseQty).toFixed(2) || 0 + '</span></td>';
+                results += '<td data-title="brandstatus" class="5"><span id="totalcls" class="badge bg-yellow" style="font-size:10px;font-weight:bold;color:#B22222;float:right;padding-right: 20%;">' + parseFloat(grand_TotDecreasepercen).toFixed(2) || 0 + '</span></td></tr>';
+                results += '</table></div>';
+                $("#tbl_Balance_amount").html(results);
+                Tototqty = 0;
+            }
+        }
+
+        function callHandler(d, s, e) {
+            $.ajax({
+                url: 'http://182.18.162.51/salesapp/Bus.axd',
+                data: d,
+                type: 'GET',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                async: true,
+                cache: true,
+                success: s,
+                error: e
+            });
+        }
+        function homeclick() {
+            window.location = "home.html";
+        }
+        function Indentclick() {
+            window.location = "Indent.html";
+        }
+        function Salesclick() {
+            window.location = "sales.html";
+        }
+        function dcclick() {
+            window.location = "dcreport.html";
+        }
+        function balanceclick() {
+            window.location = "balancerpt.html";
+        }
+        function lekageclick() {
+            window.location = "lekages.html";
+        }
+        function cratesclick() {
+            window.location = "crates.html";
+        }
+        function cashclick() {
+            window.location = "cashbook.html"; 
+        }
+        function approvalvoucherclick() {
+            window.location = "VoucherApproval.html";
+        }
+        function indentincdecclick() {
+            window.location = "AgentIncDecReport.html";
+        }
+
+        function indentincdecclick() {
+            window.location = "AgentIncDecReport.html";
+        }
+        function balanceclick() {
+            window.location = "ClosingStock.html";
+        }
+        function chartdataclick() {
+            window.location = "charts.html";
+        }
+        function chartDashBoardclick() {
+            window.location = "ClassificationChart.html";
+        }
+        function logoutclick() {
+            window.localStorage.removeItem("key7");
+            window.localStorage.removeItem("key8");
+            var data = { 'op': 'log_out' };
+            var s = function (msg) {
+                if (msg == "Valid") {
+                    window.location = 'login.html';
+                }
+            };
+            var e = function (x, h, e) {
+            };
+            callHandler(data, s, e);
+        }
+        function closeclick() {
+            $('#mydiv').css('display', 'none');
+            $('#divclose').css('display', 'none');
+            $('#divcontroles').css('display', 'block');
+            $('#divtotal').css('display', 'none');
+            $('#tbl_Balance_amount').css('display', 'none');
+        }
+        function hdispatchclick() {
+            window.location = "Dispatch.html";
+        }
+    </script>
+</head>
+<body style="background: whitesmoke !important;">
+    <!-- Pushy Menu -->
+    <nav class="pushy pushy-left">
+        <div style="background-color:#9a9494;width: 100% !important" class="menu-btn">
+            <img src="images/avatar.jpg" class="user-image" alt="User Image" style="border-radius:50%;width: 18%;" />
+            <span id="lbl_username" style="position: absolute;padding-left: 5%;padding-top: 5%;color: white;">Guest</span>
+            <img src="images/arrow.png" style="width: 6%;position: absolute;margin-left: 70%;padding-top: 5%;" />
+        </div>
+        <ul>
+            <li class="home-icon"><a href="#" onclick="homeclick();">&nbsp&nbsp&nbsp&nbsp Home</a></li>
+            <li class="about-icon"><a href="#" onclick="Indentclick();">&nbsp&nbsp&nbsp&nbsp Indent</a></li>
+            <li class="features-icon"><a href="#" onclick="Salesclick();">&nbsp&nbsp&nbsp&nbsp Sales</a></li>
+            <li class="photos-icon"><a href="#" onclick="dcclick();">&nbsp&nbsp&nbsp&nbsp DC Report</a></li>
+            <li class="video-icon">
+                <a href="#" onclick="balanceclick();">
+                    &nbsp&nbsp&nbsp&nbsp Closing Stock
+                    Report
+                </a>
+            </li>
+            <li id="lidispatch" class="cash-icon"><a href="#" onclick="hdispatchclick();">&nbsp&nbsp&nbsp Dispatch</a></li>
+
+            <li class="blog-icon"><a href="#" onclick="lekageclick();">&nbsp&nbsp&nbsp&nbsp Lekages</a></li>
+            <li class="contact-icon"><a href="#" onclick="cratesclick();">&nbsp&nbsp&nbsp&nbsp Inventory</a></li>
+            <li class="cash-icon"><a href="#" onclick="cashclick();">&nbsp&nbsp&nbsp&nbsp Cash Book</a></li>
+            <li class="cash-icon"><a href="#" onclick="indentincdecclick();">&nbsp&nbsp&nbsp&nbsp Sales Analysis</a></li>
+            <li id="liapvocher" class="approve-icon">
+                <a href="#" onclick="approvalvoucherclick();">
+                    &nbsp&nbsp&nbsp&nbsp Approval
+                    Voucher
+                </a>
+            </li>
+            <li id="lidispatch" class="dispatch-icon"><a href="#" onclick="hdispatchclick();">&nbsp&nbsp Dispatch</a></li>
+            <li id="licharts" class="chartline-icon"><a href="#" onclick="chartdataclick();">&nbsp&nbsp Charts</a></li>
+            <li id="lichartsdashboard" class="chartline1-icon"><a href="#" onclick="chartDashBoardclick();">&nbsp&nbsp ChartDashBoard</a></li>
+            <li class="logout-icon"><a href="#" onclick="logoutclick();">&nbsp&nbsp&nbsp&nbsp Logout</a></li>
+        </ul>
+    </nav>
+    <!-- Site Overlay -->
+    <div class="site-overlay">
+    </div>
+    <!-- Your Content -->
+    <div id="container">
+        <!-- Menu Button -->
+        <div class="menu-btn"  style="font-size: 22px;">
+            &#9776; &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Vyshnavi
+            Sales
+        </div>
+        <div style="padding: 13px; padding-left: 36px; color: #2a70bb; text-align: left;
+            cursor: pointer; font-size: 25px;">
+            <i class="fa fa-cogs" aria-hidden="true"></i>Sales Analysis
+        </div>
+        <!-- table code-->
+        <form role="form">
+            <div id="divcontroles" class="box-body">
+                <div class="form-group" id="divtype">
+                    <label for="exampleInputEmail1">
+                        Type:
+                    </label>
+                    <select class="form-control" id="ddltype">
+                        <option value="Branchwise">Branchwise</option>
+                        <option value="Agentwise">Agentwise</option>
+                    </select>
+                </div>
+                <div class="form-group" id="div_Branch">
+                    <label for="exampleInputEmail1">
+                        Branch Name:
+                    </label>
+                    <select class="form-control" id="ddlsalesoffice"></select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        From Date:
+                    </label>
+                    <input type="date" name="ContactName" id="txtFromDate" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">
+                        To Date
+                    </label>
+                    <input type="date" name="ContactName" id="txtToDate" class="form-control" />
+                </div>
+                <div class="box-footer" style="text-align: center;">
+                    <a id="btn_save" onclick="get_AgentIncDec();" class="btn icon-btn btn-primary" href="#">
+                        <span id="btn_save" onclick="get_AgentIncDec();" class="glyphicon btn-glyphicon glyphicon-cog img-circle text-success"></span>
+                        Generate
+                    </a>
+                </div>
+            </div>
+            <div>
+                <span id="lblBranchname" style="width: 235px; color: Red; font-weight: bold; font-size: 18px;"></span>
+            </div>
+            <div id="divclose" style="text-align: right;margin-top: -40px;"">
+                <a class="btn icon-btn btn-danger" id="Button1" onclick="closeclick();" href="#"><span id="Button1" onclick="closeclick();" name="submit" class="glyphicon btn-glyphicon1 glyphicon-remove img-circle text-muted"></span>Close</a>
+            </div>
+            <div role="grid" aria- describedby="example2_info" id="tbl_Balance_amount">
+            </div>
+            <div id="mydiv" style="display: none;">
+                <img src="images/loading.gif" alt="Loading..." id="LoadingGraphic" class="ajax-loader" />
+            </div>
+            <!--    <div id="divtotal" style="overflow: auto;">
+                  <span style="color: green; font-weight: bold; font-size: 25px;" align="left" id="lblid">
+                    TotalBalance : </span><span id="totalcls" align="left" style="color: Red; font-weight: bold;
+                        font-size: 25px; padding-left: 150px;"></span>
+                </div>-->
+        </form>
+    </div>
+    <!-- Pushy JS -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="js/pushy.min.js"></script>
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-36251023-1']);
+        _gaq.push(['_setDomainName', 'jqueryscript.net']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+</body>
+</html>

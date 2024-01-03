@@ -1,0 +1,487 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Sales App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/demo.css">
+    <!-- Pushy CSS -->
+    <link rel="stylesheet" href="css/pushy.css">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="CustomCSS/custom.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="CustomCSS/font-awesome.css" rel="stylesheet" type="text/css" />
+    <!-- jQuery -->
+    <!-- Modernizr -->
+    <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    <link href="css/homepage.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .btn-glyphicon {
+            padding: 8px;
+            background: #ffffff;
+            margin-right: 4px;
+            color: cornflowerblue;
+        }
+
+        .btn-glyphicon1 {
+            padding: 8px;
+            background: #ffffff;
+            margin-right: 4px;
+            color: darkred;
+        }
+
+        .icon-btn {
+            padding: 1px 15px 3px 2px;
+            border-radius: 50px;
+        }
+
+        #mydiv {
+            height: 400px;
+            position: relative;
+            background-color: #F8F9F9; /* for demonstration */
+        }
+
+        .ajax-loader {
+            position: absolute;
+            height: 100px;
+            width: 100px;
+            left: 50%;
+            top: 50%;
+            margin-left: -32px; /* -1 * image width / 2 */
+            margin-top: -32px; /* -1 * image height / 2 */
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            get_branch_Names();
+            getloginvalidation();
+            getloginvalidation2();
+            $('#mydiv').css('display', 'none');
+            $('#divclose').css('display', 'none');
+            $('#divcontroles').css('display', 'block');
+            $('#grandtotal').css('display', 'none');
+
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+            var hrs = today.getHours();
+            var mnts = today.getMinutes();
+            $('#txtFromDate').val(yyyy + '-' + mm + '-' + dd);
+            checkloginstatus();
+        });
+        function checkloginstatus() {
+            var data = { 'op': 'checkloginstatus' };
+            var s = function (msg) {
+                if (msg) {
+                    if (msg == "NotValid") {
+                        window.location = 'login.html';
+                    }
+                    else if (msg == "valid") {
+
+                    }
+                }
+            };
+            var e = function (x, h, e) {
+            };
+            callHandler(data, s, e);
+        }
+         var sessionarray = [];
+        function getloginvalidation() {
+            var data = { 'op': 'Getsessionvalues' };
+            var s = function (msg) {
+                if (msg) {
+                    document.getElementById('lbl_username').innerHTML = msg[0].EmpName;
+                    if (msg[0].LevelType == "AccountsOfficer" || msg[0].LevelType == "Director") {
+                                                $('#liapvocher').css('display', 'block');
+//                        $('#tdapprove').css('display', 'block');
+                    }
+                    else {
+                                                $('#liapvocher').css('display', 'none');
+//                        $('#tdapprove').css('display', 'none');
+                    }
+                }
+                else {
+                }
+            };
+            var e = function (x, h, e) {
+            };
+            $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+            callHandler(data, s, e);
+        }
+
+        var sessionarray = [];
+        function getloginvalidation2() {
+            var data = { 'op': 'Getsessionvalues' };
+            var s = function (msg) {
+                if (msg) {
+                    if (msg[0].LevelType == "Agent" || msg[0].LevelType == "Agent") {
+
+                        $('#divcontrols').css('display', 'block');
+                        //$('#divroute').css('display', 'block');
+                        leveltype = msg[0].LevelType;
+                        sessionarray = msg;
+                        get_agent_logindetails();
+                    }
+                    else if (msg[0].LevelType == "Opperations" || msg[0].LevelType == "Opperations") {
+                        //$('#divroute').css('display', 'block');
+                        $('#divcontrols').css('display', 'block');
+                    }
+                    else {
+                        //$('#divroute').css('display', 'none');
+                        $('#divcontrols').css('display', 'none');
+                        FillSalesOffice();
+                    }
+                }
+                else {
+                }
+            };
+            var e = function (x, h, e) {
+            };
+            $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+            callHandler(data, s, e);
+        }
+
+        function get_branch_Names() {
+            var data = { 'op': 'GetCsodispatchRoutes' };
+            var s = function (msg) {
+                if (msg) {
+                    if (msg == "Session Expired") {
+                        alert(msg);
+                        window.location = "login.html";
+                    }
+                    fillbranchnames(msg);
+                }
+                else {
+                }
+            };
+            var e = function (x, h, e) {
+            };
+            $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+            callHandler(data, s, e);
+        }
+        function fillbranchnames(msg) {
+            document.getElementById('ddlbranches').options.length = "";
+            var veh = document.getElementById('ddlbranches');
+            var length = veh.options.length;
+            for (i = length - 1; i >= 0; i--) {
+                veh.options[i] = null;
+            }
+            var opt = document.createElement('option');
+            opt.innerHTML = "Select BranchName";
+            opt.value = "";
+            veh.appendChild(opt);
+            for (var i = 0; i < msg.length; i++) {
+                if (msg[i] != null) {
+                    var opt = document.createElement('option');
+                    opt.innerHTML = msg[i].RouteName;
+                    opt.value = msg[i].rid;
+                    veh.appendChild(opt);
+                }
+            }
+        }
+        function get_balanceDetails() {
+            $('#divcontroles').css('display', 'none');
+            $('#mydiv').css('display', 'block');
+            var fromdate = document.getElementById('txtFromDate').value;
+            var branchid = document.getElementById('ddlbranches').value;
+            var data = { 'op': 'get_ClosingStock_Items', 'branchid': branchid, 'fromdate': fromdate, };
+            var s = function (msg) {
+                if (msg == "") {
+                    alert("Data Not Found");
+                    $('#divcontroles').css('display', 'block');
+                    $('#mydiv').css('display', 'none');
+                    $('#divclose').css('display', 'none');
+                    $('#divFillScreen').css('display', 'none');
+                    $('#grandtotal').css('display', 'none');
+
+                }
+              else  if (msg) {
+
+                    fillitems(msg);
+                    $('#mydiv').css('display', 'none');
+                    $('#divclose').css('display', 'block');
+                    $('#divFillScreen').css('display', 'block');
+                    $('#grandtotal').css('display', 'block');
+
+                }
+                else {
+                }
+            };
+            var e = function (x, h, e) {
+            };
+            $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+            callHandler(data, s, e);
+        }
+        function fillitems(msg) {
+         //var table = document.getElementById("tbl_balance_value");
+         //   for (var i = table.rows.length - 1; i > 0; i--) {
+         //       table.deleteRow(i);
+         //   }
+         //   var j = 1;
+         //   var k = 1;
+         //   var l = 0;
+         //   var COLOR = ["#b3ffe6", "AntiqueWhite", "#daffff", "MistyRose", "Bisque"];
+         //   for (var i = 0; i < msg.length; i++) {
+         //       var tablerowcnt = document.getElementById("tbl_balance_value").rows.length;
+         //       $('#tbl_balance_value').append('<tr style="background-color:' + COLOR[l] + '"><td  style="font-size:medium;font-weight:bold;font-style:inherit" data-title="ProductName" ><span id="spninqty" onclick="btnViewProducts(\'' + msg[i].sno + '\');"  class="badge bg-green"><span class="clsinqty">' + msg[i].ProductName + '</span></span></td><td data-title="BalanceQty" ><span id="spnmoniterqty" class="badge bg-green"><span class="clsmoniterqty">' + msg[i].qty + '</span></span></td></tr>');
+         //       j++;
+         //       l = l + 1;
+         //       if (l == 4) {
+         //           l = 0;
+         //       }
+            //   }
+            var branch = ddlbranches.options[ddlbranches.selectedIndex].innerHTML;
+            document.getElementById('lblBranchname').innerHTML = "" + branch;
+            $('#lblBranchname').css('display', 'block');
+            var results = '<div style="overflow:auto;"><table class="table table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="example2_info" >';
+            results += '<thead><tr><th scope="col" style="text-align: center;">ProductName</th><th scope="col" style="text-align: center;">Qty</th></tr></thead></tbody>';
+            var k = 1;
+            var l = 0;
+            var COLOR = ["#b3ffe6", "AntiqueWhite", "#daffff", "MistyRose", "Bisque"];
+            for (var i = 0; i < msg.length; i++) {
+                results += '<tr><td  style="font-size: 16px; color: red; font-weight: bold;" data-title="ProductName" ><span id="spninqty" onclick="btnViewProducts(\'' + msg[i].sno + '\');"  style="font-size: 16px; color: green; font-weight: bold;"><span class="clsinqty">' + msg[i].ProductName + '</span></span></td><td data-title="Qty" style="text-align: center;" ><div style="float:right;padding-right: 30%;"><span id="BalanceQty" style="font-size: 16px; color: green; font-weight: bold;"><span class="clsmoniterqty">' + parseFloat(msg[i].qty).toFixed(2) + '</span></div></span></td></tr>';
+                //results += '<td data-title="DCNumber" class="1">' + msg[i].DcNumber + '</td></tr>';
+                l = l + 1;
+                if (l == 4) {
+                    l = 0;
+                }
+            }
+            results += '</table></div>';
+            $("#divFillScreen").html(results);
+            GettotalclsCal();
+        }
+        function GettotalclsCal() {
+            var totamount = 0;
+            $('.clsmoniterqty').each(function (i, obj) {
+                var qtyclass = $(this).text();
+                if (qtyclass == "" || qtyclass == "0") {
+                }
+                else {
+                    totamount += parseFloat(qtyclass);
+                }
+            });
+            document.getElementById('totalcls').innerHTML = parseFloat(totamount).toFixed(2);
+        }
+        function logoutclick() {
+            window.localStorage.removeItem("key7");
+            window.localStorage.removeItem("key8");
+            var data = { 'op': 'log_out' };
+            var s = function (msg) {
+                if (msg == "Valid") {
+                    window.location = 'login.html';
+                }
+            };
+            var e = function (x, h, e) {
+            };
+            callHandler(data, s, e);
+        }
+        function callHandler(d, s, e) {
+            $.ajax({
+                url: 'http://182.18.162.51/salesapp/Bus.axd',
+                data: d,
+                type: 'GET',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                async: true,
+                cache: true,
+                success: s,
+                error: e
+            });
+        }
+        function homeclick() {
+            window.location = "home.html";
+        }
+        function Indentclick() {
+            window.location = "indententry.html";
+        }
+        function Salesclick() {
+            window.location = "sales.html";
+        }
+        function dcclick() {
+            window.location = "dcreport.html";
+        }
+        function balanceclick() {
+            window.location = "balancerpt.html";
+        }
+        function lekageclick() {
+            window.location = "lekages.html";
+        }
+        function cratesclick() {
+            window.location = "crates.html";
+        }
+        function cashclick() {
+            window.location = "cashbook.html";
+        }
+        function approvalvoucherclick() {
+            window.location = "VoucherApproval.html";
+        }
+        function horderindentclick() {
+            window.location = "indent.html";
+        }
+        //function logoutclick() {
+        //    window.location = "login.html";
+        //}
+        function indentincdecclick() {
+            window.location = "AgentIncDecReport.html";
+        }
+        function hdispatchclick() {
+            window.location = "Dispatch.html";
+        }
+        
+        function chartdataclick() {
+            window.location = "charts.html";
+        }
+        function chartDashBoardclick() {
+            window.location = "ClassificationChart.html";
+        }
+        function closeclick(){
+            $('#divcontroles').css('display', 'block');
+            $('#mydiv').css('display', 'none');
+            $('#divclose').css('display', 'none');
+            $('#divFillScreen').css('display', 'none');
+            $('#grandtotal').css('display', 'none');
+            $('#lblBranchname').css('display', 'none');
+        }
+    </script>
+</head>
+<body style="background: whitesmoke !important;">
+    <!-- Pushy Menu -->
+    <nav class="pushy pushy-left">
+        <div style="background-color:#9a9494;width: 100% !important" class="menu-btn">
+            <img src="images/avatar.jpg" class="user-image" alt="User Image" style="border-radius:50%;width: 18%;" />
+            <span id="lbl_username" style="position: absolute;padding-left: 5%;padding-top: 5%;color: white;">Guest</span>
+            <img src="images/arrow.png" style="width: 6%;position: absolute;margin-left: 70%;padding-top: 5%;" />
+        </div>
+        <ul>
+            <li class="home-icon"><a href="#" onclick="homeclick();">&nbsp&nbsp&nbsp&nbsp Home</a></li>
+            <li class="about-icon"><a href="#" onclick="Indentclick();">&nbsp&nbsp&nbsp&nbsp Indent</a></li>
+            <li class="features-icon"><a href="#" onclick="Salesclick();">&nbsp&nbsp&nbsp&nbsp Sales</a></li>
+            <li class="photos-icon"><a href="#" onclick="dcclick();">&nbsp&nbsp&nbsp&nbsp DC Report</a></li>
+            <li id="liclosingstock" class="video-icon"><a href="#" onclick="closingstockclick();">&nbsp&nbsp&nbsp Closing Stock Report</a></li>
+            <li id="libalance" class="video-icon"><a href="#" onclick="balanceclick();">&nbsp&nbsp&nbsp Balance Report</a></li>
+            <li class="blog-icon"><a href="#" onclick="lekageclick();">&nbsp&nbsp&nbsp&nbsp Lekages</a></li>
+            <li class="contact-icon"><a href="#" onclick="cratesclick();">&nbsp&nbsp&nbsp&nbsp Inventory</a></li>
+            <li class="cash-icon"><a href="#" onclick="cashclick();">&nbsp&nbsp&nbsp&nbsp Cash Book</a></li>
+            <li class="cash-icon"><a href="#" onclick="indentincdecclick();">&nbsp&nbsp&nbsp&nbsp Sales Analysis</a></li>
+            <li id="liapvocher" class="approve-icon">
+                <a href="#" onclick="approvalvoucherclick();">
+                    &nbsp&nbsp&nbsp&nbsp Approval
+                    Voucher
+                </a>
+            </li>
+            <li id="lidispatch" class="dispatch-icon"><a href="#" onclick="hdispatchclick();">&nbsp&nbsp Dispatch</a></li>
+            <li id="licharts" class="chartline-icon"><a href="#" onclick="chartdataclick();">&nbsp&nbsp Charts</a></li>
+            <li id="lichartsdashboard" class="chartline1-icon"><a href="#" onclick="chartDashBoardclick();">&nbsp&nbsp ChartDashBoard</a></li>
+            <li class="logout-icon"><a href="#" onclick="logoutclick();">&nbsp&nbsp&nbsp&nbsp Logout</a></li>
+        </ul>
+    </nav>
+    <!-- Site Overlay -->
+    <div class="site-overlay">
+    </div>
+    <!-- Your Content -->
+    <div id="container">
+        <!-- Menu Button -->
+        <div class="menu-btn" style="font-size:larger">
+            &#9776; &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Vyshnavi Sales
+        </div>
+        <div style="padding: 13px; padding-left: 36px; color: #2a70bb; text-align: left;
+            cursor: pointer; font-size: 25px;">
+            <i class="fa fa-balance-scale" aria-hidden="true"></i>Closing Stock Report
+        </div>
+        <!-- table code-->
+        <form role="form">
+            <div id="divcontroles" class="box-body">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">
+                        Branch Name:
+                    </label>
+                    <select class="form-control" id="ddlbranches"></select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputFile">
+                        Date
+                    </label>
+                    <input type="date" id="txtFromDate" class="form-control" value="" />
+                </div>
+                <div class="box-footer" style="text-align: center;">
+                    <a id="btn_save" onclick="get_balanceDetails();" class="btn icon-btn btn-primary" href="#">
+                        <span id="btn_save" onclick="get_balanceDetails();" class="glyphicon btn-glyphicon glyphicon-cog img-circle text-success"></span>
+                        Generate
+                    </a>
+                    <!--<input id="btn_save" type="button" class="btn btn-primary" name="submit" value="Genarate"
+                    onclick="get_balanceDetails();">-->
+                </div>
+            </div>
+            <div id="mydiv" style="display: none;">
+                <img src="images/loading.gif" alt="Loading..." id="LoadingGraphic" class="ajax-loader" />
+            </div>
+            <div>
+                <span id="lblBranchname" style="width: 235px; color: Red; font-weight: bold; font-size: 18px;"></span>
+            </div>
+            <div id="divclose" style="text-align: right;margin-top: -40px;">
+                <a class="btn icon-btn btn-danger" id="Button1" onclick="closeclick();" href="#"><span id="Button1" onclick="closeclick();" name="submit" class="glyphicon btn-glyphicon1 glyphicon-remove img-circle text-muted"></span>Close</a>
+            </div>
+            <!--<table>
+                <tr>
+                    <td>
+                        <div>
+                            <span id="lblBranchname" style="width: 235px; color: Red; font-weight: bold; font-size: 18px;"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div id="divclose" style="text-align:right;margin: 0px 30px;">
+                            <a class="btn icon-btn btn-danger" id="Button1" onclick="closeclick();" href="#"><span id="Button1" onclick="closeclick();" name="submit" class="glyphicon btn-glyphicon1 glyphicon-remove img-circle text-muted"></span>Close</a>
+                        </div>
+                    </td>
+                </tr>
+            </table>-->
+            <div id="divFillScreen"></div>
+            <table id="grandtotal">
+                <tr>
+                    <td>
+                        <span style="color: green; font-weight: bold; font-size: 21px;" align="left" id="lblid"> GrandTotal: </span>
+                    </td>
+                    <!--<td>
+                        <label style="align-content:left; width: 75%;">
+                            GrandTotal :
+                        </label>
+                    </td>-->
+                    <td align="right">
+                        <span id="totalcls" style="color: Red; font-weight: bold; font-size: 25px;"></span>
+                    </td>
+                </tr>
+            </table>
+            </td>
+            </tr>
+            </table>
+        </form>
+    </div>
+    <!-- Pushy JS -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="js/pushy.min.js"></script>
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-36251023-1']);
+        _gaq.push(['_setDomainName', 'jqueryscript.net']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+</body>
+</html>

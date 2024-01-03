@@ -233,6 +233,25 @@
     </style>
 
 <script type="text/javascript">
+    $(function () {
+        checkloginstatus();
+    });
+    function checkloginstatus() {
+        var data = { 'op': 'checkloginstatus' };
+        var s = function (msg) {
+            if (msg) {
+                if (msg == "NotValid") {
+                    window.location = 'login.html';
+                }
+                else if (msg == "valid") {
+
+                }
+            }
+        };
+        var e = function (x, h, e) {
+        };
+        callHandler(data, s, e);
+    }
     function homeclick() {
         window.location = "home.html";
     }
@@ -261,7 +280,17 @@
         window.location = "VoucherApproval.html";
     }
     function logoutclick() {
-        window.location = "logout.html";
+        window.localStorage.removeItem("key7");
+        window.localStorage.removeItem("key8");
+        var data = { 'op': 'log_out' };
+        var s = function (msg) {
+            if (msg == "Valid") {
+                window.location = 'login.html';
+            }
+        };
+        var e = function (x, h, e) {
+        };
+        callHandler(data, s, e);
     }
     </script>
 </head>
@@ -273,6 +302,11 @@
 
     <div class="panel panel-left panel-cover">
               <nav class="list-nav">
+                  <div style="background-color:#9a9494;width: 100% !important" class="menu-btn">
+                      <img src="images/avatar.jpg" class="user-image" alt="User Image" style="border-radius:50%;width: 18%;" />
+                      <span id="lbl_username" style="position: absolute;padding-left: 5%;padding-top: 5%;color: white;">Guest</span>
+                      <img src="images/arrow.png" style="width: 6%;position: absolute;margin-left: 70%;padding-top: 5%;" />
+                  </div>
                <ul>
                   <li class="home-icon"><a href="" onclick="homeclick();" class="close-panel">&nbsp&nbsp&nbsp Home</a></li>
                   <li class="about-icon"><a href="" onclick="Indentclick();" class="close-panel">&nbsp&nbsp&nbsp Indent</a></li>
@@ -284,6 +318,7 @@
                    <li class="heart-icon"><a href="" onclick="cashclick();" class="close-panel">&nbsp&nbsp Cash Book </a></li>
                    <li class="download-icon"><a href="" onclick="approvalvoucherclick();" class="close-panel">&nbsp&nbsp Approval Voucher</a>
                    </li>
+                   <li id="licharts" class="chartline-icon"><a href="#" onclick="chartdataclick();">&nbsp&nbsp Charts</a></li>
                   <li class="logout-icon"><a href="" onclick="logoutclick();" class="close-panel">logout</a></li>
                 </ul>
               </nav>  

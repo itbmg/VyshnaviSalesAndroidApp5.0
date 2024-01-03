@@ -1,21 +1,24 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Sales App</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/demo.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/demo.css" />
     <!-- Pushy CSS -->
-    <link rel="stylesheet" href="css/pushy.css">
+    <link rel="stylesheet" href="css/pushy.css" />
     <!-- jQuery -->
     <!-- Modernizr -->
     <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
     <link href="css/homepage.css" rel="stylesheet" type="text/css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="js/jquery-1.4.4.js?v=3004" type="text/javascript"></script>
     <style type="text/css">
-        .imgborder
-        {
+        .imgborder {
             border: 2px solid #f1d308;
             border-bottom-left-radius: 7px;
             border-bottom-right-radius: 7px;
@@ -24,6 +27,146 @@
         }
     </style>
     <script type="text/javascript">
+        $(function () {
+
+            checkloginstatus();
+            getloginvalidation2();
+            getloginvalidation();
+            //$('#lihome').css('display', 'none');
+            //$('#liindent').css('display', 'none');
+            //$('#lisales').css('display', 'none'); 
+            //$('#lidc').css('display', 'none');
+            //$('#liapvocher').css('display', 'none');
+            //$('#liclosingstock').css('display', 'none');
+            //$('#lileakages').css('display', 'none');
+            //$('#liinventory').css('display', 'none');
+            //$('#licashbook').css('display', 'none'); 
+            //$('#tdapprove').css('display', 'none');
+            //$('#liorderindent').css('display', 'none');
+            //$('#tdorderindent').css('display', 'block');
+            //$('#tddcreport').css('display', 'none');
+            //$('#tdsales').css('display', 'none');
+            //$('#tr3').css('display', 'none');
+            //$('#tr4').css('display', 'none');
+            //$('#tdcashbook').css('display', 'none');
+        });
+        var sessionarray = [];
+        function getloginvalidation() {
+            var data = { 'op': 'Getsessionvalues' };
+            var s = function (msg) {
+                if (msg) {
+                    document.getElementById('lbl_username').innerHTML = msg[0].EmpName;
+                    if (msg[0].LevelType == "AccountsOfficer" || msg[0].LevelType == "Director") {
+                        $('#liapvocher').css('display', 'block');
+                        $('#tdapprove').css('display', 'block');
+                    }
+                    else {
+                        $('#liapvocher').css('display', 'none');
+                        $('#tdapprove').css('display', 'none');
+                    }
+                }
+                else {
+                }
+            };
+            var e = function (x, h, e) {
+            };
+            $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+            callHandler(data, s, e);
+        }
+        var sessionarray = [];
+        function getloginvalidation2() {
+            var data = { 'op': 'Getsessionvalues' };
+            var s = function (msg) {
+                if (msg) {
+                    if (msg[0].LevelType == "Agent" || msg[0].LevelType == "Agent") {
+                        $('#lihome').css('display', 'block');
+                        $('#liindent').css('display', 'block');
+                        $('#lisales').css('display', 'none');
+                        $('#lidc').css('display', 'none');
+                        $('#liclosingstock').css('display', 'none');
+                        $('#lileakages').css('display', 'none');
+                        $('#liinventory').css('display', 'none');
+                        $('#licashbook').css('display', 'none'); 
+                        $('#liorderindent').css('display', 'block');
+                        $('#libalance').css('display', 'block');
+                        $('#tdbalance').show();
+                        $('#tdorderindent').show(); 
+                        $('#tdclosing').css('display', 'none');
+                        $('#tddcreport').css('display', 'none');
+                        $('#liindincdec').css('display', 'none');
+                        $('#tdsales').css('display', 'none'); 
+                        $('#tddispatch').css('display', 'none');
+                        $('#tr4').css('display', 'none');
+                        $('#tdcashbook').css('display', 'none');
+                        $('#lidispatch').css('display', 'none');
+                        $('#licharts').css('display', 'none');
+                        $('#lichartsdashboard').css('display', 'none');
+                        
+                        $('#tdcharts').css('display', 'none');
+                        $('#tdchartdashboard').css('display', 'none');
+                        
+                        leveltype = msg[0].LevelType;
+                        sessionarray = msg;
+                        get_agent_logindetails();
+                    }
+                   
+                    else {
+                        $('#lihome').show();
+                        $('#liindent').show();
+                        $('#lisales').show();
+                        $('#lidc').show();
+                        $('#liclosingstock').show();
+                        $('#lileakages').show();
+                        $('#liinventory').show();
+                        $('#licashbook').show();
+                        $('#liorderindent').show();
+                        $('#tdorderindent').show();
+                        $('#tddcreport').show();
+                        $('#tdsales').show();
+                        $('#tdbalance').show();
+                        $('#libalance').show();
+                        $('#tdcashbook').show();
+                        $('#liindent').show(); 
+                        $('#tdcrates').show();
+                        $('#tdclosing').show();
+                        $('#tdindentincdec').show(); 
+                        $('#tdlekage').show(); 
+                        $('#liindincdec').show();
+                        $('#lidispatch').show();
+                        $('#tddispatch').show();
+                        $('#licharts').show();
+                        $('#lichartsdashboard').show();
+                        $('#tdcharts').show();
+                        $('#tdchartdashboard').show();
+                        //$('#lihome').css('display', '');
+                        //$('#liindent').css('display', '');
+                        //$('#lisales').css('display', '');
+                        //$('#lidc').css('display', 'block');
+                        //$('#liclosingstock').css('display', '');
+                        //$('#lileakages').css('display', '');
+                        //$('#liinventory').css('display', '');
+                        //$('#licashbook').css('display', '');
+                        //$('#liorderindent').css('display', '');
+                        //$('#tdorderindent').css('display', '');
+                        //$('#tddcreport').css('display', '');
+                        //$('#tdsales').css('display', '');
+                        //$('#tr3').css('display', '');
+                        //$('#tr4').css('display', '');
+                        //$('#tdcashbook').css('display', '');
+                        //$('#liindent').css('display', '');
+                        //$('#tdorderindent').css('display', '');
+                        //FillSalesOffice();
+                    }
+                }
+                else {
+                }
+            };
+            var e = function (x, h, e) {
+            };
+            $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+            callHandler(data, s, e);
+        }
+
         function homeclick() {
             window.location = "home.html";
         }
@@ -34,10 +177,14 @@
             window.location = "sales.html";
         }
         function dcclick() {
+            
             window.location = "dcreport.html";
         }
         function balanceclick() {
             window.location = "balancerpt.html";
+        }
+        function closingstockclick() {
+            window.location = "ClosingStock.html";
         }
         function lekageclick() {
             window.location = "lekages.html";
@@ -51,21 +198,31 @@
         function approvalvoucherclick() {
             window.location = "VoucherApproval.html";
         }
-        function logoutclick() {
-            window.location = "login.html";
+        function chartdataclick() {
+            window.location = "charts.html";
         }
+        function chartDashBoardclick() {
+            window.location = "ClassificationChart.html";
+        }
+        
         //function logoutclick() {
-        //    var data = { 'op': 'log_out' };
-        //    var s = function (msg) {
-        //        if (msg == "Valid") {
-        //            window.location = 'login.html';
-        //        }
-        //    };
-        //    var e = function (x, h, e) {
-        //    };
-        //    callHandler(data, s, e);
+          //  window.localStorage.removeItem("key7");
+           // window.localStorage.removeItem("key8");
+            //window.location = "login.html";
         //}
-
+        function logoutclick() {
+            window.localStorage.removeItem("key7");
+            window.localStorage.removeItem("key8");
+            var data = { 'op': 'log_out' };
+            var s = function (msg) {
+                if (msg == "Valid") {
+                    window.location = 'login.html';
+                }
+            };
+            var e = function (x, h, e) {
+            };
+            callHandler(data, s, e);
+        }
         function hIndentclick() {
             window.location = "indententry.html";
         }
@@ -90,9 +247,40 @@
         function happrovalvoucherclick() {
             window.location = "VoucherApproval.html";
         }
+        //function horderindentclick() {
+        //    window.location = "indent.html";
+        //}
+        function hdispatchclick() {
+            window.location = "Dispatch.html";
+        }
+        function indentincdecclick() {
+            
+            window.location = "AgentIncDecReport.html";
+        }
+        function hchartdataclick() {
+            window.location = "charts.html";
+        }
+        function hchartDashBoardclick() {
+            window.location = "ClassificationChart.html";
+        }
+        function checkloginstatus() {
+            var data = { 'op': 'checkloginstatus' };
+            var s = function (msg) {
+                if (msg) {
+                    if (msg == "NotValid") {
+                        window.location = 'login.html';
+                    }
+                    else if (msg == "valid") {
+                    }
+                }
+            };
+            var e = function (x, h, e) {
+            };
+            callHandler(data, s, e);
+        }
         function callHandler(d, s, e) {
             $.ajax({
-                url: 'http://49.50.65.160/salesapp/Bus.axd',
+                url: 'http://182.18.162.51/salesapp/Bus.axd',
                 data: d,
                 type: 'GET',
                 dataType: "json",
@@ -108,20 +296,30 @@
 <body>
     <!-- Pushy Menu -->
     <nav class="pushy pushy-left">
-        <ul>
-            <li class="home-icon"><a href="#" onclick="homeclick();">&nbsp&nbsp&nbsp Home</a></li>
-            <li class="about-icon"><a href="#" onclick="Indentclick();">&nbsp&nbsp&nbsp Indent</a></li>
-            <li class="features-icon"><a href="#" onclick="Salesclick();">&nbsp&nbsp&nbsp Sales</a></li>
-            <li class="photos-icon"><a href="#" onclick="dcclick();">&nbsp&nbsp&nbsp DC Report</a></li>
-            <li class="video-icon"><a href="#" onclick="balanceclick();">&nbsp&nbsp&nbsp Closing Stock Report</a></li>
-            <li class="blog-icon"><a href="#" onclick="lekageclick();">&nbsp&nbsp&nbsp Lekages</a></li>
-            <li class="contact-icon"><a href="#" onclick="cratesclick();">&nbsp&nbsp&nbsp Inventory</a></li>
-            <li class="cash-icon"><a href="#" onclick="cashclick();">&nbsp&nbsp&nbsp Cash Book</a></li>
-            <li class="approve-icon"><a href="#" onclick="approvalvoucherclick();">&nbsp&nbsp&nbsp Approval
-                Voucher</a></li>
-            <li class="logout-icon"><a href="#" onclick="logoutclick();">&nbsp&nbsp&nbsp Logout</a></li>
-        </ul>
-    </nav>
+            <div style="background-color:#9a9494;width: 94.2% !important" class="menu-btn" >
+                <img src="images/avatar.jpg" class="user-image" alt="User Image" style="border-radius:50%;width: 18%;" />
+                <span id="lbl_username" style="position: absolute;padding-left: 5%;padding-top: 5%;color: white;">Guest</span>
+                <img src="images/arrow.png" style="width: 6%;position: absolute;margin-left: 70%;padding-top: 5%;" />
+            </div>
+            <ul>
+                <li id="lihome" class="home-icon"><a href="#" onclick="homeclick();">&nbsp&nbsp&nbsp Home</a></li>
+                <li id="liindent" class="about-icon"><a href="#" onclick="Indentclick();">&nbsp&nbsp&nbsp Indent</a></li>
+                <li id="lisales" class="features-icon"><a href="#" onclick="Salesclick();">&nbsp&nbsp&nbsp Sales</a></li>
+                <li id="lidc" class="photos-icon"><a href="#" onclick="dcclick();">&nbsp&nbsp&nbsp DC Report</a></li>
+                <li id="liclosingstock" class="video-icon"><a href="#" onclick="closingstockclick();">&nbsp&nbsp&nbsp Closing Stock Report</a></li>
+                <li id="libalance" class="video-icon"><a href="#" onclick="balanceclick();">&nbsp&nbsp&nbsp Balance Report</a></li>
+                <li id="lileakages" class="blog-icon"><a href="#" onclick="lekageclick();">&nbsp&nbsp&nbsp Lekages</a></li>
+                <li id="liinventory" class="contact-icon"><a href="#" onclick="cratesclick();">&nbsp&nbsp&nbsp Inventory</a></li>
+                <li id="licashbook" class="cash-icon"><a href="#" onclick="cashclick();">&nbsp&nbsp&nbsp Cash Book</a></li>
+                <li id="liindincdec" class="cash-icon"><a href="#" onclick="indentincdecclick();">&nbsp&nbsp&nbsp&nbsp Sales Analysis</a></li>
+                <li id="lidispatch" class="dispatch-icon"><a href="#" onclick="hdispatchclick();">&nbsp&nbsp Dispatch</a></li>
+                <li id="liapvocher" class="approve-icon"> <a href="#" onclick="approvalvoucherclick();">&nbsp&nbsp&nbsp Approval Voucher</a></li>
+                <li id="licharts" class="chartline-icon"><a href="#" onclick="chartdataclick();">&nbsp&nbsp Charts</a></li>
+
+                <li id="lichartsdashboard" class="chartline1-icon"><a href="#" onclick="chartDashBoardclick();">&nbsp&nbsp ChartDashBoard</a></li>
+                <li class="logout-icon"><a href="#" onclick="logoutclick();">&nbsp&nbsp&nbsp Logout</a></li>
+            </ul>
+        </a></nav>
     <!-- Site Overlay -->
     <div class="site-overlay">
     </div>
@@ -132,91 +330,173 @@
             &#9776; &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Vyshnavi
             Sales
         </div>
-            <br />
+        <br />
         <!-- table code-->
         <table>
-            <tr>
-                <td style="width: 31%;">
+            <tr id="tr1" >
+                <td style="width: 32%;display:none;" id="tdorderindent">
                     <div style="font-weight: bold; width: 89%; text-align: center;">
-                        <img src="images/indent.png" class="imgborder" alt="" height="100px" width="100px"
+                        <img src="images/indent.png" class="imgborder" alt="" height="50%" width="50%"
                              onclick="hIndentclick();" />
+                    </div>
+                    <div style="font-weight: bold; width: 89%; text-align: center;">
                         <label>
                             Indent
                         </label>
                     </div>
                 </td>
-                <td style="width: 31%;">
-                    <div style="font-weight: bold; width: 82%; text-align: center;">
-                        <img src="images/salesicon.png" class="imgborder" alt="" height="100px" width="100px"
+                <td style="width: 32%; display:none;" id="tdbalance">
+                    <div style="font-weight: bold; width: 89%; text-align: center;">
+                        <img src="images/receipt2.png" class="imgborder" alt="" height="50%" width="50%"
+                             onclick="hbalanceclick();" />
+                    </div>
+                    <div style="font-weight: bold; width: 89%; text-align: center;">
+                         <label>
+                             Balance
+                         </label>
+                    </div>
+                </td>
+                <td style="width: 32%; display:none;" id="tdsales">
+                    <div style="font-weight: bold; width: 89%; text-align: center;">
+                        <img src="images/salesicon.png" class="imgborder" alt="" height="50%" width="50%"
                              onclick="hSalesclick();" /><br />
+                    </div>
+                    <div style="font-weight: bold; width: 89%; text-align: center;">
                         <label>
                             Sales
                         </label>
-                    </div>
+                    </div>                    
                 </td>
-
-                <td style="width: 31%;">
-                    <div style="font-weight: bold; width: 81%; text-align: center;">
-                        <img src="images/DC.png" class="imgborder" alt="" height="100px" width="100px" onclick="hdcclick();" /><br />
+            </tr>
+            <tr id="tr2" style="height: 25px;"></tr>
+            <tr id="tr3" >
+                <td style="width: 32%; display:none;" id="tddcreport">
+                    <div style="font-weight: bold; width: 89%; text-align: center;">
+                        <img src="images/DC.png" class="imgborder" alt="" height="50%" width="50%" onclick="hdcclick();" /><br />
+                    </div>
+                    <div style="font-weight: bold; width: 89%; text-align: center;">
                         <label>
                             DC Report
                         </label>
-                    </div>
+                    </div>     
+
                 </td>
-            </tr>
-            
-            <tr style="height: 15px;"></tr>
-            <tr>
-                <td style="width: 32%;">
+                <td style="width: 32%; display:none;" id="tdlekage">
                     <div style="font-weight: bold; width: 89%; text-align: center;">
-                        <img src="images/receipt2.png" class="imgborder" alt="" height="100px" width="100px"
-                             onclick="hbalanceclick();" />
-                        <label>
-                            Balance
-                        </label>
+                        <img src="images/leaks_icon.png" class="img-circle" alt="" height="60%" width="50%"
+                             onclick="hlekageclick();" /><br />                        
                     </div>
-                </td>
-                <td style="width: 32%;">
-                    <div style="font-weight: bold; width: 82%; text-align: center;">
-                        <img src="images/leaks_icon.png" class="img-circle" alt="" height="110px" width="100px"
-                             onclick="hlekageclick();" /><br />
+                    <div style="font-weight: bold; width: 89%; text-align: center;">
                         <label>
                             Lekages
                         </label>
                     </div>
+
                 </td>
-                <td style="width: 32%;">
-                    <div style="font-weight: bold; width: 81%; text-align: center;">
-                        <img src="images/creat.png" class="imgborder" alt="" height="100px" width="100px"
-                             onclick="hcratesclick();" /><br />
+                <td style="width: 32%;display:none;" id="tdcrates">
+                    <div style="font-weight: bold; width: 89%; text-align: center;">
+                        <img src="images/creat.png" class="imgborder" alt="" height="50%" width="50%"
+                             onclick="hcratesclick();" /><br />                        
+                    </div>
+                    <div style="font-weight: bold; width: 89%; text-align: center;">
                         <label>
                             Inventory
                         </label>
                     </div>
                 </td>
             </tr>
-            <tr style="height: 15px;">
-            </tr>
-            <tr>
-                <td style="width: 32%;">
+            <tr id="tr4" style="height: 25px;"></tr>
+            <tr >
+                <td style="width: 32%; display:none;" id="tdcashbook">
                     <div style="font-weight: bold; width: 89%; text-align: center;">
-                        <img src="images/cashbook.png" class="imgborder" alt="" height="100px" width="100px"
-                            onclick="hcashclick();" />
+                        <img src="images/cashbook.png" class="imgborder" alt="" height="50%" width="50%"
+                             onclick="hcashclick();" />                        
+                    </div>
+                    <div style="font-weight: bold; width: 89%; text-align: center;">
                         <label>
-                            Cash Book &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            Cash Book
                         </label>
                     </div>
                 </td>
-                <td style="width: 32%;">
-                    <div style="font-weight: bold; width: 82%; text-align: center;">
-                        <img src="images/order.png" class="imgborder" alt="" height="100px" width="100px"
-                            onclick="happrovalvoucherclick();" /><br />
+               
+                <td id="tdclosing" style="width: 32%;display:none;">
+                    <div style="font-weight: bold; width: 89%; text-align: center;">
+                        <img src="images/masters.png" class="imgborder" alt="" height="50%" width="50%"
+                             onclick="closingstockclick();" /><br />
+                    </div>
+                    <div style="font-weight: bold; width: 89%; text-align: center;">
+                        <label>
+                            ClosingStock
+                        </label>
+                    </div>
+                </td>
+                <td id="tdindentincdec" style="width: 32%;display:none;">
+                    <div style="font-weight: bold; width: 89%; text-align: center;">
+                        <img src="images/indentincdec.png" class="imgborder" alt="" height="50%" width="50%"
+                             onclick="indentincdecclick();" /><br />
+                    </div>
+                    <div style="font-weight: bold; width: 89%; text-align: center;">
+                        <label>
+                            Sales Analysis
+                        </label>
+                    </div>
+                </td>
+            </tr>
+            <tr id="tr5" style="height: 25px;"></tr>
+            <tr>
+                <td id="tddispatch" style="width: 32%;display:none;">
+                    <div style="font-weight: bold; width: 89%; text-align: center;">
+                        <img src="images/dispatch.jpg" class="imgborder" alt="" height="50%" width="50%"
+                             onclick="hdispatchclick();" /><br />
+                    </div>
+                    <div style="font-weight: bold; width: 89%; text-align: center;">
+                        <label>
+                            Dispatch
+                        </label>
+                    </div>
+                </td>
+                <td id="tdcharts" style="width: 32%;display:none;">
+                    <div style="font-weight: bold; width: 89%; text-align: center;">
+                        <img src="images/charts.png" class="imgborder" alt="" height="50%" width="50%"
+                             onclick="hchartdataclick();" /><br />
+                    </div>
+                    <div style="font-weight: bold; width: 89%; text-align: center;">
+                        <label>
+                            Charts
+                        </label>
+                    </div>
+                </td>
+                <td id="tdchartdashboard" style="width: 32%;display:none;">
+                    <div style="font-weight: bold; width: 89%; text-align: center;">
+                        <img src="images/classification.png" class="imgborder" alt="" height="60%" width="50%"
+                             onclick="hchartDashBoardclick();" /><br />
+                    </div>
+                    <div style="font-weight: bold; width: 89%; text-align: center;">
+                        <label>
+                            ChartDashBoard
+                        </label>
+                    </div>
+                </td> 
+                
+            </tr>
+            <tr id="tr5" style="height: 25px;"></tr>
+
+            <tr id="tr8">
+                <td id="tdapprove" style="display:none;">
+                    <div style="font-weight: bold; width: 89%; text-align: center;">
+                        <img src="images/order.png" class="imgborder" alt="" height="50%" width="50%"
+                             onclick="happrovalvoucherclick();" />
+                    </div>
+                    <div style="font-weight: bold; width: 89%; text-align: center;">
                         <label>
                             Approval Vocher
                         </label>
                     </div>
                 </td>
+              
             </tr>
+
+            
         </table>
     </div>
     <!-- Pushy JS -->

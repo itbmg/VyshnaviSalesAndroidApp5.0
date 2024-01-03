@@ -5,25 +5,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Sales App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="css/normalize.css?v=11">
-    <link rel="stylesheet" href="css/demo.css?v=12">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/demo.css">
     <!-- Pushy CSS -->
-    <link rel="stylesheet" href="css/pushy.css?v=13">
-    <link href="bootstrap/css/bootstrap.min.css?v=14" rel="stylesheet" type="text/css" />
-    <link href="Customcss/custom.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css?v=17">
-    <link href="CustomCSS/font-awesome.css?v=16" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/pushy.css">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="CustomCSS/custom.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="CustomCSS/font-awesome.css" rel="stylesheet" type="text/css" />
     <!-- jQuery -->
     <!-- Modernizr -->
     <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
     <script src="js/vendor/modernizr-2.6.2.min.js"></script>
-    <link href="css/homepage.css?v=18" rel="stylesheet" type="text/css" />
+    <link href="css/homepage.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
+          .btn-glyphicon {
+    padding:6px;
+    background:#ffffff;
+    margin-right:4px;
+    color:cornflowerblue;
+}
+.icon-btn {
+    padding: 1px 15px 3px 2px;
+    border-radius:50px;
+}
+         .btn-glyphicon1 {
+    padding:8px;
+    background:#ffffff;
+    margin-right:4px;
+     color:darkred;
+}
+.icon-btn {
+    padding: 1px 11px 2px 0px;
+    border-radius:50px;
+}
         #mydiv
         {
             height: 400px;
             position: relative;
-            background-color: #cedede; /* for demonstration */
+            background-color: #F8F9F9; /* for demonstration */
         }
         .ajax-loader
         {
@@ -38,30 +58,117 @@
     </style>
     <script type="text/javascript">
         $(function () {
-            var date = new Date();
-            var day = date.getDate();
-            var month = date.getMonth() + 1;
-            var year = date.getFullYear();
-            if (month < 10) month = "0" + month;
-            if (day < 10) day = "0" + day;
-            today = year + "-" + month + "-" + day;
-            $('#txtFromDate').val(today);
-            $('#txtToDate').val(today);
+            getloginvalidation();
+            getloginvalidation2();
             $('#divdcdetails').css('display', 'none');
             $('#dcdata').css('display', 'block');
             $('#divcontroles').css('display', 'block');
             $('#mydiv').css('display', 'none');
+            $('#dcclose').css('display', 'none');
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+            var yyyy = today.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+            var hrs = today.getHours();
+            var mnts = today.getMinutes();
+            $('#txtFromDate').val(yyyy + '-' + mm + '-' + dd);
+            $('#txtToDate').val(yyyy + '-' + mm + '-' + dd);
+            checkloginstatus();
         });
+        function checkloginstatus() {
+            var data = { 'op': 'checkloginstatus' };
+            var s = function (msg) {
+                if (msg) {
+                    if (msg == "NotValid") {
+                        window.location = 'login.html';
+                    }
+                    else if (msg == "valid") {
+
+                    }
+                }
+            };
+            var e = function (x, h, e) {
+            };
+            callHandler(data, s, e);
+        }
+        var sessionarray = [];
+        function getloginvalidation() {
+            var data = { 'op': 'Getsessionvalues' };
+            var s = function (msg) {
+                if (msg) {
+                    document.getElementById('lbl_username').innerHTML = msg[0].EmpName;
+                    if (msg[0].LevelType == "AccountsOfficer" || msg[0].LevelType == "Director") {
+                        $('#liapvocher').css('display', 'block');
+                        //                        $('#tdapprove').css('display', 'block');
+                    }
+                    else {
+                        $('#liapvocher').css('display', 'none');
+                        //                        $('#tdapprove').css('display', 'none');
+                    }
+                }
+                else {
+                }
+            };
+            var e = function (x, h, e) {
+            };
+            $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+            callHandler(data, s, e);
+        }
+        var sessionarray = [];
+        function getloginvalidation2() {
+            var data = { 'op': 'Getsessionvalues' };
+            var s = function (msg) {
+                if (msg) {
+                    if (msg[0].LevelType == "Agent" || msg[0].LevelType == "Agent") {
+                        $('#divcontrols').css('display', 'block');
+                        //$('#divroute').css('display', 'block');
+                        leveltype = msg[0].LevelType;
+                        sessionarray = msg;
+                        get_agent_logindetails();
+                    }
+                    else if (msg[0].LevelType == "Opperations" || msg[0].LevelType == "Opperations") {
+                        //$('#divroute').css('display', 'block');
+                        $('#divcontrols').css('display', 'block');
+                    }
+                    else {
+                        //$('#divroute').css('display', 'none');
+                        $('#divcontrols').css('display', 'none');
+                        
+                    }
+                }
+                else {
+                }
+            };
+            var e = function (x, h, e) {
+            };
+            $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+            callHandler(data, s, e);
+        }
         function DCDeatils() {
             $('#divcontroles').css('display', 'none');
             $('#mydiv').css('display', 'block');
+            //$('#dcdata').css('display', 'block');
             var fromdate = document.getElementById('txtFromDate').value;
             var todate = document.getElementById('txtToDate').value;
             var data = { 'op': 'GetDCNumbers', 'fromdate': fromdate, 'todate': todate };
             var s = function (msg) {
-                if (msg) {
+                if (msg == "") {
+                    alert("Data Not Found");
+                    $('#mydiv').css('display', 'none');
+                    $('#divcontroles').css('display', 'block');
+                    $('#divdcdetails').css('display', 'none');
+                }
+               else if (msg) {
                     bindOrderReport(msg);
                     $('#mydiv').css('display', 'none');
+                    $('#dcdata').css('display', 'block');
+                    $('#dcclose').css('display', 'block');
                 }
                 else {
                 }
@@ -73,14 +180,15 @@
         }
         function bindOrderReport(msg) {
             var results = '<div style="overflow:auto;"><table class="table table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="example2_info">';
-            results += '<thead><tr><th scope="col" >DC No</th><th scope="col"></th></tr></thead></tbody>';
+            results += '<thead><tr><th scope="col" >DC No</th><th scope="col">DispatchName</th><th scope="col"></th></tr></thead></tbody>';
             var k = 1;
             var l = 0;
             var COLOR = ["#b3ffe6", "AntiqueWhite", "#daffff", "MistyRose", "Bisque"];
             for (var i = 0; i < msg.length; i++) {
-                results += '<tr style="background-color:' + COLOR[l] + '">';
+                results += '<tr style="background-color:' + COLOR[l] + '">'; 
                 results += '<td data-title="DCNumber" class="1">' + msg[i].DcNumber + '</td>';
-                results += '<td><input id="btn_poplate"  onclick="dcdetails(this)"  name="submit" style="background: #e4d5d5; border-radius: 7px; width: 57px; font-size: 22px;"  value="View" /></td></tr>';
+                results += '<td data-title="DispatchName" class="2">' + msg[i].branch + '</td>';
+                results += '<td><a class="btn icon-btn btn-primary" id="btn_poplate"  onclick="dcdetails(this)"  href="#"><span id="btn_poplate"  onclick="dcdetails(this)"  name="submit" class="glyphicon btn-glyphicon glyphicon-share img-circle text-info""></span>View</a></td></tr>';
                 l = l + 1;
                 if (l == 4) {
                     l = 0;
@@ -91,15 +199,25 @@
         }
         function dcdetails(thisid) {
             $('#mydiv').css('display', 'block');
-            $('#divdcdetails').css('display', 'block');
             $('#dcdata').css('display', 'none');
             $('#divcontroles').css('display', 'none');
+            $('#dcclose').css('display', 'none');
             var dcno = $(thisid).parent().parent().children('.1').html();
+            var Branchname = $(thisid).parent().parent().children('.2').html();
             var data = { 'op': 'GetDCDetails', 'dcno': dcno };
             var s = function (msg) {
-                if (msg) {
-                    dcproductdetails(msg);
+                if (msg == "") {
+                    alert("Data Not Found");
                     $('#mydiv').css('display', 'none');
+                    $('#divcontroles').css('display', 'block');
+                    $('#divdcdetails').css('display', 'none');
+                }
+               else if (msg) {
+                   
+                   dcproductdetails(msg);
+                   document.getElementById("lblBranchname").innerHTML = Branchname;
+                    $('#mydiv').css('display', 'none');
+                    $('#divdcdetails').css('display', 'block');
                 }
                 else {
                 }
@@ -110,15 +228,32 @@
             callHandler(data, s, e);
         }
         function dcproductdetails(msg) {
-            
-            
+            //var table = document.getElementById("tbl_dcvalue_value");
+            //for (var i = table.rows.length - 1; i > 0; i--) {
+            //    table.deleteRow(i);
+            //}
+            //var j = 1;
+            //var k = 1;
+            //var l = 0;
+            //var COLOR = ["#b3ffe6", "AntiqueWhite", "#daffff", "MistyRose", "Bisque"];
+            //for (var i = 0; i < msg.length; i++) {
+            //    var tablerowcnt = document.getElementById("tbl_dcvalue_value").rows.length;
+            //    $('#tbl_dcvalue_value').append('<tr style="background-color:' + COLOR[l] + '"><td  style="font-size:medium;font-weight:bold;font-style:inherit" data-title="ProductName" ><span id="spninqty" onclick="btnViewProducts(\'' + msg[i].sno + '\');"  class="badge bg-green"><span class="clsinqty">' + msg[i].ProductName + '</span></span></td><td data-title="Qty" ><span id="spnmoniterqty" class="badge bg-green"><span class="tammountcls">' + msg[i].qty + '</span></span></td></tr>');
+            //    j++;
+            //    l = l + 1;
+            //    if (l == 4) {
+            //        l = 0;
+            //    }
+            //}
+            //GettotalclsCal();
+
             var results = '<div style="overflow:auto;"><table class="table table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="example2_info">';
-            results += '<thead><tr><th scope="col">ProductName</th><th scope="col" >Qty</th></tr></thead></tbody>';
+            results += '<thead><tr><th scope="col" style="text-align: center;">ProductName</th><th scope="col" style="text-align: center;">Qty</th></tr></thead></tbody>';
             var k = 1;
             var l = 0;
             var COLOR = ["#b3ffe6", "AntiqueWhite", "#daffff", "MistyRose", "Bisque"];
             for (var i = 0; i < msg.length; i++) {
-                results += '<tr><td  style="font-size: 16px; color: red; font-weight: bold;" data-title="ProductName" ><span id="spninqty" onclick="btnViewProducts(\'' + msg[i].sno + '\');"  style="font-size: 16px; color: green; font-weight: bold;"><span class="clsinqty">' + msg[i].ProductName + '</span></span></td><td data-title="Qty" ><span id="spnmoniterqty" style="font-size: 16px; color: green; font-weight: bold;"><span class="tammountcls">' + msg[i].qty + '</span></span></td></tr>';
+                results += '<tr><td  style="font-size: 16px; color: red; font-weight: bold;" data-title="ProductName" ><span id="spninqty" onclick="btnViewProducts(\'' + msg[i].sno + '\');"  style="font-size: 16px; color: green; font-weight: bold;"><span class="clsinqty">' + msg[i].ProductName + '</span></span></td><td data-title="Qty" style="text-align: center;"><span id="spnmoniterqty" style="font-size: 16px; color: green; font-weight: bold;"><div style="float:right;padding-right: 30%;"><span class="tammountcls">' + parseFloat(msg[i].qty).toFixed(2) + '</span></div></span></td></tr>';
                 //results += '<td data-title="DCNumber" class="1">' + msg[i].DcNumber + '</td></tr>';
                 l = l + 1;
                 if (l == 4) {
@@ -140,14 +275,23 @@
                 }
             });
             document.getElementById('totalcls').innerHTML = parseFloat(totamount).toFixed(2);
-        }
-
+        } 
         function CloseClick() {
             $('#divdcdetails').css('display', 'none');
             $('#dcdata').css('display', 'block');
+            $('#dcclose').css('display', 'block');
+            $('#divcontroles').css('display', 'none'); 
+        }
+        function DCCloseClick() {
+            $('#divdcdetails').css('display', 'none');
+            $('#dcdata').css('display', 'none');
             $('#divcontroles').css('display', 'block');
+            $('#dcclose').css('display', 'none');
+
         }
         function logoutclick() {
+            window.localStorage.removeItem("key7");
+            window.localStorage.removeItem("key8");
             var data = { 'op': 'log_out' };
             var s = function (msg) {
                 if (msg == "Valid") {
@@ -160,7 +304,7 @@
         }
         function callHandler(d, s, e) {
             $.ajax({
-                url: 'http://49.50.65.160/salesapp/Bus.axd',
+                url: 'http://182.18.162.51/salesapp/Bus.axd',
                 data: d,
                 type: 'GET',
                 dataType: "json",
@@ -198,27 +342,52 @@
         function approvalvoucherclick() {
             window.location = "VoucherApproval.html";
         }
-        function logoutclick() {
-            window.location = "login.html";
+        function horderindentclick() {
+            window.location = "indent.html";
         }
+        function closingstockclick() {
+            window.location = "ClosingStock.html";
+        }
+        function indentincdecclick() {
+            window.location = "AgentIncDecReport.html";
+        }
+        function hdispatchclick() {
+            window.location = "Dispatch.html";
+        }
+        function chartdataclick() {
+            window.location = "charts.html";
+        }
+        function chartDashBoardclick() {
+            window.location = "ClassificationChart.html";
+        }
+        
     </script>
 </head>
 <body style="background: whitesmoke !important;">
     <!-- Pushy Menu -->
     <nav class="pushy pushy-left">
+        <div style="background-color:#9a9494;width: 100% !important" class="menu-btn">
+            <img src="images/avatar.jpg" class="user-image" alt="User Image" style="border-radius:50%;width: 18%;" />
+            <span id="lbl_username" style="position: absolute;padding-left: 5%;padding-top: 5%;color: white;">Guest</span>
+            <img src="images/arrow.png" style="width: 6%;position: absolute;margin-left: 70%;padding-top: 5%;" />
+        </div>
         <ul>
-            <li class="home-icon"><a href="#" onclick="homeclick();">&nbsp&nbsp Home</a></li>
-            <li class="about-icon"><a href="#" onclick="Indentclick();">&nbsp&nbsp Indent</a></li>
-            <li class="features-icon"><a href="#" onclick="Salesclick();">&nbsp&nbsp Sales</a></li>
-            <li class="photos-icon"><a href="#" onclick="dcclick();">&nbsp&nbsp DC Report</a></li>
-            <li class="video-icon"><a href="#" onclick="balanceclick();">&nbsp&nbsp Closing Stock
-                Report</a></li>
-            <li class="blog-icon"><a href="#" onclick="lekageclick();">&nbsp&nbsp Lekages</a></li>
-            <li class="contact-icon"><a href="#" onclick="cratesclick();">&nbsp&nbsp Inventory</a></li>
-            <li class="cash-icon"><a href="#" onclick="cashclick();">&nbsp&nbsp Cash Book</a></li>
-            <li class="approve-icon"><a href="#" onclick="approvalvoucherclick();">&nbsp&nbsp Approval
+            <li class="home-icon"><a href="#" onclick="homeclick();">&nbsp&nbsp&nbsp&nbsp Home</a></li>
+            <li class="about-icon"><a href="#" onclick="Indentclick();">&nbsp&nbsp&nbsp&nbsp Indent</a></li>
+            <li class="features-icon"><a href="#" onclick="Salesclick();">&nbsp&nbsp&nbsp&nbsp Sales</a></li>
+            <li class="photos-icon"><a href="#" onclick="dcclick();">&nbsp&nbsp&nbsp&nbsp DC Report</a></li>
+            <li id="liclosingstock" class="video-icon"><a href="#" onclick="closingstockclick();">&nbsp&nbsp&nbsp Closing Stock Report</a></li>
+            <li id="libalance" class="video-icon"><a href="#" onclick="balanceclick();">&nbsp&nbsp&nbsp Balance Report</a></li>
+            <li class="blog-icon"><a href="#" onclick="lekageclick();">&nbsp&nbsp&nbsp&nbsp Lekages</a></li>
+            <li class="contact-icon"><a href="#" onclick="cratesclick();">&nbsp&nbsp&nbsp&nbsp Inventory</a></li>
+            <li class="cash-icon"><a href="#" onclick="indentincdecclick();">&nbsp&nbsp&nbsp&nbsp Sales Analysis</a></li>
+            <li class="cash-icon"><a href="#" onclick="cashclick();">&nbsp&nbsp&nbsp&nbsp Cash Book</a></li>
+            <li id="lidispatch" class="dispatch-icon"><a href="#" onclick="hdispatchclick();">&nbsp&nbsp Dispatch</a></li>
+            <li id="liapvocher" class="approve-icon"><a href="#" onclick="approvalvoucherclick();">&nbsp&nbsp&nbsp&nbsp Approval
                 Voucher</a></li>
-            <li class="logout-icon"><a href="#" onclick="logoutclick();">&nbsp&nbsp Logout</a></li>
+            <li id="licharts" class="chartline-icon"><a href="#" onclick="chartdataclick();">&nbsp&nbsp Charts</a></li>
+            <li id="lichartsdashboard" class="chartline1-icon"><a href="#" onclick="chartDashBoardclick();">&nbsp&nbsp ChartDashBoard</a></li>
+            <li class="logout-icon"><a href="#" onclick="logoutclick();">&nbsp&nbsp&nbsp&nbsp Logout</a></li>
         </ul>
     </nav>
     <!-- Site Overlay -->
@@ -228,9 +397,7 @@
     <div id="container">
         <!-- Menu Button -->
         <div class="menu-btn" style="font-size:larger">
-            &#9776;  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Vyshnavi
-            Sales
-        </div>
+            &#9776;&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Vyshnavi Sales</div>
         <div style="padding: 13px; padding-left: 36px; color: #2a70bb; text-align: left;
             cursor: pointer; font-size: 25px;">
             <i class="fa fa-indent" aria-hidden="true"></i>DC Report
@@ -248,29 +415,69 @@
                     To Date</label>
                 <input type="date" name="ContactName" id="txtToDate" class="form-control" />
             </div>
-            <div class="box-footer" style="text-align: center;">
-                <input id="btn_save" type="button" class="btn btn-primary" name="submit" value="Genarate"
-                    onclick="DCDeatils();">
+            <div  class="box-footer" style="text-align: center;">
+                <a id="btn_save" onclick="DCDeatils();" class="btn icon-btn btn-primary" href="#">
+                    <span id="btn_save" onclick="DCDeatils();" class="glyphicon btn-glyphicon glyphicon-cog img-circle text-success"></span>
+                    Generate
+                </a>
+                <!--<input id="btn_save" type="button" class="btn btn-primary" name="submit" value="Genarate"
+                    onclick="DCDeatils();">-->
             </div>
         </div>
         <div id="mydiv" style="display: none;">
             <img src="images/loading.gif" alt="Loading..." id="LoadingGraphic" class="ajax-loader" />
         </div>
+            <div id="dcclose" style="text-align:right;">
+                <a class="btn icon-btn btn-danger" id="Button1" onclick="DCCloseClick();" href="#"><span id="Button1" onclick="DCCloseClick();" name="submit" class="glyphicon btn-glyphicon1 glyphicon-remove img-circle text-muted"></span>Close</a>
+            </div>
         <div id="dcdata" style="overflow: auto;">
         </div>
         <div id="divdcdetails" class="box-body">
-            <div style="text-align:right;">
+            <!--<div style="text-align:right;">
                 <input id="Button1" type="button" class="btn btn-primary" name="submit" value="close"
                     onclick="CloseClick();">
+            </div>-->
+
+            <div>
+                <span id="lblBranchname" style="width: 235px; color: Red; font-weight: bold; font-size: 18px;"></span>
             </div>
+            <div id="divclose" style="text-align: right;margin-top: -35px;">
+                <a class="btn icon-btn btn-danger" id="Button1" onclick="CloseClick();" href="#"><span id="Button1" onclick="CloseClick();" name="submit" class="glyphicon btn-glyphicon1 glyphicon-remove img-circle text-muted"></span>Close</a>
+            </div>
+
+            <!--<table>
+                <tr>
+                    <td>
+                        <div>
+                            <span id="lblBranchname" style="width: 235px; color: Red; font-weight: bold; font-size: 18px;"></span>
+                        </div>
+                    </td>
+                    <td>
+                        <div style="text-align:right;margin: 1px 90px;">
+                            <a class="btn icon-btn btn-danger" id="Button1" onclick="CloseClick();" href="#"><span id="Button1" onclick="CloseClick();" name="submit" class="glyphicon btn-glyphicon1 glyphicon-remove img-circle text-muted"></span>Close</a>
+                        </div>
+                    </td>
+                </tr>
+            </table>-->
             <div class="box-body no-padding">
                 <table class="table table-bordered table-hover dataTable no-footer" role="grid" aria- describedby="example2_info" id="tbl_dcvalue_value">
                 </table>
             </div>
-            <label style="width: 75%;">
-                GrandTotal : <span id="totalcls" style="color: Red; font-weight: bold; font-size: 25px;"></span>
-            </label>
-            
+            <table>
+                <tr>
+                    <td>
+                        <span style="color: blue; font-weight: bold; font-size: 21px;" align="left" id="lblid"> GrandTotal: </span>
+                    </td>
+                    <!--<td>
+                        <label style="align-content:left; width: 75%;">
+                            GrandTotal :
+                        </label>
+                    </td>-->
+                    <td align="right">
+                        <span id="totalcls" style="color: Red; font-weight: bold; font-size: 25px;"></span>
+                    </td>
+                </tr>
+            </table>
         </div>
         </form>
     </div>
